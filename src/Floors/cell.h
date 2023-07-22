@@ -9,7 +9,6 @@ class Floor;
 
 
 class Cell {
-	
 	public:
 		enum CellType {
                 WALL,
@@ -35,7 +34,7 @@ class Cell {
         virtual bool isWalkable() = 0;
         virtual Character* occupiedBy();
     private:
-		int row, col, chamberID;
+		int row, col, chamberID, level;
 		char symbol;
         bool walkable;
         CellType cellType;
