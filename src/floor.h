@@ -37,8 +37,6 @@ class Floor {
 
 		Floor();
 		~Floor();
-		void spawnFloor();
-
 
 		void loadFromFile(std::ifstream *floorStream);
 		void displayFloor();
@@ -47,11 +45,6 @@ class Floor {
 		void spawn();
         Cell *getCell(int i, int j);
 	private:
-		void spawnEnemies();
-		void spawnPotions();
-		void spawnTreasures();
-		void spawnPlayers();
-		void spawnStairs();
 		Cell *map[MAX_ROW][MAX_COLUMN];
 		Chamber *chambers[MAX_CHAMBERS];
 
