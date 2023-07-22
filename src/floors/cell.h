@@ -1,7 +1,7 @@
 #ifndef ___CELL_H___
 #define ___CELL_H___
 
-#include "../floor.h"
+#include "floor.h"
 
 // Forward declaration
 class Character;
