@@ -44,6 +44,7 @@ class Floor {
 		void resetMoved();
 		void spawn();
         Cell *getCell(int i, int j);
+		
 	private:
 		Cell *map[MAX_ROW][MAX_COLUMN];
 		Chamber *chambers[MAX_CHAMBERS];
