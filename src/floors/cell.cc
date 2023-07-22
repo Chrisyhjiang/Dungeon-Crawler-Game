@@ -30,6 +30,7 @@ bool Cell::isOccupied(){
     return symbol != Floor::SYM_TILE;
 }
 
+
 int Cell::getChamberID(){
     return chamberID;
 }
