@@ -28,7 +28,7 @@ class Enemy : public Character{
         void attachPlayer();
         bool isPlayerInRange();
         void takeDamage(int damage);
-        int calculateDamageToPlayer();
+        virtual int calculateDamageToPlayer() = 0;
         bool isDead() override;
         int giveRewardToPlayer();
         virtual bool isMovable() = 0;
