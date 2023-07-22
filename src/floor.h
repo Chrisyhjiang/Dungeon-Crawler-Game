@@ -16,6 +16,25 @@ class Floor {
 		static const int NUM_POTION = 10;
 		static const int NUM_ENEMY = 20;
 
+		static char const SYM_PLAYER = '@';
+		static char const SYM_WALL_VER = '|';
+		static char const SYM_WALL_HOR = '-';
+		static char const SYM_DOORWAY = '+';
+		static char const SYM_PASSAGE = '#';
+		static char const SYM_TILE = '.';
+		static char const STAIRS = '\\';
+
+		static char const ENEMY_HUMAN = 'H';
+		static char const ENEMY_DWARF = 'W';
+		static char const ENEMY_ELF = 'E';
+		static char const ENEMY_ORC = 'O';
+		static char const ENEMY_MERCHANT = 'M';
+		static char const ENEMY_DRAGON = 'D';
+		static char const ENEMY_HALFING = 'L';
+
+		static char const GOLD = 'G';
+		static char const POTION = 'P';
+
 		Floor();
 		~Floor();
 

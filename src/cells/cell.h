@@ -1,14 +1,12 @@
 #ifndef ___CELL_H___
 #define ___CELL_H___
 
+#include "../floor.h"
+
 // Forward declaration
 class Character;
-class Entity;
-class Player;
-class Enemy;
 class Floor;
-class Drow;
-class Goblin;
+
 
 class Cell {
 	
@@ -34,13 +32,13 @@ class Cell {
         bool isOccupied();
         int getChamberID();
         void setChamberID(int id);
-        bool isWalkable();
-        // virtual occupiedBy();
+        virtual bool isWalkable() = 0;
+        virtual Character* occupiedBy();
     private:
 		int row, col, chamberID;
 		char symbol;
         bool walkable;
         CellType cellType;
-        // Todo: Character* ch;
+        Character* ch;
 };
 #endif

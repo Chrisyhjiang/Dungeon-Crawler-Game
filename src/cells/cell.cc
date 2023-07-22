@@ -27,9 +27,7 @@ void Cell::setRow(int r){
 }
 
 bool Cell::isOccupied(){
-    // Todo:
-
-    return false;
+    return symbol != Floor::SYM_TILE;
 }
 
 int Cell::getChamberID(){
@@ -40,7 +38,4 @@ void Cell::setChamberID(int id){
     chamberID = id;
 }
 
-bool Cell::isWalkable(){
-    return isWalkable;
-}
-
+ 
