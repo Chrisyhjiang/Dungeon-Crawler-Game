@@ -33,4 +33,14 @@ char const STAIRS = '\\';
 char const GOLD = 'G';
 char const POTION = 'P';
 
+char const ENEMY_HUMAN = 'H';
+char const ENEMY_DWARF = 'W';
+char const ENEMY_ELF = 'E';
+char const ENEMY_ORC = 'O';
+char const ENEMY_MERCHANT = 'M';
+char const ENEMY_DRAGON = 'D';
+char const ENEMY_HALFING = 'L';
+
+const char movableEnemies[] = { ENEMY_HUMAN, ENEMY_DWARF, ENEMY_ORC, ENEMY_MERCHANT, ENEMY_HALFING };
+
 #endif

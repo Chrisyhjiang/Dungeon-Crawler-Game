@@ -10,14 +10,7 @@ class Enemy : public Character{
         bool movable;
     
     public:
-        static char const ENEMY_HUMAN = 'H';
-		static char const ENEMY_DWARF = 'W';
-		static char const ENEMY_ELF = 'E';
-		static char const ENEMY_ORC = 'O';
-		static char const ENEMY_MERCHANT = 'M';
-		static char const ENEMY_DRAGON = 'D';
-		static char const ENEMY_HALFING = 'L';
-
+    
         Enemy(int hp, int atk, int def, string race, char symbol);
         ~Enemy();
         char getSymbol();
