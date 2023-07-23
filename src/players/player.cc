@@ -42,5 +42,12 @@ void Player::takeDamage(int dmg) {
     }
 }
 
+int Player::calculateDmgToEnemy(Enemy* en) {
+    return Character::getAtk();
+}
+
+bool Player::isDead() {
+    return Character::getHP == 0;
+}
 
 

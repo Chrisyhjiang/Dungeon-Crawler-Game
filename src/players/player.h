@@ -9,6 +9,7 @@ using namespace std;
 
 class Player : public Character{
         int gold, maxHp;
+        string name;
         static Player *instance;
     public:
         bool move(string dir);
@@ -21,11 +22,13 @@ class Player : public Character{
         int getMaxHp();
         void setMaxHp(int maxHp);
         void takeDamage(int dmg);
-        virtual int calculateDmgToEnemy(Enemy *en) = 0;
+        virtual int calculateDmgToEnemy(Enemy *en);
         bool isDead();
         virtual int calculateReward(Enemy *en) = 0;
         static Player* getInstance();
         static void setRace(char race);
+        string getName();
+        void setName(string n);
     private:
         Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player();
