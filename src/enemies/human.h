@@ -8,10 +8,12 @@ class Human: public Enemy{
         int goldToDrop;
     
     public:
-        Human(int hp, int atk, int def, string race, char symbol, string name, int goldToDrop);
+        Human(string name);
+        Human(int hp, int atk, int def, string race, char symbol, int goldToDrop);
         ~Human();
         int getGoldToDrop();
         void setGoldToDrop(int gold);
+        bool isMovable() override;
         int calculateDamageToPlayer() override;
 
 };

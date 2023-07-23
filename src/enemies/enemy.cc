@@ -1,6 +1,8 @@
 #include "enemy.h"
 
-Enemy::Enemy(int hp, int atk, int def, string race, char symbol, string name) : Character(hp, atk, def, race), symbol(symbol), name(name){}
+
+//Enemy::Enemy(int hp, int atk, int def, string race) : Character(hp, atk, def, race){};
+Enemy::Enemy(int hp, int atk, int def, string race, char symbol) : Character(hp, atk, def, race), symbol(symbol){}
 
 Enemy::~Enemy(){
     //Todo:
@@ -10,17 +12,8 @@ char Enemy::getSymbol(){
     return symbol;
 }
 
-
 void Enemy::setSymbol(char symbol){
     this->symbol = symbol;
-}
-
-string Enemy::getName(){
-    return name;
-}
-
-void Enemy::setName(string name){
-    this->name = name;
 }
 
 void Enemy::attachPlayer(){

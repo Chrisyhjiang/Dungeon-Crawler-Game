@@ -7,7 +7,6 @@
 class Enemy : public Character{
     private:
         char symbol;
-        string name;
         bool movable;
     
     public:
@@ -19,12 +18,10 @@ class Enemy : public Character{
 		static char const ENEMY_DRAGON = 'D';
 		static char const ENEMY_HALFING = 'L';
 
-        Enemy(int hp, int atk, int def, string race, char symbol, string name);
+        Enemy(int hp, int atk, int def, string race, char symbol);
         ~Enemy();
         char getSymbol();
         void setSymbol(char symbol);
-        string getName();
-        void setName(string name);
         void attachPlayer();
         bool isPlayerInRange();
         void takeDamage(int damage);

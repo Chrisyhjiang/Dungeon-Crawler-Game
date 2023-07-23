@@ -9,12 +9,14 @@ class Dragon : public Enemy {
         TreasureHoard * hoard;
 
     public:
-        Dragon(int hp, int atk, int def, string race, char symbol, string name);
+        Dragon(string race);
+        Dragon(int hp, int atk, int def, string race, char symbol);
         ~Dragon();
         TreasureHoard* getHoard();
         void setTreasureHoard(TreasureHoard* hoard);
         int calculateDamageToPlayer() override;
         void guard();
+         bool isMovable() override;
 };
 
 #endif

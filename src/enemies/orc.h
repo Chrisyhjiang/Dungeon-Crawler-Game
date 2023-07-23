@@ -5,14 +5,16 @@
 
 class Orc : public Enemy {
     private: 
-        int extraDamage;
+        double extraDamage;
 
     public:
-        Orc(int hp, int atk, int def, string race, char symbol, string name, int extraDamage);
+        Orc(string race);
+        Orc(int hp, int atk, int def, string race, char symbol, double extraDamage);
         ~Orc();
-        int getExtraDamage();
-        void setExtraDamage(int extraDamage);
+        double getExtraDamage();
+        void setExtraDamage(double extraDamage);
         int calculateDamageToPlayer() override;
+        bool isMovable() override;
 
 };
 

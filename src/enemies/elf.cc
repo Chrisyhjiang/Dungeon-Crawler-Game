@@ -1,6 +1,6 @@
 #include "elf.h"
 
-Elf::Elf(int hp, int atk, int def, string race, char symbol, string name, int extraAtk) : Enemy(hp, atk, def, race, symbol, name), extraAtk(extraAtk){}
+Elf::Elf(int hp, int atk, int def, string race, char symbol int extraAtk) : Enemy(hp, atk, def, race, symbol), extraAtk(extraAtk){}
 
 Elf::~Elf(){
     //Todo:
@@ -14,4 +14,8 @@ void Elf::setExtraAtk(int extraAtk){
 
 int calculateDamageToPlayer(){
     //Todo:
+}
+
+bool isMovable(){
+    return true;
 }

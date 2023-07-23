@@ -1,6 +1,7 @@
 #include "merchant.h"
 
-Merchant::Merchant(int hp, int atk, int def, string race, char symbol, string name) : Enemy(hp, atk, def, race, symbol, name){}
+Merchant::Merchant(string race) : Enemy(30, 70, 5, race, Enemy::ENEMY_MERCHANT), hostile(false) {};
+Merchant::Merchant(int hp, int atk, int def, string race, char symbol) : Enemy(hp, atk, def, race, symbol){}
 
 Merchant::~Merchant(){
     //Todo: 
@@ -17,4 +18,8 @@ void  Merchant::setHostile(bool hostile){
 
 int calculateDamageToPlayer(){
     //Todo: 
+}
+
+bool isMovable(){
+    return true;
 }

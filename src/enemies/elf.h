@@ -8,12 +8,12 @@ class Elf : public Enemy {
         int extraAtk;
 
     public:
-        Elf(int hp, int atk, int def, string race, char symbol, string name, int extraAtk);
-        Elf();
+        Elf(string race);
+        Elf(int hp, int atk, int def, string race, char symbol, int extraAtk);
         int getExtraAtk();
         void setExtraAtk(int extraAtk);
         int calculateDamageToPlayer() override;
-
+        bool isMovable() override;
 };
 
 #endif

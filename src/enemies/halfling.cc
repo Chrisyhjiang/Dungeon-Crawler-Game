@@ -3,7 +3,8 @@
 #include <ctime>
 
 
-Halfling::Halfling (int hp, int atk, int def, string race, char symbol, string name, double chance) : Enemy(hp, atk, def, race, symbol, name), chance(chance){}
+Halfling::Halfling(string race) : Enemy(100, 15, 20, race, Enemy::ENEMY_HALFING), chance(0.5){};
+Halfling::Halfling (int hp, int atk, int def, string race, char symbol, double chance) : Enemy(hp, atk, def, race, symbol), chance(chance){};
 Halfling::~Halfling(){
     // todo
 }
@@ -32,4 +33,8 @@ bool Halfling::chanceToMiss(){
 
 int calculateDamageToPlayer(){
     //todo:
+}
+
+bool isMovable(){
+    return true;
 }

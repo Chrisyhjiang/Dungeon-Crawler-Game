@@ -8,9 +8,8 @@ using namespace std;
 class Enemy;
 
 class EnemyFactory{
-
     public:
-        static Enemy* createEnemy(char en);
+        static Enemy* createEnemy(char en, string race);
 
 };
 

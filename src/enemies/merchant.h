@@ -8,12 +8,15 @@ class Merchant : public Enemy {
         bool hostile;
 
     public:
-        Merchant(int hp, int atk, int def, string race, char symbol, string name);
+        Merchant(string race);
+        Merchant(int hp, int atk, int def, string race, char symbol);
         ~Merchant();
         bool isHostile();
         void setHostile(bool hostile);
         int calculateDamageToPlayer() override;
+        bool isMovable() override;
 
 };
+
 
 #endif
