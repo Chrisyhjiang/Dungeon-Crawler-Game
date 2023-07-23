@@ -16,10 +16,13 @@ void Orc::setExtraDamage(double extraDamage){
     this->extraDamage = extraDamage;
 }
 
-int calculateDamageToPlayer(){
-    //Todo:
+int Orc::calculateDamageToPlayer(){
+    if( this->getRace() == GOBLIN){
+        return (1 + extraDamage) * this->getAtk();
+    }
+    return this->getAtk();
 }
 
-bool isMovable(){
+bool Orc::isMovable(){
     return true;
 }

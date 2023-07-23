@@ -9,7 +9,7 @@ Player::Player(int hp, int atk, int def, string race,
 
 
 Player::~Player() {
-
+    // todo:
 }
 
 Player* Player::getInstance() {
@@ -33,21 +33,23 @@ void Player::setMaxHp(int mh) {
 }
 
 void Player::takeDamage(int dmg) {
-    int diff = dmg - Character::getDef();
+    int diff = dmg - this->getDef();
     if (diff > 0) {
-        Character::setDef(0);
-        Character::setHP(max(Character::getHP() - diff, 0));
+        this->setDef(0);
+        this->setHP(max(this->getHP() - diff, 0));
     } else {
-        Character::setDef(-1 * diff);
+        this->setDef(-1 * diff);
     }
 }
 
-int Player::calculateDmgToEnemy(Enemy* en) {
-    return Character::getAtk();
+bool Player::isDead() {
+    return getHP() == 0;
 }
 
-bool Player::isDead() {
-    return Character::getHP == 0;
+void Player::attackEnemy(Enemy* enemy){
+    int dmg = this->calculateDmgToEnemy(enemy);
+    enemy->takeDamage(dmg);
+    this->addReward(enemy);
 }
 
 

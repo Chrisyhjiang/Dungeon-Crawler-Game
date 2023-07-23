@@ -2,6 +2,7 @@
 #define ___DWARF_H___
 
 #include "enemy.h"
+#include "../constants.h"
 
 class Dwarf : public Enemy {
     public:

@@ -18,10 +18,10 @@ void Human::setGoldToDrop(int gold){
     this->goldToDrop = gold;
 }
 
-bool isMovable(){
+bool Human::isMovable(){
     return true;
 }
 
- int calculateDamageToPlayer(){
-    //Todo:
- }
+int Human::calculateDamageToPlayer(){
+    return this->getAtk();
+}

@@ -2,16 +2,19 @@
 #define ___PLAYER_H___
 
 #include <string>
+#include "constants.h"
 #include "enemy.h"
 #include "../character.h"
 
 using namespace std;
 
 class Player : public Character{
+    private:
         int gold, maxHp;
-        string name;
         static Player *instance;
+
     public:
+
         bool move(string dir);
         void useItem(string dir);
         int getGold();
@@ -24,12 +27,10 @@ class Player : public Character{
         void takeDamage(int dmg);
         virtual int calculateDmgToEnemy(Enemy *en);
         bool isDead();
-        virtual int calculateReward(Enemy *en) = 0;
+        virtual void addReward(Enemy *en) = 0;
         static Player* getInstance();
-        static void setRace(char race);
-        string getName();
-        void setName(string n);
-    private:
+        static void setRace(string race);
+        Player();
         Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player();
 };
