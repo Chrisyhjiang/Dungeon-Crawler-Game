@@ -5,31 +5,14 @@
 #include <cstdlib>
 #include <vector>
 #include "cell.h"
-// #include "chamber.h"
+#include "../constants.h"
 
 class Chamber;
 
 class Floor {
 
 	public:
-		static const int MAX_CHAMBERS = 5;
-		static const int MAX_ROW = 25;
-		static const int MAX_COLUMN = 79;
-		static const int NUM_GOLD = 10;
-		static const int NUM_POTION = 10;
-		static const int NUM_ENEMY = 20;
-		static const int NUM_TREASURES = 10;
 
-		static char const SYM_PLAYER = '@';
-		static char const SYM_WALL_VER = '|';
-		static char const SYM_WALL_HOR = '-';
-		static char const SYM_DOORWAY = '+';
-		static char const SYM_PASSAGE = '#';
-		static char const SYM_TILE = '.';
-		static char const STAIRS = '\\';
-
-		static char const GOLD = 'G';
-		static char const POTION = 'P';
 
 		Floor();
 		~Floor();

@@ -12,7 +12,6 @@ class Player;
 class PlayerFactory{
     public:
         static Player* createPlayer(string race);
-
 };
 
 #endif;
