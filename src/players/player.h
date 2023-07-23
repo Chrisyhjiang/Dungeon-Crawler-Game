@@ -1,10 +1,15 @@
 #ifndef ___PLAYER_H___
 #define ___PLAYER_H___
 
-class Player {
-        int gold, maxHP;
-        static Player *player;
+#include <string>
+#include "enemy.h"
+#include "../character.h"
 
+using namespace std;
+
+class Player : public Character{
+        int gold, maxHp;
+        static Player *instance;
     public:
         bool move(string dir);
         void useItem(string dir);
@@ -16,10 +21,13 @@ class Player {
         int getMaxHp();
         void setMaxHp(int maxHp);
         void takeDamage(int dmg);
-        int calculateDmgToEnemy(Enemy *en);
+        virtual int calculateDmgToEnemy(Enemy *en) = 0;
         bool isDead();
-        int calculateReward(Enemy *en);
+        virtual int calculateReward(Enemy *en) = 0;
         static Player* getInstance();
         static void setRace(char race);
+    private:
+        Player(int hp, int atk, int def, string race, int maxHP, int gold);
+        ~Player();
 };
 #endif

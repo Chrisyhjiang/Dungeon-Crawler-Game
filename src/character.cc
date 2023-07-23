@@ -1,6 +1,6 @@
 #include "character.h"
 
-Character::Character(int hp, int atk, int def, string race) : hp(hp), atk(atk), def(def) race(race){}
+Character::Character(int hp, int atk, int def, string race) : hp(hp), atk(atk), def(def), race(race){}
 
 int Character::getHP(){
     return hp;

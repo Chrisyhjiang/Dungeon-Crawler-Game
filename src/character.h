@@ -4,6 +4,8 @@
 #include <string>
 
 using namespace std;
+
+using namespace std;
 class Character{
     private:
         int hp, atk, def, x, y;
