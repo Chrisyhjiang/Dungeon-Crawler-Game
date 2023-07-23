@@ -1,6 +1,21 @@
 #ifndef CHAMBER_H
 #define CHAMBER_H
 #include "cell.h"
+#include "../constants.h"
+#include "../enemies/enemy.h"
+#include "../enemies/enemyFactory.h"
+#include "../character.h"
+#include "../items/itemDecorator.h"
+#include "../items/smallTreasure.h"
+#include "../items/normalTreasure.h"
+#include "../items/dragonTreasure.h"
+#include "../items/boostAtk.h"
+#include "../items/boostDef.h"
+#include "../items/woundAtk.h"
+#include "../items/woundDef.h"
+#include "../items/poisonHP.h"
+#include "../items/restoreHP.h"
+#include "stair.h"
 #include <vector>
 #include <cstdlib>
 using namespace std;

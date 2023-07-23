@@ -2,6 +2,10 @@
 
 Cell::Cell(int i, int j, char s) : row(i), col(j), symbol(s){}
 
+Cell::~Cell() {
+    
+}
+
 char Cell::getSymbol(){
     return symbol;
 }
@@ -26,10 +30,13 @@ void Cell::setRow(int r){
     row = r;
 }
 
-bool Cell::isOccupied(){
-    return symbol != Floor::SYM_TILE;
+int Cell::getCol() {
+    return col;
 }
 
+bool Cell::isOccupied(){
+    return symbol != SYM_TILE;
+}
 
 int Cell::getChamberID(){
     return chamberID;
@@ -39,4 +46,10 @@ void Cell::setChamberID(int id){
     chamberID = id;
 }
 
+void Cell::setCharacter(Character* a) {
+    ch = a;
+}
  
+Character* Cell::getCharacter() {
+    return ch;
+}

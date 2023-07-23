@@ -8,6 +8,7 @@ class ItemDecorator : public Player {
         Player* target;
     public:
         ItemDecorator(Player* p);
+        ItemDecorator();
         ~ItemDecorator();
         void setTarget(Player *p);
         virtual void update() = 0;

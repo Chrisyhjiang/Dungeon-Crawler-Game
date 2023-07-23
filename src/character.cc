@@ -42,6 +42,6 @@ int Character::getY(){
     return y;
 }
 
-void Character::setY(){
+void Character::setY(int y){
     this->y = y;
 }

@@ -2,7 +2,7 @@
 #define ___CELL_H___
 
 #include "floor.h"
-
+#include "../constants.h"
 // Forward declaration
 class Character;
 class Floor;
@@ -20,7 +20,7 @@ class Cell {
         };
 
 		Cell(int i, int j, char symbol);
-		virtual ~Cell() = 0;
+		virtual ~Cell();
 
         virtual char getSymbol();
         virtual void setSymbol(char sb);
@@ -28,11 +28,14 @@ class Cell {
         virtual void setCellType(CellType ct);
         int getRow();
         void setRow(int r);
+        int getCol();
         bool isOccupied();
         int getChamberID();
         void setChamberID(int id);
         virtual bool isWalkable() = 0;
         virtual Character* occupiedBy();
+        Character* getCharacter();
+        void setCharacter(Character* a);
     private:
 		int row, col, chamberID, level;
 		char symbol;

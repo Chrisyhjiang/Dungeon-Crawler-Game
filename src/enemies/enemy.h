@@ -8,7 +8,6 @@ class Enemy : public Character{
     private:
         char symbol;
         bool movable;
-    
     public:
     
         Enemy(int hp, int atk, int def, string race, char symbol);

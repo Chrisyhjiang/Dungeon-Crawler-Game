@@ -6,6 +6,7 @@
 class BoostDefPotion : public ItemDecorator{
     public:
         BoostDefPotion();
+        BoostDefPotion(Player* p);
         ~BoostDefPotion();
         void update();
 };

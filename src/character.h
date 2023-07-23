@@ -9,7 +9,7 @@ using namespace std;
 class Character{
     private:
         int hp, atk, def, x, y;
-        string race;
+        static string race;
     public:
         Character(int hp, int atk, int def, string race);
         virtual ~Character() = 0;
@@ -20,11 +20,11 @@ class Character{
         int getDef();
         void setDef(int def);
         virtual bool isDead() = 0;
-        string getRace();
+        static string getRace();
         int getX();
         void setX(int x);
         int getY();
-        void setY();
+        void setY(int y);
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 class SmallTreasure : public ItemDecorator {
     public:
-        SmallTreasure();
+        SmallTreasure(Player* p);
         ~SmallTreasure();
         void update();
 };

@@ -6,6 +6,7 @@
 class NormalTreasure : public ItemDecorator {
     public:
         NormalTreasure();
+        NormalTreasure(Player* p);
         ~NormalTreasure();
         void update();
 };

@@ -41,6 +41,10 @@ char const ENEMY_MERCHANT = 'M';
 char const ENEMY_DRAGON = 'D';
 char const ENEMY_HALFING = 'L';
 
-const char movableEnemies[] = { ENEMY_HUMAN, ENEMY_DWARF, ENEMY_ORC, ENEMY_MERCHANT, ENEMY_HALFING };
+char const SMALL_GOLD = 'S';
+char const NORMAL_GOLD = 'N';
+char const MERCHANT_GOLD = 'M';
+char const DRAGON_GOLD = 'D';
+
 
 #endif

@@ -27,7 +27,7 @@ class Player : public Character{
         void takeDamage(int dmg);
         virtual int calculateDmgToEnemy(Enemy *en);
         bool isDead();
-        virtual void addReward(Enemy *en) = 0;
+        virtual void addReward(Enemy *en);
         static Player* getInstance();
         static void setRace(string race);
         Player();

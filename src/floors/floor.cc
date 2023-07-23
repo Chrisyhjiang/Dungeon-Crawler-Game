@@ -17,7 +17,7 @@ Floor::Floor() {
     }
 }
 
-Floor::Floor() {
+Floor::~Floor() {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
             delete map[i][j];

@@ -6,6 +6,7 @@
 class PoisonHealthPotion : public ItemDecorator{
     public:
         PoisonHealthPotion();
+        PoisonHealthPotion(Player* p);
         ~PoisonHealthPotion();
         void update();
 };
