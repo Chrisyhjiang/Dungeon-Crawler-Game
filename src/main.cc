@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
     ChamberCrawler *game = new ChamberCrawler();
     string race = game->chooseGameRace();
     cout << "race: " << race << endl;
-    game->start(race,"");
+    game->start(race, "");
 
 
     
