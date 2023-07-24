@@ -72,10 +72,10 @@ void ChamberCrawler::loadFloor(Player* player){
     floor->displayFloor();
 }
 
-void displayFloor(){
-    // display floor;
+void ChamberCrawler::play(){
+    
 }
-
+ 
 string ChamberCrawler::getRace(){
     return race;
 }

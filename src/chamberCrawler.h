@@ -25,7 +25,6 @@ class ChamberCrawler {
 		static string getRace();
 		void start(string floorFile);
 		void loadFloor(Player* player);
-
-		//void displayFloor();
+		void play();
 };
 #endif

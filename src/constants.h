@@ -25,30 +25,45 @@ const string PLAYERS[] = {SHADE, DROW, VAMPIRE, TROLL, GOBLIN};
 const char SYM_PLAYER = '@';
 
 // constants for floor elements
-char const SYM_WALL_VER = '|';
-char const SYM_WALL_HOR = '-';
-char const SYM_DOORWAY = '+';
-char const SYM_PASSAGE = '#';
-char const SYM_TILE = '.';
-char const SYM_STAIRS = '\\';
+const char SYM_WALL_VER = '|';
+const char SYM_WALL_HOR = '-';
+const char SYM_DOORWAY = '+';
+const char SYM_PASSAGE = '#';
+const char SYM_TILE = '.';
+const char SYM_STAIRS = '\\';
 
 // constants for potion and gold
-char const GOLD = 'G';
-char const POTION = 'P';
+const char GOLD = 'G';
+const char POTION = 'P';
 
 // constants for Enemy 
-char const ENEMY_HUMAN = 'H';
-char const ENEMY_DWARF = 'W';
-char const ENEMY_ELF = 'E';
-char const ENEMY_ORC = 'O';
-char const ENEMY_MERCHANT = 'M';
-char const ENEMY_DRAGON = 'D';
-char const ENEMY_HALFING = 'L';
+const char ENEMY_HUMAN = 'H';
+const char ENEMY_DWARF = 'W';
+const char ENEMY_ELF = 'E';
+const char ENEMY_ORC = 'O';
+const char ENEMY_MERCHANT = 'M';
+const char ENEMY_DRAGON = 'D';
+const char ENEMY_HALFING = 'L';
 
-char const SMALL_GOLD = 'S';
-char const NORMAL_GOLD = 'N';
-char const MERCHANT_GOLD = 'M';
-char const DRAGON_GOLD = 'D';
+// constants for Gold
+const char SMALL_GOLD = 'S';
+const char NORMAL_GOLD = 'N';
+const char MERCHANT_GOLD = 'M';
+const char DRAGON_GOLD = 'D';
+
+// command
+//no,so,ea,we,ne,nw,se,sw
+const string MOVE_NORTH = "no";
+const string MOVE_SOUTH = "so";
+const string MOVE_EAST = "ea";
+const string MOVE_WEST = "we";
+const string MOVE_NORTH_EAST = "ne";
+const string MOVE_NORTH_WEST = "nw";
+const string MOVE_SOUTH_EAST = "se";
+const string MOVE_SOURTH_WEST = "sw";
+const char USE_POTION = 'u';
+const char EXIT = 'q';
+
 
 
 #endif

@@ -90,7 +90,7 @@ void Floor::spawnPotions(Player* player) {
 void Floor::spawnEnemies() {
     for (int i = 0; i < NUM_ENEMY; i++) {
         Chamber* chamber = getRandomChamber();
-        cout <<  "chamber id: " << chamber->getChamberID() << endl;
+        //cout <<  "chamber id: " << chamber->getChamberID() << endl;
         chamber->renderEnemy();
     }
 }
