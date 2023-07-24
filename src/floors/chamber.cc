@@ -44,11 +44,8 @@ void Chamber::renderEnemy() {
     enemy->setY(cell->getCol());
 }
 
-void Chamber::renderTreasure() {
-    Cell *c = chamberCells.at(rand() % chamberCells.size());
-    while (c->isOccupied()) {
-        Cell *c = chamberCells.at(rand() % chamberCells.size());
-    }
+void Chamber::renderTreasure(Player* player) {
+    Cell* cell = getRandomCell();
     int m = rand() % 8;
     char e;
     ItemDecorator* gold;
@@ -61,52 +58,49 @@ void Chamber::renderTreasure() {
     }
     switch(e){
         case NORMAL_GOLD:
-            gold = new NormalTreasure(nullptr);
+            gold = new NormalTreasure(player);
             break;
         case SMALL_GOLD:
-            gold = new SmallTreasure(nullptr);
+            gold = new SmallTreasure(player);
             break;
         case DRAGON_GOLD:   
-            gold = new DragonTreasure(nullptr);
+            gold = new DragonTreasure(player);
             break;
         default:
             gold = nullptr;
             break;
     }
-    c->setSymbol(GOLD);
-    c->setCharacter(gold);
-    gold->setX(c->getRow());
-    gold->setY(c->getCol());
+    cell->setSymbol(GOLD);
+    cell->setCharacter(gold);
+    gold->setX(cell->getRow());
+    gold->setY(cell->getCol());
 }
 
 void Chamber::addCell(Cell* c) {
     chamberCells.push_back(c);
 }
 
-void Chamber::renderPotion() {
-    Cell *c = chamberCells.at(rand() % chamberCells.size());
-    while (c->isOccupied()) {
-        Cell *c = chamberCells.at(rand() % chamberCells.size());
-    }
+void Chamber::renderPotion(Player* player) {
+    Cell* cell = getRandomCell();
     int m = rand() % 6;
     ItemDecorator* potion;
     if (m == 0) {
-        potion = new BoostAtkPotion(nullptr);
+        potion = new BoostAtkPotion(player);
     } else if (m == 1) {
-        potion = new WoundAtkPotion(nullptr);
+        potion = new WoundAtkPotion(player);
     } else if (m == 2) {
-        potion = new BoostDefPotion(nullptr);
+        potion = new BoostDefPotion(player);
     } else if (m == 3) {
-        potion = new WoundDefPotion(nullptr);
+        potion = new WoundDefPotion(player);
     } else if (m == 4) {
-        potion = new RestoreHealthPotion(nullptr);
+        potion = new RestoreHealthPotion(player);
     } else {
-        potion = new PoisonHealthPotion(nullptr);
+        potion = new PoisonHealthPotion(player);
     }
-    c->setSymbol(POTION);
-    c->setCharacter(potion);
-    potion->setX(c->getRow());
-    potion->setY(c->getCol());
+    cell->setSymbol(POTION);
+    cell->setCharacter(potion);
+    potion->setX(cell->getRow());
+    potion->setY(cell->getCol());
 }
 
 void Chamber::renderStairs() {

@@ -34,8 +34,8 @@ class Chamber {
     public:
         Chamber(int id);
         ~Chamber();
-        void renderPotion();
-        void renderTreasure();
+        void renderPotion(Player* player);
+        void renderTreasure(Player* player);
         void renderEnemy();
         void renderStairs();
         void addCell(Cell* c);

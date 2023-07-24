@@ -77,15 +77,13 @@ void Floor::displayFloor() {
 }
 
 Chamber* Floor::getRandomChamber() {
-    // Seed the random number generator with the current time
-    //srand(static_cast<unsigned int>(time(0)));
     return chambers[rand() % MAX_CHAMBERS];
 }
 
-void Floor::spawnPotions() {
+void Floor::spawnPotions(Player* player) {
     for (int i = 0; i < NUM_POTION; i++) {
-        Chamber* c = Floor::getRandomChamber();
-        c->renderPotion();
+        Chamber* cell = getRandomChamber();
+        cell->renderPotion(player);
     }
 }
 
@@ -97,10 +95,10 @@ void Floor::spawnEnemies() {
     }
 }
 
-void Floor::spawnTreasures() {
+void Floor::spawnTreasures(Player* player) {
     for (int i = 0; i < NUM_TREASURES; i++) {
         Chamber* c = Floor::getRandomChamber();
-        c->renderTreasure();
+        c->renderTreasure(player);
     }
 }
 
@@ -122,35 +120,9 @@ void Floor::spawnPlayers(Player* player){
     cell->setCharacter(player);
 }
 
-void Floor::spawnFloor() {
+void Floor::spawnFloor(Player* player) {
     spawnStairs();
     spawnEnemies();
-    // spawnPotions();
-    // spawnTreasures();
+    spawnPotions(player);
+    spawnTreasures(player);
 }
-
- 
-
-// Function to spawn the player in a chamber
-// void spawnPlayerInChamber(Chamber* chambers[], int numChambers) {
-//     // Seed the random number generator (called once at the start of the program)
-//     std::srand(std::time(nullptr));
-
-//     // Step 1: Randomly select a chamber
-//     int chosenChamberIndex = std::rand() % numChambers;
-//     Chamber* chosenChamber = chambers[chosenChamberIndex];
-
-//     // Step 2: Randomly select a floor tile within the chosen chamber
-//     int numRows = chosenChamber->getNumRows();
-//     int numCols = chosenChamber->getNumCols();
-//     int playerRow, playerCol;
-
-//     do {
-//         playerRow = std::rand() % numRows;
-//         playerCol = std::rand() % numCols;
-//     } while (!chosenChamber->isFloorTile(playerRow, playerCol) || chosenChamber->isOccupied(playerRow, playerCol));
-
-//     // Step 3: Create the player instance and set its position in the chosen chamber
-//     Player* player = new Player(/* Optional parameters for player initialization */);
-//     chosenChamber->setEntity(player, playerRow, playerCol);
-// }
