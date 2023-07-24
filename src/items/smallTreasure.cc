@@ -1,6 +1,6 @@
 #include "smallTreasure.h"
 
-SmallTreasure::SmallTreasure (Player* p){
+SmallTreasure::SmallTreasure (Player* p) : ItemDecorator(p) {
     target = p;
 }
 

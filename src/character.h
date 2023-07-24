@@ -8,7 +8,7 @@ using namespace std;
 class Character{
     private:
         int hp, atk, def, x, y;
-        static string race;
+        string race;
     public:
         Character();
         Character(int hp, int atk, int def, string race);

@@ -1,4 +1,9 @@
 #include "chamber.h"
+// #include "../items/normalTreasure.h"
+// #include "../items/smallTreasure.h"
+// #include "../items/dragonTreasure.h"
+// #include "../items/boostAtk.h"
+// #include "../items/boostDef.h"
 
 Chamber::Chamber(int id) : id{id}{}
 
@@ -31,7 +36,8 @@ void Chamber::renderEnemy() {
     } else {
         e = ENEMY_MERCHANT;
     }
-    Enemy* en = EnemyFactory::createEnemy(e, Character::getRace());
+
+    Enemy* en = EnemyFactory::createEnemy(e, SHADE);
     c->setSymbol(e);
     c->setCharacter(en);
     en->setX(c->getRow());

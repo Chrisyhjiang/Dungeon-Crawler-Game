@@ -5,7 +5,7 @@
 
 class MerchantTreasure : public ItemDecorator {
     public:
-        MerchantTreasure();
+        MerchantTreasure(Player* player);
         ~MerchantTreasure();
         void update();
 };

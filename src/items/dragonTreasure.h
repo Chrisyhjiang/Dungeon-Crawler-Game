@@ -5,7 +5,6 @@
 
 class DragonTreasure : public ItemDecorator {
     public:
-        DragonTreasure();
         DragonTreasure(Player* p);
         ~DragonTreasure();
         void update();

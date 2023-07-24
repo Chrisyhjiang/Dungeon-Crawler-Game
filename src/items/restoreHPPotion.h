@@ -5,7 +5,6 @@
 
 class RestoreHealthPotion : public ItemDecorator{
     public:
-        RestoreHealthPotion();
         RestoreHealthPotion(Player* p);
         ~RestoreHealthPotion();
         void update();

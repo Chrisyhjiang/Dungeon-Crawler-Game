@@ -5,7 +5,6 @@
 
 class WoundDefPotion : public ItemDecorator{
     public:
-       WoundDefPotion();
        WoundDefPotion(Player* p);
        ~WoundDefPotion();
        void update(); 

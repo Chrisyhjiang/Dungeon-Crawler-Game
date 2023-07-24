@@ -1,7 +1,10 @@
 #include "dragonTreasure.h"
 
-DragonTreasure::DragonTreasure(Player* p) {
+DragonTreasure::DragonTreasure(Player* p) : ItemDecorator(p) {
     target = p;
+}
+
+DragonTreasure::~DragonTreasure(){
 }
 
 void DragonTreasure::update() {

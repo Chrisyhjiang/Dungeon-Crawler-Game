@@ -65,4 +65,8 @@ void Player::setRace(string race){
     this->setRace(race);
 }
 
+void Player::addReward(Enemy* en){
+    
+}
+
 
