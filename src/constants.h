@@ -13,6 +13,7 @@ const int NUM_GOLD = 10;
 const int NUM_POTION = 10;
 const int NUM_ENEMY = 20;
 const int NUM_TREASURES = 10;
+const int TOTAL_PROBABILITY_DISTRIBUTION = 18;
 
 // constants for players
 const string SHADE = "Shade";
@@ -35,6 +36,7 @@ char const SYM_STAIRS = '\\';
 char const GOLD = 'G';
 char const POTION = 'P';
 
+// constants for Enemy 
 char const ENEMY_HUMAN = 'H';
 char const ENEMY_DWARF = 'W';
 char const ENEMY_ELF = 'E';

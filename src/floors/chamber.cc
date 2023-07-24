@@ -20,32 +20,28 @@ vector<Cell*> Chamber::getCells(){
 }
 
 void Chamber::renderEnemy() {
-    Cell *c = chamberCells.at(rand() % chamberCells.size());
-    while (c->isOccupied()) {
-        c = chamberCells.at(rand() % chamberCells.size());
-    }
-
-    int m = rand() % 18;
-    char e;
+    int m = rand() % TOTAL_PROBABILITY_DISTRIBUTION;
+    char enemyType;
     if (0 <= m && m < 4) {
-        e = ENEMY_HUMAN;
-    } else if (4 <= m && m < 6) {
-        e = ENEMY_DWARF;
-    } else if (6 <= m && m < 11) {
-        e = ENEMY_HALFING; 
-    } else if (11 <= m && m < 13) {
-        e = ENEMY_ELF;
-    } else if (13 <= m && m < 15) {
-        e = ENEMY_ORC;
+        enemyType = ENEMY_HUMAN;
+    } else if (4 <= m && m < 7) {
+        enemyType = ENEMY_DWARF;
+    } else if (7 <= m && m < 12) {
+        enemyType= ENEMY_HALFING; 
+    } else if (12 <= m && m < 14) {
+        enemyType = ENEMY_ELF;
+    } else if (14 <= m && m < 16) {
+        enemyType = ENEMY_ORC;
     } else {
-        e = ENEMY_MERCHANT;
+        enemyType = ENEMY_MERCHANT;
     }
 
-    Enemy* en = EnemyFactory::createEnemy(e, SHADE);
-    c->setSymbol(e);
-    c->setCharacter(en);
-    en->setX(c->getRow());
-    en->setY(c->getCol());
+    Enemy* enemy = EnemyFactory::createEnemy(enemyType, ChamberCrawler::getRace());
+    Cell* cell = getRandomCell();
+    cell->setSymbol(enemyType);
+    cell->setCharacter(enemy);
+    enemy->setX(cell->getRow());
+    enemy->setY(cell->getCol());
 }
 
 void Chamber::renderTreasure() {
@@ -115,10 +111,7 @@ void Chamber::renderPotion() {
 
 void Chamber::renderStairs() {
     Cell* cell = getRandomCell();
-    // Cell *c = chamberCells.at(rand() % chamberCells.size());
-    // while (c->isOccupied()) {
-    //     Cell *c = chamberCells.at(rand() % chamberCells.size());
-    // }
+
     cell->setSymbol(SYM_STAIRS);
 }
 
@@ -128,4 +121,9 @@ Cell* Chamber::getRandomCell(){
         cell = chamberCells.at(rand() % chamberCells.size());
     }while(cell->isOccupied());
     return cell;
+}
+
+
+int Chamber::getChamberID(){
+    return id;
 }

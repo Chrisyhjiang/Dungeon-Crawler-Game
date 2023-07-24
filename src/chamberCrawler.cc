@@ -75,3 +75,7 @@ void ChamberCrawler::loadFloor(Player* player){
 void displayFloor(){
     // display floor;
 }
+
+string ChamberCrawler::getRace(){
+    return race;
+}

@@ -1,6 +1,8 @@
 #ifndef CHAMBER_H
 #define CHAMBER_H
+#include <iostream>
 #include "cell.h"
+#include "../chamberCrawler.h"
 #include "../constants.h"
 #include "../enemies/enemy.h"
 #include "../enemies/enemyFactory.h"
@@ -27,6 +29,7 @@ class Chamber {
         // int size;
         int id;
         vector<Cell*> chamberCells;
+        
       
     public:
         Chamber(int id);
@@ -38,6 +41,7 @@ class Chamber {
         void addCell(Cell* c);
         vector<Cell*> getCells();
         Cell* getRandomCell();
+        int getChamberID();
 };
 
 #endif
