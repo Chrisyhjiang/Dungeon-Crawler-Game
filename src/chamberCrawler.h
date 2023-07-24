@@ -16,13 +16,16 @@ class ChamberCrawler {
 		ifstream *floorStream;
 		Player* player;
 		Floor* floor;
+		static string race;
 
 	public:
 		ChamberCrawler();
 		~ChamberCrawler();
-		void start(string race, string floorFile);
-		string chooseGameRace();
-		void loadFloor();
+		static void setGameRace();
+		static string getRace();
+		void start(string floorFile);
+		void loadFloor(Player* player);
+
 		//void displayFloor();
 };
 #endif

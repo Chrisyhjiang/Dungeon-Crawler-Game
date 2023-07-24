@@ -69,4 +69,8 @@ void Player::addReward(Enemy* en){
     
 }
 
+char Player::getSymbol(){
+    return SYM_PLAYER;
+}
+
 

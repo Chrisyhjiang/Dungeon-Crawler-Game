@@ -1,6 +1,6 @@
 #include "floor.h"
 #include <iostream>
-#include "chamber.h"
+
 using namespace std;
 
 class Chamber;
@@ -10,12 +10,12 @@ Floor::Floor() {
 
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
-            cells[i][j] = nullptr;
+            cells[i][j] = new Cell(i, j, ' ');
         }
     }
 
     for (int i = 0; i < MAX_CHAMBERS; i++) {
-        chambers[i] = nullptr;
+        chambers[i] = new Chamber(-1);
     }
 }
 
@@ -27,7 +27,7 @@ Floor::~Floor() {
     }
 
     for (int i = 0; i < MAX_CHAMBERS; i++) {
-       // delete chambers[i];
+       delete chambers[i];
     }
 }
 
@@ -36,14 +36,14 @@ void Floor::loadFromFile(ifstream *floorStream) {
     for (int i = 0; i < MAX_ROW; i++) {
         getline(*floorStream, line);
         for (int j = 0; j < MAX_COLUMN; j++) {
-            cells[i][j] = new Cell(i, j, line[i]);
-            // if (c->getSymbol() == '.') {
-            //     int chamberID = locateChamber(i, j);
-            //     c->setChamberID(chamberID);
-            //     chambers[chamberID]->addCell(c);
-            // } else {
-            //     c->setChamberID(-1);
-            // }
+            cells[i][j] = new Cell(i, j, line[j]);
+            if ( cells[i][j]->getSymbol() == SYM_TILE) {
+                int chamberID = locateChamber(i, j);
+                cells[i][j]->setChamberID(chamberID);
+                chambers[chamberID]->addCell(cells[i][j]);
+            } else {
+                 cells[i][j]->setChamberID(-1);
+            }
         }
     }
 }
@@ -77,6 +77,8 @@ void Floor::displayFloor() {
 }
 
 Chamber* Floor::getRandomChamber() {
+    // Seed the random number generator with the current time
+    srand(static_cast<unsigned int>(std::time(0)));
     return chambers[rand() % MAX_CHAMBERS];
 }
 
@@ -110,14 +112,48 @@ Cell* Floor::getCell(int i, int j) {
     return cells[i][j];
 }
 
-void Floor::spawnPlayers(){
-    
+void Floor::spawnPlayers(Player* player){
+    // Seed the random number generator with the current time
+    std::srand(static_cast<unsigned int>(std::time(0)));
+    int chamberId = rand() % MAX_CHAMBERS;
+    cout << "chamberId: " << chamberId << endl;
+    Chamber* chosenChamber = chambers[chamberId];
+    Cell * cell = chosenChamber->getRandomCell();
+    player->setX(cell->getRow());
+    player->setY(cell->getCol());
+    cell->setSymbol(SYM_PLAYER);
 }
 
 void Floor::spawnFloor() {
-    spawnPlayers();
-    spawnStairs();
-    spawnPotions();
-    spawnTreasures();
-    spawnEnemies();
+    //spawnPlayers();
+    // spawnStairs();
+    // spawnPotions();
+    // spawnTreasures();
+    // spawnEnemies();
 }
+
+ 
+
+// Function to spawn the player in a chamber
+// void spawnPlayerInChamber(Chamber* chambers[], int numChambers) {
+//     // Seed the random number generator (called once at the start of the program)
+//     std::srand(std::time(nullptr));
+
+//     // Step 1: Randomly select a chamber
+//     int chosenChamberIndex = std::rand() % numChambers;
+//     Chamber* chosenChamber = chambers[chosenChamberIndex];
+
+//     // Step 2: Randomly select a floor tile within the chosen chamber
+//     int numRows = chosenChamber->getNumRows();
+//     int numCols = chosenChamber->getNumCols();
+//     int playerRow, playerCol;
+
+//     do {
+//         playerRow = std::rand() % numRows;
+//         playerCol = std::rand() % numCols;
+//     } while (!chosenChamber->isFloorTile(playerRow, playerCol) || chosenChamber->isOccupied(playerRow, playerCol));
+
+//     // Step 3: Create the player instance and set its position in the chosen chamber
+//     Player* player = new Player(/* Optional parameters for player initialization */);
+//     chosenChamber->setEntity(player, playerRow, playerCol);
+// }

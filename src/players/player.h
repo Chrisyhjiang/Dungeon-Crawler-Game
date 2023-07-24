@@ -33,6 +33,7 @@ class Player : public Character{
         virtual void addReward(Enemy *en);
         //static Player* getInstance();
         virtual void setRace(string race);
+        char getSymbol();
         
       
 };

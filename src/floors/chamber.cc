@@ -8,17 +8,21 @@
 Chamber::Chamber(int id) : id{id}{}
 
 Chamber::~Chamber() {
-    while (!cells.empty()) {
-        Cell *c = cells.back();
+    while (!chamberCells.empty()) {
+        Cell *c = chamberCells.back();
         delete c;
-        cells.pop_back();
+        chamberCells.pop_back();
     }
 }
 
+vector<Cell*> Chamber::getCells(){
+    return chamberCells;
+}
+
 void Chamber::renderEnemy() {
-    Cell *c = cells.at(rand() % cells.size());
+    Cell *c = chamberCells.at(rand() % chamberCells.size());
     while (c->isOccupied()) {
-        c = cells.at(rand() % cells.size());
+        c = chamberCells.at(rand() % chamberCells.size());
     }
 
     int m = rand() % 18;
@@ -45,9 +49,9 @@ void Chamber::renderEnemy() {
 }
 
 void Chamber::renderTreasure() {
-    Cell *c = cells.at(rand() % cells.size());
+    Cell *c = chamberCells.at(rand() % chamberCells.size());
     while (c->isOccupied()) {
-        Cell *c = cells.at(rand() % cells.size());
+        Cell *c = chamberCells.at(rand() % chamberCells.size());
     }
     int m = rand() % 8;
     char e;
@@ -80,13 +84,13 @@ void Chamber::renderTreasure() {
 }
 
 void Chamber::addCell(Cell* c) {
-    cells.push_back(c);
+    chamberCells.push_back(c);
 }
 
 void Chamber::renderPotion() {
-    Cell *c = cells.at(rand() % cells.size());
+    Cell *c = chamberCells.at(rand() % chamberCells.size());
     while (c->isOccupied()) {
-        Cell *c = cells.at(rand() % cells.size());
+        Cell *c = chamberCells.at(rand() % chamberCells.size());
     }
     int m = rand() % 6;
     ItemDecorator* potion;
@@ -110,9 +114,17 @@ void Chamber::renderPotion() {
 }
 
 void Chamber::renderStairs() {
-    Cell *c = cells.at(rand() % cells.size());
+    Cell *c = chamberCells.at(rand() % chamberCells.size());
     while (c->isOccupied()) {
-        Cell *c = cells.at(rand() % cells.size());
+        Cell *c = chamberCells.at(rand() % chamberCells.size());
     }
     c->setSymbol(STAIRS);
+}
+
+Cell* Chamber::getRandomCell(){
+    Cell* cell = nullptr;
+    do{
+        cell = chamberCells.at(rand() % chamberCells.size());
+    }while(cell->isOccupied());
+    return cell;
 }

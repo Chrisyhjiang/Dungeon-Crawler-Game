@@ -5,10 +5,10 @@ using namespace std;
 
 
 int main(int argc, char* argv[]) {
+    ChamberCrawler::setGameRace();
     ChamberCrawler *game = new ChamberCrawler();
-    string race = game->chooseGameRace();
-    cout << "race: " << race << endl;
-    game->start(race, "");
+    // Todo: pass default file for now
+    game->start("");
 
 
     

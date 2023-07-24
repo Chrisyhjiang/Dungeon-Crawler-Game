@@ -2,6 +2,8 @@
 #include <iostream>
 #include "chamberCrawler.h"
 
+string ChamberCrawler::race = SHADE;
+
 ChamberCrawler::ChamberCrawler(){
 
 }
@@ -10,17 +12,18 @@ ChamberCrawler::~ChamberCrawler(){
     //Todo:    
 }
 
-void ChamberCrawler::start(string race, string floorFile){
+void ChamberCrawler::start(string floorFile){
+
     floorLayoutFile =  (floorFile == "") ? EMPTY_FLOOR_FILE : floorFile;
     floorStream = new ifstream(floorLayoutFile);
     player = PlayerFactory::createPlayer(race);
-    loadFloor();
+    loadFloor(player);
     // displayFloor;
     // start game loop
 
 }
 
-string  ChamberCrawler::chooseGameRace(){
+void  ChamberCrawler::setGameRace(){
     cout << "please choose a game race from the following options: \n";
     for(int i = 0; i < 5; i++){
         cout << "enter " << i+1 << " for choosing " << PLAYERS[i] << endl;
@@ -38,32 +41,33 @@ string  ChamberCrawler::chooseGameRace(){
         std::cout << "Invalid input. Please enter an integer between 1 and 5" << endl;
         
     }
-    string result = "";
+    
     switch (number){
         case 1 :
-            result = SHADE;
+            ChamberCrawler::race = SHADE;
             break;
         case 2 :
-            result = DROW;
+            ChamberCrawler::race = DROW;
             break;
         case 3 :
-            result = VAMPIRE;
+            ChamberCrawler::race = VAMPIRE;
             break;
         case 4 :
-            result = TROLL;
+            ChamberCrawler::race = TROLL;
             break;
         case 5 :
-            result = GOBLIN;
+            ChamberCrawler::race = GOBLIN;
             break;
         default:
             break;
     }
-    return result;
+
 }
 
-void ChamberCrawler::loadFloor(){
+void ChamberCrawler::loadFloor(Player* player){
     floor = new Floor();
     floor->loadFromFile(floorStream);
+    floor->spawnPlayers(player);
     //floor->spawnFloor();
     floor->displayFloor();
 }

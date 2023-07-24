@@ -26,15 +26,18 @@ class Chamber {
     private:
         // int size;
         int id;
-        vector<Cell*> cells;
+        vector<Cell*> chamberCells;
+      
+    public:
         Chamber(int id);
         ~Chamber();
-    public:
         void renderPotion();
         void renderTreasure();
         void renderEnemy();
         void renderStairs();
         void addCell(Cell* c);
+        vector<Cell*> getCells();
+        Cell* getRandomCell();
 };
 
 #endif

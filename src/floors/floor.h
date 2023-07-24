@@ -4,8 +4,11 @@
 #include <fstream>
 #include <cstdlib>
 #include <vector>
+#include <ctime>
 #include "cell.h"
+#include "chamber.h"
 #include "../constants.h"
+#include "../players/player.h"
 
 class Chamber;
 
@@ -19,14 +22,15 @@ class Floor {
 		void displayFloor();
         Cell *getCell(int i, int j);
 		void spawnFloor();
+		void spawnPlayers(Player* player);
+
 	private:
 		int locateChamber(int i, int j);
 		Cell* cells[MAX_ROW][MAX_COLUMN];
-		Chamber *chambers[MAX_CHAMBERS];
+		Chamber* chambers[MAX_CHAMBERS];
 		void spawnEnemies();
 		void spawnPotions();
 		void spawnTreasures();
-		void spawnPlayers();
 		void spawnStairs();
 		// void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
 		Chamber *getRandomChamber();
