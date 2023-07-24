@@ -1,7 +1,7 @@
 #include "dragon.h"
 
 
-Dragon::Dragon(string race) : Enemy(100, 20, 20, race, Enemy::ENEMY_DRAGON){};
+Dragon::Dragon(string race) : Enemy(100, 20, 20, race, ENEMY_DRAGON){};
 Dragon::Dragon(int hp, int atk, int def, string race, char symbol): Enemy(hp, atk, def, race, symbol){};
 
 Dragon::~Dragon(){
@@ -16,14 +16,14 @@ void Dragon::setTreasureHoard(TreasureHoard* hoard){
     this->hoard = hoard;
 }
 
-int calculateDamageToPlayer(){
-    //Todo: 
+int Dragon::calculateDamageToPlayer(){
+    return this->getAtk();
 }
 
-void guard(){
+void Dragon::guard(){
     
 }
 
- bool isMovable(){
+ bool Dragon::isMovable(){
     return false;
  }

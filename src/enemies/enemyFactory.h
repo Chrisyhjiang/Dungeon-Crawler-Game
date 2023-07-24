@@ -2,15 +2,15 @@
 #define ___ENEMYFACTORY_H___
 
 #include <string>
+#include "enemy.h"
 
 using namespace std;
 
-class Enemy;
+ 
 
 class EnemyFactory{
     public:
         static Enemy* createEnemy(char en, string race);
-
 };
 
-#endif;
+#endif

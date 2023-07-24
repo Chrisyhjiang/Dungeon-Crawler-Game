@@ -4,14 +4,14 @@
 #include "../players/player.h"
 
 class ItemDecorator : public Player {
-    protected:
-        Player* target;
+    
     public:
+        Player* target;
         ItemDecorator(Player* p);
         ItemDecorator();
         ~ItemDecorator();
         void setTarget(Player *p);
-        virtual void update() = 0;
+        virtual void update();
 };
 
 

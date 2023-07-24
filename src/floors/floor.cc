@@ -25,25 +25,25 @@ Floor::~Floor() {
     }
 
     for (int i = 0; i < MAX_CHAMBERS; i++) {
-        delete chambers[i];
+       // delete chambers[i];
     }
 }
 
 void Floor::loadFromFile(std::ifstream *floorStream) {
-    string line;
-    for (int i = 0; i < MAX_ROW; i++) {
-        getline(*floorStream, line);
-        for (int j = 0; j < MAX_COLUMN; j++) {
-            Cell* c = new Cell(i, j, line[i]);
-            if (c->getSymbol() == '.') {
-                int chamberID = locateChamber(i, j);
-                c->setChamberID(chamberID);
-                chambers[chamberID]->addCell(c);
-            } else {
-                c->setChamberID(-1);
-            }
-        }
-    }
+    // string line;
+    // for (int i = 0; i < MAX_ROW; i++) {
+    //     getline(*floorStream, line);
+    //     for (int j = 0; j < MAX_COLUMN; j++) {
+    //         Cell* c = new Cell(i, j, line[i]);
+    //         if (c->getSymbol() == '.') {
+    //             int chamberID = locateChamber(i, j);
+    //             c->setChamberID(chamberID);
+    //             chambers[chamberID]->addCell(c);
+    //         } else {
+    //             c->setChamberID(-1);
+    //         }
+    //     }
+    // }
 }
 
 int Floor::locateChamber(int i, int j) {
@@ -100,12 +100,16 @@ void Floor::spawnTreasures() {
 }
 
 void Floor::spawnStairs() {
-    Chamber* c = Floor::getRandomChamber();
+   // Chamber* c = Floor::getRandomChamber();
     
 }
 
 Cell* Floor::getCell(int i, int j) {
     return map[i][j];
+}
+
+void Floor::spawnPlayers(){
+    
 }
 
 void Floor::spawnFloor() {

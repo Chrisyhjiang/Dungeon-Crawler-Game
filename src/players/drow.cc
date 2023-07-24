@@ -1,13 +1,8 @@
 #include "drow.h"
 
-Drow::Drow(){
-    this->setHP(150);
-    this->setAtk(25);
-    this->setDef(15);
-    this->setMaxHp(150);
-    this->setGold(0);
-    this->setRace(DROW);
-}
+//Player::Player(int hp, int atk, int def, string race, int maxHP, int gold)
+
+Drow::Drow() : Player(150, 25, 15, DROW, 150, 0){}
 
 int Drow::calculateDmgToEnemy(Enemy* en){
     return this->getAtk();

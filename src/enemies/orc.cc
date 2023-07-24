@@ -1,6 +1,6 @@
 #include "orc.h"
 
-Orc::Orc(string race) : Enemy(180, 30, 25, race, Enemy::ENEMY_ORC), extraDamage(0.5) {};
+Orc::Orc(string race) : Enemy(180, 30, 25, race, ENEMY_ORC), extraDamage(0.5) {};
 
 Orc::Orc(int hp, int atk, int def, string race, char symbol, double extraDamage) : Enemy(hp, atk, def, race, symbol), extraDamage(extraDamage){};
 

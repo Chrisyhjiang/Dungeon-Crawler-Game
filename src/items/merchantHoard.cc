@@ -1,5 +1,5 @@
-#include "merchantTreasure.h"
+#include "merchantHoard.h"
 
-void NormalTreasure::update() {
+void MerchantTreasure::update() {
     target->setGold(target->getGold() + 4);
 }

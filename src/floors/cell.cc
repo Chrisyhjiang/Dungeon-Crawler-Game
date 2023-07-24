@@ -1,10 +1,7 @@
-#include <cell.h>
+#include "cell.h"
 
 Cell::Cell(int i, int j, char s) : row(i), col(j), symbol(s){}
-
-Cell::~Cell() {
-    
-}
+Cell::~Cell(){}
 
 char Cell::getSymbol(){
     return symbol;
@@ -36,6 +33,7 @@ int Cell::getCol() {
 
 bool Cell::isOccupied(){
     return symbol != SYM_TILE;
+    return symbol != SYM_TILE;
 }
 
 int Cell::getChamberID(){
@@ -46,6 +44,13 @@ void Cell::setChamberID(int id){
     chamberID = id;
 }
 
+bool Cell::isWalkable(){
+    return true;
+}
+
+Character* Cell::occupiedBy(){
+     return ch;
+}
 void Cell::setCharacter(Character* a) {
     ch = a;
 }

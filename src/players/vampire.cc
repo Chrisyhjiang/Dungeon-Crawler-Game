@@ -2,13 +2,7 @@
 #include "vampire.h"
 
 
-Vampire::Vampire(){
-    this->setHP(50);
-    this->setAtk(25);
-    this->setDef(25);
-    this->setMaxHp(INT_MAX);
-    this->setGold(0);
-    this->setRace(SHADE);
+Vampire::Vampire() : Player(50, 25, 25, VAMPIRE, INT_MAX, 0) {
 }
 
 int Vampire::calculateDmgToEnemy(Enemy* en){

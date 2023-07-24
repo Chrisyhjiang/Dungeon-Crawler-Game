@@ -1,13 +1,6 @@
 #include "shade.h"
 
-Shade::Shade(){
-    this->setHP(125);
-    this->setAtk(25);
-    this->setDef(25);
-    this->setMaxHp(125);
-    this->setGold(0);
-    this->setRace(SHADE);
-}
+Shade::Shade() : Player(125, 25, 25, SHADE, 125, 0){}
 
 int Shade::calculateDmgToEnemy(Enemy* en){
     return this->getAtk();

@@ -2,7 +2,7 @@
 #include "../players/player.h"
 
 
-ItemDecorator::ItemDecorator(Player* p) {
+ItemDecorator::ItemDecorator(Player* p) : Player(*p) {
     target = p;
 }
 
@@ -14,3 +14,6 @@ void ItemDecorator::setTarget(Player* p) {
     target = p;
 }
 
+void ItemDecorator::update(){
+    
+}

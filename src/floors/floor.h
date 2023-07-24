@@ -12,8 +12,6 @@ class Chamber;
 class Floor {
 
 	public:
-
-
 		Floor();
 		~Floor();
 		
@@ -25,7 +23,7 @@ class Floor {
 		void spawnFloor();
 	private:
 		int locateChamber(int i, int j);
-		Cell *map[MAX_ROW][MAX_COLUMN];
+		Cell* map[MAX_ROW][MAX_COLUMN];
 		Chamber *chambers[MAX_CHAMBERS];
 		void spawnEnemies();
 		void spawnPotions();

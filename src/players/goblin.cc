@@ -1,12 +1,7 @@
 #include "goblin.h"
 
-Goblin::Goblin(){
-    this->setHP(125);
-    this->setAtk(25);
-    this->setDef(25);
-    this->setMaxHp(125);
-    this->setGold(0);
-    this->setRace(SHADE);
+Goblin::Goblin() : Player(125, 25, 25, GOBLIN, 125, 0){
+   
 }
 
 int Goblin::calculateDmgToEnemy(Enemy* en){

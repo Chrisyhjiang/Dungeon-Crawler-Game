@@ -14,4 +14,4 @@ class PlayerFactory{
         static Player* createPlayer(string race);
 };
 
-#endif;
+#endif

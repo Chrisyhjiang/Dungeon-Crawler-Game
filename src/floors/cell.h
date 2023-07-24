@@ -1,8 +1,8 @@
 #ifndef ___CELL_H___
 #define ___CELL_H___
 
-#include "floor.h"
 #include "../constants.h"
+
 // Forward declaration
 class Character;
 class Floor;
@@ -32,7 +32,7 @@ class Cell {
         bool isOccupied();
         int getChamberID();
         void setChamberID(int id);
-        virtual bool isWalkable() = 0;
+        virtual bool isWalkable();
         virtual Character* occupiedBy();
         Character* getCharacter();
         void setCharacter(Character* a);

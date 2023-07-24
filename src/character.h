@@ -2,8 +2,7 @@
 #define ___CHARACTER_H___
 
 #include <string>
-
-using namespace std;
+#include "constants.h"
 
 using namespace std;
 class Character{
@@ -11,8 +10,9 @@ class Character{
         int hp, atk, def, x, y;
         static string race;
     public:
+        Character();
         Character(int hp, int atk, int def, string race);
-        virtual ~Character() = 0;
+        virtual ~Character();
         int getHP ();
         void setHP(int hp);
         int getAtk();
@@ -20,7 +20,8 @@ class Character{
         int getDef();
         void setDef(int def);
         virtual bool isDead() = 0;
-        static string getRace();
+        virtual string getRace();
+        virtual void setRace(string r);
         int getX();
         void setX(int x);
         int getY();

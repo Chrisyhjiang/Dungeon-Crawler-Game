@@ -21,23 +21,23 @@ void Enemy::attachPlayer(){
 }
 
 bool Enemy::isPlayerInRange(){
+   return true;
+}
+
+void Enemy::takeDamage(int damage){
 
 }
 
-void takeDamage(int damage){
-
+int Enemy::calculateDamageToPlayer(){
+    return this->getAtk();
 }
 
-int calculateDamageToPlayer(){
-
+bool Enemy::isDead(){
+    return true;
 }
 
-bool isDead(){
-
-}
-
-int giveRewardToPlayer(){
-    
+int Enemy::giveRewardToPlayer(){
+    return 0;
 }
 
 

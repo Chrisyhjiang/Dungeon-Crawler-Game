@@ -3,18 +3,23 @@
 
 using namespace std;
 
-Player::Player(int hp, int atk, int def, string race, 
-                int maxHP, int gold) : Character(hp, atk, def, race),
-                maxHp(maxHp), gold(gold){}
+Player::Player(string race) {
+    this->setRace(race);
+}
+
+Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Character(hp, atk, def, race){
+    this->setMaxHp(maxHp);
+    this->setGold(gold);
+}
 
 
 Player::~Player() {
     // todo:
 }
 
-Player* Player::getInstance() {
-    return instance;
-}
+// Player* Player::getInstance() {
+//     return instance;
+// }
 
 int Player::getGold() {
     return gold;
@@ -50,6 +55,14 @@ void Player::attackEnemy(Enemy* enemy){
     int dmg = this->calculateDmgToEnemy(enemy);
     enemy->takeDamage(dmg);
     this->addReward(enemy);
+}
+
+int Player::calculateDmgToEnemy(Enemy *en){
+    return this->getAtk();
+}
+
+void Player::setRace(string race){
+    this->setRace(race);
 }
 
 

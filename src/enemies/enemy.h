@@ -4,6 +4,7 @@
 #include <string>
 #include "../character.h"
 
+
 class Enemy : public Character{
     private:
         char symbol;
@@ -11,7 +12,7 @@ class Enemy : public Character{
     public:
     
         Enemy(int hp, int atk, int def, string race, char symbol);
-        ~Enemy();
+        ~Enemy() override;
         char getSymbol();
         void setSymbol(char symbol);
         void attachPlayer();

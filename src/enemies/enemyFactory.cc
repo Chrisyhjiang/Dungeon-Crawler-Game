@@ -35,5 +35,5 @@ Enemy* EnemyFactory::createEnemy(char en, string race){
         default:
              enemy = nullptr;
     }
-
+    return enemy;
 }

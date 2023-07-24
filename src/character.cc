@@ -1,5 +1,9 @@
 #include "character.h"
 
+Character::Character(){};
+
+Character::~Character(){};
+
 Character::Character(int hp, int atk, int def, string race) : hp(hp), atk(atk), def(def), race(race){}
 
 int Character::getHP(){
@@ -29,6 +33,11 @@ void Character::setDef(int def){
 string Character::getRace(){
     return race;
 }
+void Character::setRace(string r){
+    race = r;
+}
+
+
 
 int Character::getX(){
     return x;
