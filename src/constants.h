@@ -5,6 +5,7 @@
 using namespace std;
 
 const int MAX_LEVEL = 5;
+const string EMPTY_FLOOR_FILE = "emptyFloor.txt";
 const int MAX_CHAMBERS = 5;
 const int MAX_ROW = 25;
 const int MAX_COLUMN = 79;
@@ -19,6 +20,7 @@ const string DROW = "Drow";
 const string VAMPIRE = "Vampire";
 const string TROLL = "Troll";
 const string GOBLIN = "Goblin";
+const string PLAYERS[] = {SHADE, DROW, VAMPIRE, TROLL, GOBLIN};
 const char SYM_PLAYER = '@';
 
 // constants for floor elements

@@ -26,5 +26,3 @@ $(OBJ_DIR)/%.o: %.cc
 clean:
 	rm -rf $(OBJ_DIR) $(EXEC)
 
-# Include dependency files
--include $(OBJECTS:.o=.d)
