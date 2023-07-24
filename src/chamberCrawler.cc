@@ -68,7 +68,7 @@ void ChamberCrawler::loadFloor(Player* player){
     floor = new Floor();
     floor->loadFromFile(floorStream);
     floor->spawnPlayers(player);
-    //floor->spawnFloor();
+    floor->spawnFloor();
     floor->displayFloor();
 }
 

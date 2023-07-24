@@ -114,11 +114,12 @@ void Chamber::renderPotion() {
 }
 
 void Chamber::renderStairs() {
-    Cell *c = chamberCells.at(rand() % chamberCells.size());
-    while (c->isOccupied()) {
-        Cell *c = chamberCells.at(rand() % chamberCells.size());
-    }
-    c->setSymbol(STAIRS);
+    Cell* cell = getRandomCell();
+    // Cell *c = chamberCells.at(rand() % chamberCells.size());
+    // while (c->isOccupied()) {
+    //     Cell *c = chamberCells.at(rand() % chamberCells.size());
+    // }
+    cell->setSymbol(SYM_STAIRS);
 }
 
 Cell* Chamber::getRandomCell(){

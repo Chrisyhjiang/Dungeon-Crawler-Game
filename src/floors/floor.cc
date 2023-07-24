@@ -104,8 +104,10 @@ void Floor::spawnTreasures() {
 }
 
 void Floor::spawnStairs() {
-   // Chamber* c = Floor::getRandomChamber();
-    
+    Chamber* chamber = getRandomChamber();
+    chamber->renderStairs();
+    // Cell * cell = chamber->getRandomCell();
+    // cell->setSymbol(SYM_STAIRS);   
 }
 
 Cell* Floor::getCell(int i, int j) {
@@ -113,20 +115,16 @@ Cell* Floor::getCell(int i, int j) {
 }
 
 void Floor::spawnPlayers(Player* player){
-    // Seed the random number generator with the current time
-    std::srand(static_cast<unsigned int>(std::time(0)));
-    int chamberId = rand() % MAX_CHAMBERS;
-    cout << "chamberId: " << chamberId << endl;
-    Chamber* chosenChamber = chambers[chamberId];
+    Chamber* chosenChamber = getRandomChamber();
     Cell * cell = chosenChamber->getRandomCell();
     player->setX(cell->getRow());
     player->setY(cell->getCol());
     cell->setSymbol(SYM_PLAYER);
+    cell->setCharacter(player);
 }
 
 void Floor::spawnFloor() {
-    //spawnPlayers();
-    // spawnStairs();
+    spawnStairs();
     // spawnPotions();
     // spawnTreasures();
     // spawnEnemies();

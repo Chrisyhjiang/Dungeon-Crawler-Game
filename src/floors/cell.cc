@@ -33,7 +33,6 @@ int Cell::getCol() {
 
 bool Cell::isOccupied(){
     return symbol != SYM_TILE;
-    return symbol != SYM_TILE;
 }
 
 int Cell::getChamberID(){
@@ -48,9 +47,6 @@ bool Cell::isWalkable(){
     return true;
 }
 
-Character* Cell::occupiedBy(){
-     return ch;
-}
 void Cell::setCharacter(Character* a) {
     ch = a;
 }

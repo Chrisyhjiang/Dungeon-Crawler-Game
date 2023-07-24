@@ -33,7 +33,7 @@ class Cell {
         int getChamberID();
         void setChamberID(int id);
         virtual bool isWalkable();
-        virtual Character* occupiedBy();
+        //virtual Character* occupiedBy();
         Character* getCharacter();
         void setCharacter(Character* a);
     private:

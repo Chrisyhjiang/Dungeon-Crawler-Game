@@ -29,7 +29,7 @@ char const SYM_WALL_HOR = '-';
 char const SYM_DOORWAY = '+';
 char const SYM_PASSAGE = '#';
 char const SYM_TILE = '.';
-char const STAIRS = '\\';
+char const SYM_STAIRS = '\\';
 
 // constants for potion and gold
 char const GOLD = 'G';
