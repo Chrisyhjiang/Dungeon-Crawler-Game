@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++20 -Wall -Werror=vla -MMD
+CXXFLAGS = -std=c++20 -g -Wall -Werror=vla -MMD
 EXEC = main
 
 SRC_DIRS := ./ ./enemies/ ./floors/  ./items/ ./players/  # Add your source folders here

@@ -5,7 +5,7 @@
 using namespace std;
 
 const int MAX_LEVEL = 5;
-const string EMPTY_FLOOR_FILE = "emptyFloor.txt";
+const string EMPTY_FLOOR_FILE = "emptySingleFloor.txt";
 const int MAX_CHAMBERS = 5;
 const int MAX_ROW = 25;
 const int MAX_COLUMN = 79;

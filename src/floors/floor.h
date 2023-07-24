@@ -17,13 +17,11 @@ class Floor {
 		
 		void loadFromFile(std::ifstream *floorStream);
 		void displayFloor();
-		// void performAction();
-		// void resetMoved();
         Cell *getCell(int i, int j);
 		void spawnFloor();
 	private:
 		int locateChamber(int i, int j);
-		Cell* map[MAX_ROW][MAX_COLUMN];
+		Cell* cells[MAX_ROW][MAX_COLUMN];
 		Chamber *chambers[MAX_CHAMBERS];
 		void spawnEnemies();
 		void spawnPotions();

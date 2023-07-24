@@ -13,6 +13,10 @@ ChamberCrawler::~ChamberCrawler(){
 void ChamberCrawler::start(string race, string floorFile){
     floorLayoutFile =  (floorFile == "") ? EMPTY_FLOOR_FILE : floorFile;
     floorStream = new ifstream(floorLayoutFile);
+    player = PlayerFactory::createPlayer(race);
+    loadFloor();
+    // displayFloor;
+    // start game loop
 
 }
 
@@ -55,4 +59,15 @@ string  ChamberCrawler::chooseGameRace(){
             break;
     }
     return result;
+}
+
+void ChamberCrawler::loadFloor(){
+    floor = new Floor();
+    floor->loadFromFile(floorStream);
+    //floor->spawnFloor();
+    floor->displayFloor();
+}
+
+void displayFloor(){
+    // display floor;
 }

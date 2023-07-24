@@ -7,11 +7,13 @@ class Chamber;
 class Cell;
 
 Floor::Floor() {
+
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
-            map[i][j] = nullptr;
+            cells[i][j] = nullptr;
         }
     }
+
     for (int i = 0; i < MAX_CHAMBERS; i++) {
         chambers[i] = nullptr;
     }
@@ -20,7 +22,7 @@ Floor::Floor() {
 Floor::~Floor() {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
-            delete map[i][j];
+            delete cells[i][j];
         }
     }
 
@@ -29,21 +31,21 @@ Floor::~Floor() {
     }
 }
 
-void Floor::loadFromFile(std::ifstream *floorStream) {
-    // string line;
-    // for (int i = 0; i < MAX_ROW; i++) {
-    //     getline(*floorStream, line);
-    //     for (int j = 0; j < MAX_COLUMN; j++) {
-    //         Cell* c = new Cell(i, j, line[i]);
-    //         if (c->getSymbol() == '.') {
-    //             int chamberID = locateChamber(i, j);
-    //             c->setChamberID(chamberID);
-    //             chambers[chamberID]->addCell(c);
-    //         } else {
-    //             c->setChamberID(-1);
-    //         }
-    //     }
-    // }
+void Floor::loadFromFile(ifstream *floorStream) {
+    string line;
+    for (int i = 0; i < MAX_ROW; i++) {
+        getline(*floorStream, line);
+        for (int j = 0; j < MAX_COLUMN; j++) {
+            cells[i][j] = new Cell(i, j, line[i]);
+            // if (c->getSymbol() == '.') {
+            //     int chamberID = locateChamber(i, j);
+            //     c->setChamberID(chamberID);
+            //     chambers[chamberID]->addCell(c);
+            // } else {
+            //     c->setChamberID(-1);
+            // }
+        }
+    }
 }
 
 int Floor::locateChamber(int i, int j) {
@@ -64,8 +66,8 @@ int Floor::locateChamber(int i, int j) {
 void Floor::displayFloor() {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
-            if (map[i][j]) {
-                cout << map[i][j]->getSymbol();
+            if (cells[i][j]) {
+                cout << cells[i][j]->getSymbol();
             } else {
                 cout <<  ' ';
             }
@@ -105,7 +107,7 @@ void Floor::spawnStairs() {
 }
 
 Cell* Floor::getCell(int i, int j) {
-    return map[i][j];
+    return cells[i][j];
 }
 
 void Floor::spawnPlayers(){
