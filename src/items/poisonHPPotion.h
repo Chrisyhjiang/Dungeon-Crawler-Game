@@ -1,0 +1,15 @@
+#ifndef POISONHP_H
+#define POISONHP_H
+
+#include "itemDecorator.h"
+
+class PoisonHealthPotion : public ItemDecorator{
+    public:
+        PoisonHealthPotion(Player* p);
+        ~PoisonHealthPotion();
+        void update();
+};
+
+
+
+#endif
