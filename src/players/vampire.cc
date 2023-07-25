@@ -3,6 +3,7 @@
 
 
 Vampire::Vampire() : Player(50, 25, 25, VAMPIRE, INT_MAX, 0) {
+    this->setCellSymbol(SYM_TILE);
 }
 
 int Vampire::calculateDmgToEnemy(Enemy* en){

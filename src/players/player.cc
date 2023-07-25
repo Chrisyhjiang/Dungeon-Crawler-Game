@@ -73,10 +73,21 @@ char Player::getSymbol(){
     return SYM_PLAYER;
 }
 
+char Player::getCellSymbol(){
+    return cellSymbol;
+}
 
-void Player::move (int row, int col) {
-    this->setX(row);
-    this->setY(col);
+void Player::setCellSymbol(char symbol){
+    cellSymbol = symbol;
+}
+
+
+void Player::move (Cell* nextCell) {
+    this->setX(nextCell->getRow());
+    this->setY(nextCell->getCol());
+    cellSymbol = nextCell->getSymbol();
+    nextCell->setSymbol(SYM_PLAYER);
+    nextCell->setCharacter(this);
 }
 
 

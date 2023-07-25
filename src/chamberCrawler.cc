@@ -4,25 +4,24 @@
 
 string ChamberCrawler::race = SHADE;
 
-ChamberCrawler::ChamberCrawler(){
 
-}
+ChamberCrawler::ChamberCrawler(){}
 
 ChamberCrawler::~ChamberCrawler(){
     //Todo:    
 }
 
-void ChamberCrawler::start(string floorFile){
+void ChamberCrawler::start(string floorFile, int level){
 
     floorLayoutFile =  (floorFile == "") ? EMPTY_FLOOR_FILE : floorFile;
     floorStream = new ifstream(floorLayoutFile);
     player = PlayerFactory::createPlayer(race);
-    loadFloor(player);
+    loadFloor(player, level);
     play();
-    // displayFloor;
-    // start game loop
 
 }
+
+
 
 void  ChamberCrawler::setGameRace(){
     cout << "please choose a game race from the following options: \n";
@@ -65,23 +64,32 @@ void  ChamberCrawler::setGameRace(){
 
 }
 
-void ChamberCrawler::loadFloor(Player* player){
-    floor = new Floor();
+void ChamberCrawler::loadFloor(Player* player, int n){
+    floor = new Floor(n);
     floor->loadFromFile(floorStream);
     floor->spawnPlayers(player);
     floor->spawnFloor(player);
-    floor->displayFloor();
+    floor->displayFloor(player);
 }
 
-void ChamberCrawler::play(){
+bool ChamberCrawler::play(){
 
    while(true){
-        floor->movePlayer(player);
-        // Todo: floor->moveEnemies();
-        floor->displayFloor();
+        bool result = floor->movePlayer(player);
+        if(result){
+            if(player->getCellSymbol() == SYM_STAIRS){
+                //setLevel(getLevel()+1);
+                start("", floor->getLevel()+1);
+            }else{
+                floor->displayFloor(player);
+            }
+        }
     }
 }
  
 string ChamberCrawler::getRace(){
     return race;
 }
+
+
+ 

@@ -6,6 +6,7 @@
 #include "../constants.h"
 #include "../enemies/enemy.h"
 #include "../character.h"
+#include "../floors/cell.h"
 
 using namespace std;
 
@@ -13,13 +14,14 @@ class Player : public Character{
     private:
         int gold;
         int maxHp;
+        char cellSymbol;
        // static Player *instance;
 
     public:
         Player(string race);
         Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player() override;
-        void move(int row, int col);
+        void move(Cell* nextCell);
         void useItem(string dir);
         int getGold();
         void setGold(int g);
@@ -35,6 +37,7 @@ class Player : public Character{
         //static Player* getInstance();
         virtual void setRace(string race);
         char getSymbol();
-      
+        char getCellSymbol();
+        void setCellSymbol (char symbol);
 };
 #endif

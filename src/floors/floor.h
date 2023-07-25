@@ -15,24 +15,30 @@ class Chamber;
 class Floor {
 
 	public:
-		Floor();
+		Floor(int level);
 		~Floor();
 		
 		void loadFromFile(std::ifstream *floorStream);
-		void displayFloor();
+		void displayFloor(Player* player);
         Cell *getCell(int i, int j);
 		void spawnFloor(Player* player);
 		void spawnPlayers(Player* player);
-		void movePlayer(Player* player);
+		bool movePlayer(Player* player);
+		int getLevel();
+		void setLevel(int n);
 
 	private:
 		int locateChamber(int i, int j);
 		Cell* cells[MAX_ROW][MAX_COLUMN];
 		Chamber* chambers[MAX_CHAMBERS];
+		int level;
+	
 		void spawnEnemies();
 		void spawnPotions(Player* player);
 		void spawnTreasures(Player* player);
 		void spawnStairs();
+		bool canMovePlayer(Cell* cell);
+		void resetCurCell(Cell* cell, char symbol);
 		// void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
 		Chamber *getRandomChamber();
 		// Tile *getRandomTile();

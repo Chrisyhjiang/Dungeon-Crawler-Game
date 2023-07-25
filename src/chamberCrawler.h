@@ -17,16 +17,15 @@ class ChamberCrawler {
 		Player* player;
 		Floor* floor;
 		static string race;
-
-		void play();
+		bool play();
 
 	public:
 		ChamberCrawler();
 		~ChamberCrawler();
 		static void setGameRace();
 		static string getRace();
-		void start(string floorFile);
-		void loadFloor(Player* player);
+		void start(string floorFile, int level);
+		void loadFloor(Player* player, int level);
 		
 };
 #endif
