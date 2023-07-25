@@ -1,0 +1,15 @@
+1. creae a Makefile and code structures                 - done
+2. load the floor plan                                  - done
+3. Player movement                                      - done
+4. Enemy movement                                       - in progress
+5. load next floor plan                                 - done
+6. player attack enemy
+7. enemy attack player
+8. player take items
+9. final UML 
+10. design documentation
+11. testing
+12. Polish display                                       - done
+
+changes:
+-- add a new field cellSymbol to the player.h to track the cell symbol as we need reset back this symbol after moving away from the current cell.

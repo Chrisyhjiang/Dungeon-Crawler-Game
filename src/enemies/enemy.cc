@@ -1,6 +1,8 @@
 #include "enemy.h"
 
-Enemy::Enemy(int hp, int atk, int def, string race, char symbol, string name) : Character(hp, atk, def, race), symbol(symbol), name(name){}
+
+//Enemy::Enemy(int hp, int atk, int def, string race) : Character(hp, atk, def, race){};
+Enemy::Enemy(int hp, int atk, int def, string race, char symbol) : Character(hp, atk, def, race), symbol(symbol){}
 
 Enemy::~Enemy(){
     //Todo:
@@ -10,17 +12,8 @@ char Enemy::getSymbol(){
     return symbol;
 }
 
-
 void Enemy::setSymbol(char symbol){
     this->symbol = symbol;
-}
-
-string Enemy::getName(){
-    return name;
-}
-
-void Enemy::setName(string name){
-    this->name = name;
 }
 
 void Enemy::attachPlayer(){
@@ -28,23 +21,39 @@ void Enemy::attachPlayer(){
 }
 
 bool Enemy::isPlayerInRange(){
+   return true;
+}
+
+void Enemy::takeDamage(int damage){
 
 }
 
-void takeDamage(int damage){
-
+int Enemy::calculateDamageToPlayer(){
+    return this->getAtk();
 }
 
-int calculateDamageToPlayer(){
-
+bool Enemy::isDead(){
+    return true;
 }
 
-bool isDead(){
-
+int Enemy::giveRewardToPlayer(){
+    return 0;
 }
 
-int giveRewardToPlayer(){
-    
+bool Enemy::hasMoved(){
+    return isMoved;
+}
+
+void Enemy::setMoved(bool moved){
+    isMoved = moved;
+}
+
+void Enemy::move(Cell* cell){
+    this->setX(cell->getRow());
+    this->setY(cell->getCol());
+    cell->setSymbol(this->getSymbol());
+    cell->setCharacter(this);
+    isMoved = true;
 }
 
 

@@ -1,16 +1,39 @@
 #include "enemy.h"
 #include "enemyFactory.h"
-
-Enemy* EnemyFactory::createEnemy(char en){
-    Enemy* en
-
+#include "human.h"
+#include "dwarf.h"
+#include "elf.h"
+#include "halfling.h"
+#include "merchant.h"
+#include "orc.h"
+#include "dragon.h"
+#include "../constants.h"
+Enemy* EnemyFactory::createEnemy(char en, string race){
+    Enemy* enemy;
     switch(en){
-        case Enemy::ENEMY_HUMAN:
-            en = new 
-        
+        case ENEMY_HUMAN:
+            enemy = new Human(race);
             break;
-        case: ''
-
+        case ENEMY_DWARF:
+            enemy = new Dwarf(race);
+            break;
+        case ENEMY_ELF:
+            enemy = new Elf(race);
+            break;
+        case ENEMY_HALFING:
+            enemy = new Halfling(race);
+            break;
+        case ENEMY_MERCHANT:
+            enemy = new Merchant(race);
+            break;
+        case ENEMY_ORC:
+            enemy = new Orc(race);
+            break;
+        case ENEMY_DRAGON:
+             enemy = new Dragon(race);
+             break;
+        default:
+             enemy = nullptr;
     }
-
+    return enemy;
 }

@@ -1,16 +1,28 @@
 CXX = g++
-CXXFLAGS = -std=c++20 -Wall -Werror=vla -MMD
-EXEC = chamCrawler
-OBJECTS = main.o
+CXXFLAGS = -std=c++20 -g -Wall -Werror=vla -MMD
+EXEC = main
 
-DEPENDS = ${OBJECTS:.o=.d}
+SRC_DIRS := ./ ./enemies/ ./floors/  ./items/ ./players/  # Add your source folders here
+OBJ_DIR := ./build
 
-${EXEC}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} ${LIBS} -o ${EXEC}
+# Find all source files in the specified directories
+SOURCES := $(wildcard $(addsuffix *.cc,$(SRC_DIRS)))
 
--include ${DEPENDS}
+# Generate corresponding object file paths
+OBJECTS := $(patsubst %.cc,$(OBJ_DIR)/%.o,$(notdir $(SOURCES)))
+
+VPATH := $(SRC_DIRS)
+
+# Rule to build the executable
+$(EXEC): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(EXEC)
+
+# Rule to compile source files into object files
+$(OBJ_DIR)/%.o: %.cc
+	@mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 .PHONY: clean
-
 clean:
-	rm ${OBJECTS} ${EXEC} ${DEPENDS}
+	rm -rf $(OBJ_DIR) $(EXEC)
+

@@ -2,59 +2,54 @@
 #define ___FLOOR_H___
 #include <string>
 #include <fstream>
+#include <cstdlib>
 #include <vector>
+#include <ctime>
+#include <iostream>
+#include <map>
 #include "cell.h"
- 
+#include "chamber.h"
+#include "../constants.h"
+#include "../players/player.h"
+
+class Chamber;
 
 class Floor {
 
 	public:
-		static const int MAX_CHAMBERS = 5;
-		static const int MAX_ROW = 25;
-		static const int MAX_COLUMN = 79;
-		static const int NUM_GOLD = 10;
-		static const int NUM_POTION = 10;
-		static const int NUM_ENEMY = 20;
-
-		static char const SYM_PLAYER = '@';
-		static char const SYM_WALL_VER = '|';
-		static char const SYM_WALL_HOR = '-';
-		static char const SYM_DOORWAY = '+';
-		static char const SYM_PASSAGE = '#';
-		static char const SYM_TILE = '.';
-		static char const STAIRS = '\\';
-
-		static char const ENEMY_HUMAN = 'H';
-		static char const ENEMY_DWARF = 'W';
-		static char const ENEMY_ELF = 'E';
-		static char const ENEMY_ORC = 'O';
-		static char const ENEMY_MERCHANT = 'M';
-		static char const ENEMY_DRAGON = 'D';
-		static char const ENEMY_HALFING = 'L';
-
-		static char const GOLD = 'G';
-		static char const POTION = 'P';
-
-		Floor();
+		Floor(int level);
 		~Floor();
-
+		
 		void loadFromFile(std::ifstream *floorStream);
-		void displayFloor();
-		void performAction();
-		void resetMoved();
-		void spawn();
+		void displayFloor(Player* player);
         Cell *getCell(int i, int j);
-		void spawnFloor();
+		void spawnFloor(Player* player);
+		void spawnPlayers(Player* player);
+		bool movePlayer(Player* player);
+		void moveEnemies();
+		int getLevel();
+		void setLevel(int n);
+
 	private:
-		Cell *map[MAX_ROW][MAX_COLUMN];
-		Chamber *chambers[MAX_CHAMBERS];
+		int locateChamber(int i, int j);
+		Cell* cells[MAX_ROW][MAX_COLUMN];
+		Chamber* chambers[MAX_CHAMBERS];
+		map<char, string> colorMap = {	{SYM_PLAYER, ANSI_BLUE}, {SYM_STAIRS, ANSI_BLUE}, {GOLD, ANSI_YELLOW},
+										{POTION, ANSI_GREEN},  {ENEMY_MERCHANT, ANSI_RED}, {ENEMY_DRAGON, ANSI_RED},
+										{ENEMY_DWARF, ANSI_RED}, {ENEMY_ELF, ANSI_RED}, {ENEMY_HUMAN, ANSI_RED}, 
+										{ENEMY_ORC, ANSI_RED}, {ENEMY_HALFING, ANSI_RED}};
+
+		int level;
 		void spawnEnemies();
-		void spawnPotions();
-		void spawnTreasures();
-		void spawnPlayers();
+		void spawnPotions(Player* player);
+		void spawnTreasures(Player* player);
 		void spawnStairs();
-		void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
+		bool canMovePlayer(Cell* cell);
+		void resetCurCell(Cell* cell, char symbol);
+		// void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
 		Chamber *getRandomChamber();
-		Tile *getRandomTile();
+		string getColorCode(char c);
+		 
+		// Tile *getRandomTile();
 };
 #endif

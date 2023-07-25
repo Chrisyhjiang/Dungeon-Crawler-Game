@@ -3,35 +3,32 @@
 
 #include <string>
 #include "../character.h"
+#include "../floors/cell.h"
+
 
 class Enemy : public Character{
     private:
         char symbol;
-        string name;
         bool movable;
-    
-    public:
-        static char const ENEMY_HUMAN = 'H';
-		static char const ENEMY_DWARF = 'W';
-		static char const ENEMY_ELF = 'E';
-		static char const ENEMY_ORC = 'O';
-		static char const ENEMY_MERCHANT = 'M';
-		static char const ENEMY_DRAGON = 'D';
-		static char const ENEMY_HALFING = 'L';
+        bool isMoved;
 
-        Enemy(int hp, int atk, int def, string race, char symbol, string name);
-        ~Enemy();
+    public:
+    
+        Enemy(int hp, int atk, int def, string race, char symbol);
+        ~Enemy() override;
         char getSymbol();
         void setSymbol(char symbol);
-        string getName();
-        void setName(string name);
         void attachPlayer();
         bool isPlayerInRange();
         void takeDamage(int damage);
-        int calculateDamageToPlayer();
+        virtual int calculateDamageToPlayer() = 0;
         bool isDead() override;
+        bool hasMoved();
+        void setMoved(bool moved);
         int giveRewardToPlayer();
+        void move(Cell* cell);
         virtual bool isMovable() = 0;
+        
 };
 
 #endif
