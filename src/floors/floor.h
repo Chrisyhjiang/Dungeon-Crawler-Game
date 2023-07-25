@@ -26,6 +26,7 @@ class Floor {
 		void spawnFloor(Player* player);
 		void spawnPlayers(Player* player);
 		bool movePlayer(Player* player);
+		void moveEnemies();
 		int getLevel();
 		void setLevel(int n);
 
@@ -48,6 +49,7 @@ class Floor {
 		// void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
 		Chamber *getRandomChamber();
 		string getColorCode(char c);
+		 
 		// Tile *getRandomTile();
 };
 #endif

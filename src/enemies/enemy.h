@@ -3,12 +3,15 @@
 
 #include <string>
 #include "../character.h"
+#include "../floors/cell.h"
 
 
 class Enemy : public Character{
     private:
         char symbol;
         bool movable;
+        bool isMoved;
+
     public:
     
         Enemy(int hp, int atk, int def, string race, char symbol);
@@ -20,8 +23,12 @@ class Enemy : public Character{
         void takeDamage(int damage);
         virtual int calculateDamageToPlayer() = 0;
         bool isDead() override;
+        bool hasMoved();
+        void setMoved(bool moved);
         int giveRewardToPlayer();
+        void move(Cell* cell);
         virtual bool isMovable() = 0;
+        
 };
 
 #endif

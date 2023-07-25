@@ -40,5 +40,21 @@ int Enemy::giveRewardToPlayer(){
     return 0;
 }
 
+bool Enemy::hasMoved(){
+    return isMoved;
+}
+
+void Enemy::setMoved(bool moved){
+    isMoved = moved;
+}
+
+void Enemy::move(Cell* cell){
+    this->setX(cell->getRow());
+    this->setY(cell->getCol());
+    cell->setSymbol(this->getSymbol());
+    cell->setCharacter(this);
+    isMoved = true;
+}
+
 
 

@@ -84,6 +84,8 @@ bool ChamberCrawler::play(){
                 floor->displayFloor(player);
             }
         }
+        floor->moveEnemies();
+        floor->displayFloor(player);
     }
 }
  
