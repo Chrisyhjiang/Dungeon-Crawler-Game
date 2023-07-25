@@ -10,3 +10,7 @@
 10. design documentation
 11. testing
 12. Polish display 
+
+
+changes:
+-- add a new field cellSymbol to the player.h to track the cell symbol as we need reset back this symbol after moving away from the current cell.

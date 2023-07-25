@@ -1,5 +1,6 @@
 #include "floor.h"
-#include <iostream>
+
+
 
 using namespace std;
 
@@ -74,7 +75,13 @@ void Floor::displayFloor(Player* player) {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
             if (cells[i][j]) {
-                cout << cells[i][j]->getSymbol();
+                char s = cells[i][j]->getSymbol();
+                auto it = colorMap.find(s);
+                if ( it != colorMap.end()){
+                      cout << it->second << s << ANSI_RESET;
+                } else {
+                    cout << s; 
+                }
             } else {
                 cout <<  ' ';
             }
@@ -88,12 +95,6 @@ void Floor::displayFloor(Player* player) {
     cout << "Action: " << endl;
 
 }
-
-// Race: Shade Gold: 0 Floor 1
-// HP: 125
-// Atk: 25
-// Def: 25
-// Action:
 
 Chamber* Floor::getRandomChamber() {
     return chambers[rand() % MAX_CHAMBERS];

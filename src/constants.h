@@ -67,4 +67,13 @@ const char EXIT = 'q';
 
 const string directions[] = { NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST};
 
+#include <iostream>
+
+// ANSI escape codes for text colors
+const string ANSI_RESET = "\033[0m";
+const string ANSI_RED = "\033[31m";
+const string ANSI_GREEN = "\033[32m";
+const string ANSI_YELLOW = "\033[33m";
+const string ANSI_BLUE = "\033[34m";
+
 #endif
