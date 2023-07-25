@@ -2,6 +2,7 @@
 #define CONSTANTS_H
 
 #include <string>
+
 using namespace std;
 
 const int MAX_LEVEL = 5;
@@ -60,10 +61,10 @@ const string MOVE_WEST = "we";
 const string MOVE_NORTH_EAST = "ne";
 const string MOVE_NORTH_WEST = "nw";
 const string MOVE_SOUTH_EAST = "se";
-const string MOVE_SOURTH_WEST = "sw";
+const string MOVE_SOUTH_WEST = "sw";
 const char USE_POTION = 'u';
 const char EXIT = 'q';
 
-
+const string directions[] = { NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST};
 
 #endif
