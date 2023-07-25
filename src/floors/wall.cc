@@ -1,3 +1,4 @@
+
 #include "wall.h"
 
 bool Wall::isWalkable(){

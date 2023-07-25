@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
-
+#include "cell.h"
  
 
 class Floor {
@@ -44,11 +44,15 @@ class Floor {
 		void resetMoved();
 		void spawn();
         Cell *getCell(int i, int j);
-		
+		void spawnFloor();
 	private:
 		Cell *map[MAX_ROW][MAX_COLUMN];
 		Chamber *chambers[MAX_CHAMBERS];
-
+		void spawnEnemies();
+		void spawnPotions();
+		void spawnTreasures();
+		void spawnPlayers();
+		void spawnStairs();
 		void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
 		Chamber *getRandomChamber();
 		Tile *getRandomTile();

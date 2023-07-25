@@ -10,7 +10,7 @@ class Enemy;
 class EnemyFactory{
 
     public:
-        static Enemy* createEnemy(string en);
+        static Enemy* createEnemy(char en);
 
 };
 
