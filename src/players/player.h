@@ -2,6 +2,7 @@
 #define ___PLAYER_H___
 
 #include <string>
+#include <iostream>
 #include "../constants.h"
 #include "../enemies/enemy.h"
 #include "../character.h"
@@ -18,7 +19,7 @@ class Player : public Character{
         Player(string race);
         Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player() override;
-        bool move(string dir);
+        void move(int row, int col);
         void useItem(string dir);
         int getGold();
         void setGold(int g);
@@ -34,7 +35,6 @@ class Player : public Character{
         //static Player* getInstance();
         virtual void setRace(string race);
         char getSymbol();
-        
       
 };
 #endif

@@ -126,3 +126,57 @@ void Floor::spawnFloor(Player* player) {
     spawnPotions(player);
     spawnTreasures(player);
 }
+
+void Floor::movePlayer(Player* player){
+    int nextRow = player->getX();
+    int nextCol = player->getY();
+
+     while(true){
+        bool isValid = true;
+        cout << "enter a valid move: {no,so,ea,we,ne,nw,se,sw}" << endl;
+        string dir;
+        std::cin >> dir;
+        if ( dir == NORTH){
+             nextRow--;
+        } else if ( dir == SOUTH){
+            nextRow++;
+        } else if ( dir == EAST) {
+            nextCol++;
+        } else if ( dir == WEST) {
+            nextCol--;
+        } else if ( dir == NORTH_EAST) {
+            nextRow--;
+            nextCol++;
+        } else if ( dir == NORTH_WEST ) {
+            nextRow--;
+            nextCol--;
+        } else if ( dir == SOUTH_EAST ) {
+            nextRow++;
+            nextCol++;
+        } else if ( dir == SOUTH_WEST ) {
+            nextRow++;
+            nextCol--;
+        } else {
+            cout << "Invalid move direction." << endl;
+            isValid = false;
+        }
+      
+        if(isValid){
+            
+            if(!cells[nextRow][nextCol]->isOccupied()){
+                
+                int row = player->getX();
+                int col = player->getY();
+                Cell* cell = cells[row][col];
+                cell->setSymbol(SYM_TILE);
+                cell->setCharacter(nullptr);
+                cells[nextRow][nextCol]->setSymbol(SYM_PLAYER);
+                player->move(nextRow, nextCol);
+                break;
+            }else {
+                cout << "cell is occupied... " << endl;
+            }
+        }
+    }
+}
+

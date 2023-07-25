@@ -18,6 +18,8 @@ class ChamberCrawler {
 		Floor* floor;
 		static string race;
 
+		void play();
+
 	public:
 		ChamberCrawler();
 		~ChamberCrawler();
@@ -25,6 +27,6 @@ class ChamberCrawler {
 		static string getRace();
 		void start(string floorFile);
 		void loadFloor(Player* player);
-		void play();
+		
 };
 #endif

@@ -23,6 +23,7 @@ class Floor {
         Cell *getCell(int i, int j);
 		void spawnFloor(Player* player);
 		void spawnPlayers(Player* player);
+		void movePlayer(Player* player);
 
 	private:
 		int locateChamber(int i, int j);

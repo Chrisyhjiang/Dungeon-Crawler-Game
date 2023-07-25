@@ -74,3 +74,9 @@ char Player::getSymbol(){
 }
 
 
+void Player::move (int row, int col) {
+    this->setX(row);
+    this->setY(col);
+}
+
+

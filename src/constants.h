@@ -54,14 +54,14 @@ const char DRAGON_GOLD = 'D';
 
 // command
 //no,so,ea,we,ne,nw,se,sw
-const string MOVE_NORTH = "no";
-const string MOVE_SOUTH = "so";
-const string MOVE_EAST = "ea";
-const string MOVE_WEST = "we";
-const string MOVE_NORTH_EAST = "ne";
-const string MOVE_NORTH_WEST = "nw";
-const string MOVE_SOUTH_EAST = "se";
-const string MOVE_SOUTH_WEST = "sw";
+const string NORTH = "no";
+const string SOUTH = "so";
+const string EAST = "ea";
+const string WEST = "we";
+const string NORTH_EAST = "ne";
+const string NORTH_WEST = "nw";
+const string SOUTH_EAST = "se";
+const string SOUTH_WEST = "sw";
 const char USE_POTION = 'u';
 const char EXIT = 'q';
 

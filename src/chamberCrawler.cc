@@ -18,6 +18,7 @@ void ChamberCrawler::start(string floorFile){
     floorStream = new ifstream(floorLayoutFile);
     player = PlayerFactory::createPlayer(race);
     loadFloor(player);
+    play();
     // displayFloor;
     // start game loop
 
@@ -73,7 +74,12 @@ void ChamberCrawler::loadFloor(Player* player){
 }
 
 void ChamberCrawler::play(){
-    
+
+   while(true){
+        floor->movePlayer(player);
+        // Todo: floor->moveEnemies();
+        floor->displayFloor();
+    }
 }
  
 string ChamberCrawler::getRace(){
