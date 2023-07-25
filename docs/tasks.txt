@@ -1,10 +1,12 @@
-1. creae a Makefile     - done
-2. load the floor plan  - done
-3. Player movement      - in progress
-4. Enemy movement       - in progress
+1. creae a Makefile and code structures                 - done
+2. load the floor plan                                  - done
+3. Player movement                                      - in progress
+4. Enemy movement                                       - in progress
 5. load next floor plan 
-6. player attackEnemy
+6. player attack enemy
 7. enemy attack player
 8. player take items
 9. final UML 
-10. Design documentation
+10. design documentation
+11. testing
+12. Polish display 
