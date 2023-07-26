@@ -5,6 +5,7 @@
 #include "../character.h"
 #include "../floors/cell.h"
 #include <cmath>
+#include <algorithm>
 
 class Enemy : public Character{
     private:

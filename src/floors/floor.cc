@@ -198,52 +198,55 @@ string Floor::enemyTurn(){
              if(current->getChamberID() > -1){
                   Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
                   if(enemy && !enemy->hasMoved()){
-                        if (enemy->isDead()) {
-                            msg += string(1, p->getSymbol()) + " was slain!\n";
-                            continue;
-                        }
-                        if (enemy->isPlayerInRange(p->getX(), p->getY())) {
-                            enemy->attackPlayer(p->getRace(), p->getDef());
-                            msg += string(1, p->getSymbol()) + " dealt " + 
-                                                        std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
-                                                        + "to player\n";
+                    if (enemy->isDead()) {
+                        msg += string(1, p->getSymbol()) + " was slain!\n";
+                        continue;
+                    }
+                    if (enemy->isPlayerInRange(p->getX(), p->getY())) {
+                        int x = enemy->attackPlayer(p->getRace(), p->getDef());
+                        msg += string(1, enemy->getSymbol());
+                        if (x > 0) {
+                            p->takeDamage(x);
+                            msg += " dealt " + std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
+                                                    + " damage to player\n";
                         } else {
-                            //if (!enemy->hasMoved()) {
-                            bool done = false;
-                            while(!done){
-                                int i = std::rand() % 8;
-                                string dir = DIRECTIONS[i];
-                                int nextRow = enemy->getX();
-                                int nextCol = enemy->getY();
-                                if ( dir == NORTH){
-                                    nextRow--;
-                                } else if ( dir == SOUTH){
-                                    nextRow++;
-                                } else if ( dir == EAST) {
-                                    nextCol++;
-                                } else if ( dir == WEST) {
-                                    nextCol--;
-                                } else if ( dir == NORTH_EAST) {
-                                    nextRow--;
-                                    nextCol++;
-                                } else if ( dir == NORTH_WEST ) {
-                                    nextRow--;
-                                    nextCol--;
-                                } else if ( dir == SOUTH_EAST ) {
-                                    nextRow++;
-                                    nextCol++;
-                                } else if ( dir == SOUTH_WEST ) {
-                                    nextRow++;
-                                    nextCol--;
-                                }
-                                Cell* next = cells[nextRow][nextCol];
-                                if(!next->isOccupied() ){
-                                    done = true;
-                                    enemy->move(next);
-                                    resetCurCell(current, SYM_TILE);
-                                } 
+                            msg += " missed\n";
+                        }
+                    } else {
+                        bool done = false;
+                        while(!done){
+                            int i = std::rand() % 8;
+                            string dir = DIRECTIONS[i];
+                            int nextRow = enemy->getX();
+                            int nextCol = enemy->getY();
+                            if ( dir == NORTH){
+                                nextRow--;
+                            } else if ( dir == SOUTH){
+                                nextRow++;
+                            } else if ( dir == EAST) {
+                                nextCol++;
+                            } else if ( dir == WEST) {
+                                nextCol--;
+                            } else if ( dir == NORTH_EAST) {
+                                nextRow--;
+                                nextCol++;
+                            } else if ( dir == NORTH_WEST ) {
+                                nextRow--;
+                                nextCol--;
+                            } else if ( dir == SOUTH_EAST ) {
+                                nextRow++;
+                                nextCol++;
+                            } else if ( dir == SOUTH_WEST ) {
+                                nextRow++;
+                                nextCol--;
                             }
-                       // }
+                            Cell* next = cells[nextRow][nextCol];
+                            if(!next->isOccupied() ){
+                                done = true;
+                                enemy->move(next);
+                                resetCurCell(current, SYM_TILE);
+                            } 
+                        }
                     }
                 }
             }

@@ -4,8 +4,6 @@
 #include "chamberCrawler.h"
 
 
-
-
 ChamberCrawler::ChamberCrawler(){}
 
 ChamberCrawler::~ChamberCrawler(){
@@ -17,7 +15,6 @@ void ChamberCrawler::start(string floorFile, int level){
     floorStream = new ifstream(floorLayoutFile);
     loadFloor(level);
     play();
-
 }
 
 
@@ -71,16 +68,33 @@ void ChamberCrawler::loadFloor(int n){
     floor->displayFloor("");
 }
 
-bool ChamberCrawler::play(){
+void ChamberCrawler::play(){
    while(true){
         string actionMsg = "";
         actionMsg += playerTakeTurn();
         actionMsg += enemiesTakeTurn();
+        actionMsg.erase(actionMsg.size() - 1);
         Player* player = Player::getInstance();
-        if(player->getCellSymbol() == SYM_STAIRS){
-            start("", floor->getLevel()+1);
-        }else{
-            floor->displayFloor(actionMsg);
+        if (player->isDead()) {
+            cout << "You Died! Do you want to restart the game? [y/n]" << endl;
+            char x; 
+            while (true) {
+                cin >> x;
+                if (x == 'y') {
+                    Player::setInstance();
+                    this->start("", 1);
+                } else if (x == 'n') {
+                    exit(0);
+                } else {
+                    cout << "Please input [y/n]" << endl;
+                }
+            }
+        } else {
+            if(player->getCellSymbol() == SYM_STAIRS){
+                start("", floor->getLevel()+1);
+            }else{
+                floor->displayFloor(actionMsg);
+            }
         }
     }
 }
@@ -162,6 +176,6 @@ bool ChamberCrawler::isValidCmd(string cmd){
 }
 
 string ChamberCrawler::enemiesTakeTurn(){
-    return floor->enemyTurn();
+    return "enemy action: " + floor->enemyTurn();
 }
 

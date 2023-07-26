@@ -11,7 +11,4 @@ int main(int argc, char* argv[]) {
     // game->setCanAdvanceToNextLevel(false);
     // Todo: pass default file for now
     game->start("", 1);
-
-
-    
 }

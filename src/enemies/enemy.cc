@@ -18,7 +18,7 @@ void Enemy::setSymbol(char symbol){
 
 int Enemy::attackPlayer(string playerRace, int playerDef){
     int x = rand() % 2;
-    int dmg = -1;
+    int dmg = 0;
     if (x == 0) {
         dmg = calculateDamageToPlayer(playerRace, playerDef);
     }
@@ -30,7 +30,7 @@ bool Enemy::isPlayerInRange(int px, int py){
 }
 
 void Enemy::takeDamage(int damage){
-    this->setHP(this->getHP() - damage);
+    this->setHP(std::max(this->getHP() - damage, 0));
 }
 
 int Enemy::calculateDamageToPlayer(string playerRace, int playerDef){

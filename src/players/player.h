@@ -36,6 +36,7 @@ class Player : public Character{
         bool isDead();
         virtual void addReward(Enemy *en);
         static Player* getInstance();
+        static void setInstance();
         char getCellSymbol();
         void setCellSymbol (char symbol);
         static void setRace(string race);

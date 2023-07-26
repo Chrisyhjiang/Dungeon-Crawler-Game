@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <cstdlib>
 #include "./floors/floor.h"
 #include "./players/player.h"
 
@@ -14,7 +15,7 @@ class ChamberCrawler {
 		string floorLayoutFile;
 		ifstream *floorStream;
 		Floor* floor;
-		bool play();
+		void play();
 		string playerTakeTurn();
 		string enemiesTakeTurn();
 		string processPlayerAttackCmd(string direction);

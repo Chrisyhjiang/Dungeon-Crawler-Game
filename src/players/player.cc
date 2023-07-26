@@ -34,6 +34,10 @@ Player* Player::getInstance() {
     return instance;
 }
 
+void Player::setInstance() {
+    instance = nullptr;
+}
+
 int Player::getGold() {
     return gold;
 }
@@ -51,13 +55,7 @@ void Player::setMaxHp(int mh) {
 }
 
 void Player::takeDamage(int dmg) {
-    int diff = dmg - this->getDef();
-    if (diff > 0) {
-        this->setDef(0);
-        this->setHP(max(this->getHP() - diff, 0));
-    } else {
-        this->setDef(-1 * diff);
-    }
+    setHP(std::max(getHP() - dmg, 0));
 }
 
 bool Player::isDead() {
