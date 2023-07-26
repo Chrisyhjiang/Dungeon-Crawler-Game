@@ -38,7 +38,7 @@ int Enemy::calculateDamageToPlayer(string playerRace, int playerDef){
 }
 
 bool Enemy::isDead(){
-    return true;
+    return this->getHP() == 0;
 }
 
 int Enemy::giveRewardToPlayer(){

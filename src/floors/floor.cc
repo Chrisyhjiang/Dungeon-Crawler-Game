@@ -197,18 +197,18 @@ string Floor::enemyTurn(){
             Cell* current = cells[i][j];
              if(current->getChamberID() > -1){
                   Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
-                  if(enemy){
+                  if(enemy && !enemy->hasMoved()){
                         if (enemy->isDead()) {
-                            msg += p->getCellSymbol() + " was slain!\n";
+                            msg += string(1, p->getSymbol()) + " was slain!\n";
                             continue;
                         }
                         if (enemy->isPlayerInRange(p->getX(), p->getY())) {
                             enemy->attackPlayer(p->getRace(), p->getDef());
-                            msg += p->getCellSymbol() + " dealt " + 
+                            msg += string(1, p->getSymbol()) + " dealt " + 
                                                         std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
                                                         + "to player\n";
                         } else {
-                            if (!enemy->hasMoved()) {
+                            //if (!enemy->hasMoved()) {
                             bool done = false;
                             while(!done){
                                 int i = std::rand() % 8;
@@ -243,7 +243,7 @@ string Floor::enemyTurn(){
                                     resetCurCell(current, SYM_TILE);
                                 } 
                             }
-                        }
+                       // }
                     }
                 }
             }
