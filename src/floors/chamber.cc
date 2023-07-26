@@ -39,7 +39,7 @@ void Chamber::renderEnemy() {
     Enemy* enemy = EnemyFactory::createEnemy(enemyType, Player::getRace());
     Cell* cell = getRandomCell();
     cell->setSymbol(enemyType);
-    cell->setCharacter(enemy);
+    cell->setEntity(enemy);
     enemy->setX(cell->getRow());
     enemy->setY(cell->getCol());
 }
@@ -72,9 +72,9 @@ void Chamber::renderTreasure() {
             break;
     }
     cell->setSymbol(GOLD);
-//     cell->setCharacter(gold);
-    // gold->setX(cell->getRow());
-    // gold->setY(cell->getCol());
+    cell->setEntity(gold);
+    gold->setX(cell->getRow());
+    gold->setY(cell->getCol());
  }
 
 void Chamber::addCell(Cell* c) {
@@ -100,9 +100,9 @@ void Chamber::renderPotion() {
         potion = new PoisonHealthPotion(player);
     }
     cell->setSymbol(POTION);
-    // cell->setCharacter(potion);
-    // potion->setX(cell->getRow());
-    // potion->setY(cell->getCol());
+    cell->setEntity(potion);
+    potion->setX(cell->getRow());
+    potion->setY(cell->getCol());
 }
 
 void Chamber::renderStairs() {

@@ -14,6 +14,8 @@ string Player::race = SHADE;
 Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Character(hp, atk, def, race){
     this->setMaxHp(maxHp);
     this->setGold(gold);
+    this->setSymbol(SYM_PLAYER);
+    this->setCellSymbol(SYM_TILE);
 }
 
 
@@ -81,9 +83,9 @@ void Player::addReward(Enemy* en){
     
 }
 
-char Player::getSymbol(){
-    return SYM_PLAYER;
-}
+// char Player::getSymbol(){
+//     return SYM_PLAYER;
+// }
 
 char Player::getCellSymbol(){
     return cellSymbol;
@@ -99,7 +101,7 @@ void Player::move (Cell* nextCell) {
     this->setY(nextCell->getCol());
     cellSymbol = nextCell->getSymbol();
     nextCell->setSymbol(SYM_PLAYER);
-    nextCell->setCharacter(this);
+    nextCell->setEntity(this);
 }
 
 

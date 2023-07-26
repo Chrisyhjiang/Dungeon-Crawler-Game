@@ -1,13 +1,15 @@
 #ifndef ___CHARACTER_H___
 #define ___CHARACTER_H___
 
+ 
 #include <string>
 #include "constants.h"
+#include "entity.h"
 
 using namespace std;
-class Character{
+class Character : public Entity{
     private:
-        int hp, atk, def, x, y;
+        int hp, atk, def;
         string race;
     public:
         Character();
@@ -20,12 +22,10 @@ class Character{
         int getDef();
         void setDef(int def);
         virtual bool isDead() = 0;
-        // virtual string getRace();
-        // virtual void setRace(string r);
-        int getX();
-        void setX(int x);
-        int getY();
-        void setY(int y);
+        // int getX();
+        // void setX(int x);
+        // int getY();
+        // void setY(int y);
 };
 
 #endif

@@ -29,28 +29,21 @@ int Character::getDef(){
 void Character::setDef(int def){
     this->def = def;
 }
- 
-// string Character::getRace(){
-//     return race;
+
+
+
+// int Character::getX(){
+//     return x;
 // }
-// void Character::setRace(string r){
-//     race = r;
+
+// void Character::setX(int x){
+//     this->x = x;
 // }
 
+// int Character::getY(){
+//     return y;
+// }
 
-
-int Character::getX(){
-    return x;
-}
-
-void Character::setX(int x){
-    this->x = x;
-}
-
-int Character::getY(){
-    return y;
-}
-
-void Character::setY(int y){
-    this->y = y;
-}
+// void Character::setY(int y){
+//     this->y = y;
+// }

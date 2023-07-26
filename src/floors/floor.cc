@@ -139,7 +139,7 @@ void Floor::spawnPlayers(){
     player->setX(cell->getRow());
     player->setY(cell->getCol());
     cell->setSymbol(SYM_PLAYER);
-    cell->setCharacter(player);
+    cell->setEntity(player);
 }
 
 void Floor::spawnFloor() {
@@ -156,7 +156,7 @@ bool Floor::canMovePlayer(Cell* cell){
 
 void Floor::resetCurCell(Cell* cell, char symbol) {
     cell->setSymbol(symbol);
-    cell->setCharacter(nullptr);
+    cell->setEntity(nullptr);
 }
 
 void Floor::moveEnemies(){
@@ -164,7 +164,7 @@ void Floor::moveEnemies(){
         for(int j = 0; j < MAX_COLUMN; j++){
             Cell* current = cells[i][j];
              if(current->getChamberID() > -1){
-                  Enemy* enemy = dynamic_cast<Enemy*>(current->getCharacter());
+                  Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
                   if(enemy && !enemy->hasMoved()){
                     bool done = false;
                     while(!done){
@@ -210,7 +210,7 @@ void Floor::moveEnemies(){
         for(int j = 0; j < MAX_COLUMN; j++){
             Cell* current = cells[i][j];
             if(current->getChamberID() > -1){
-                Enemy* enemy = dynamic_cast<Enemy*>(current->getCharacter());
+                Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
                 if(enemy){
                     enemy->setMoved(false);
                 }

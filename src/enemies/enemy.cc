@@ -52,7 +52,7 @@ void Enemy::move(Cell* cell){
     this->setX(cell->getRow());
     this->setY(cell->getCol());
     cell->setSymbol(this->getSymbol());
-    cell->setCharacter(this);
+    cell->setEntity(this);
     isMoved = true;
 }
 

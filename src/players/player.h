@@ -18,9 +18,7 @@ class Player : public Character{
         char cellSymbol;
         static Player *instance;
         static string race;
-           // Player(string race);
         
-
     public:
         Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player() override;
@@ -38,7 +36,7 @@ class Player : public Character{
         bool isDead();
         virtual void addReward(Enemy *en);
         static Player* getInstance();
-        char getSymbol();
+        //char getSymbol();
         char getCellSymbol();
         void setCellSymbol (char symbol);
         static void setRace(string race);

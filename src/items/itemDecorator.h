@@ -3,7 +3,7 @@
 
 #include "../players/player.h"
 
-class ItemDecorator {
+class ItemDecorator : public Entity {
     
     public:
         Player* target;

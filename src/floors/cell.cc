@@ -47,10 +47,10 @@ bool Cell::isWalkable(){
     return true;
 }
 
-void Cell::setCharacter(Character* a) {
-    ch = a;
+void Cell::setEntity(Entity* en) {
+    entity = en;
 }
  
-Character* Cell::getCharacter() {
-    return ch;
+Entity* Cell::getEntity() {
+    return entity;
 }
