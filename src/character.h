@@ -20,8 +20,8 @@ class Character{
         int getDef();
         void setDef(int def);
         virtual bool isDead() = 0;
-        virtual string getRace();
-        virtual void setRace(string r);
+        // virtual string getRace();
+        // virtual void setRace(string r);
         int getX();
         void setX(int x);
         int getY();

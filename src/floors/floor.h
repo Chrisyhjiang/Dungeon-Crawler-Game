@@ -21,11 +21,11 @@ class Floor {
 		~Floor();
 		
 		void loadFromFile(std::ifstream *floorStream);
-		void displayFloor(Player* player);
+		void displayFloor();
         Cell *getCell(int i, int j);
-		void spawnFloor(Player* player);
-		void spawnPlayers(Player* player);
-		bool movePlayer(Player* player);
+		void spawnFloor();
+		void spawnPlayers();
+		bool movePlayer();
 		void moveEnemies();
 		int getLevel();
 		void setLevel(int n);
@@ -41,8 +41,8 @@ class Floor {
 
 		int level;
 		void spawnEnemies();
-		void spawnPotions(Player* player);
-		void spawnTreasures(Player* player);
+		void spawnPotions();
+		void spawnTreasures();
 		void spawnStairs();
 		bool canMovePlayer(Cell* cell);
 		void resetCurCell(Cell* cell, char symbol);

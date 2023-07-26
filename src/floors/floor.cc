@@ -71,7 +71,7 @@ int Floor::locateChamber(int i, int j) {
     }
 }
 
-void Floor::displayFloor(Player* player) {
+void Floor::displayFloor() {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
             if (cells[i][j]) {
@@ -88,7 +88,8 @@ void Floor::displayFloor(Player* player) {
         }
         cout << endl;
     }
-    cout << "Race: " << ChamberCrawler::getRace() << " Gold: " << player->getGold() << "\t\t\t\t\t\t\tFloor " << getLevel() << endl; 
+    Player* player = Player::getInstance();
+    cout << "Race: " << Player::getRace() << " Gold: " << player->getGold() << "\t\t\t\t\t\t\tFloor " << getLevel() << endl; 
     cout << "HP: " << player->getHP() << endl;
     cout << "Atk: " << player->getAtk() << endl;
     cout << "Def: " << player->getDef() << endl;
@@ -100,10 +101,10 @@ Chamber* Floor::getRandomChamber() {
     return chambers[rand() % MAX_CHAMBERS];
 }
 
-void Floor::spawnPotions(Player* player) {
+void Floor::spawnPotions() {
     for (int i = 0; i < NUM_POTION; i++) {
         Chamber* cell = getRandomChamber();
-        cell->renderPotion(player);
+        cell->renderPotion();
     }
 }
 
@@ -115,10 +116,10 @@ void Floor::spawnEnemies() {
     }
 }
 
-void Floor::spawnTreasures(Player* player) {
+void Floor::spawnTreasures() {
     for (int i = 0; i < NUM_TREASURES; i++) {
         Chamber* c = Floor::getRandomChamber();
-        c->renderTreasure(player);
+        c->renderTreasure();
     }
 }
 
@@ -131,20 +132,21 @@ Cell* Floor::getCell(int i, int j) {
     return cells[i][j];
 }
 
-void Floor::spawnPlayers(Player* player){
+void Floor::spawnPlayers(){
     Chamber* chosenChamber = getRandomChamber();
     Cell * cell = chosenChamber->getRandomCell();
+    Player* player = Player::getInstance();
     player->setX(cell->getRow());
     player->setY(cell->getCol());
     cell->setSymbol(SYM_PLAYER);
     cell->setCharacter(player);
 }
 
-void Floor::spawnFloor(Player* player) {
+void Floor::spawnFloor() {
     spawnStairs();
     spawnEnemies();
-    spawnPotions(player);
-    spawnTreasures(player);
+    spawnPotions();
+    spawnTreasures();
 }
 
 bool Floor::canMovePlayer(Cell* cell){
@@ -167,7 +169,7 @@ void Floor::moveEnemies(){
                     bool done = false;
                     while(!done){
                         int i = std::rand() % 8;
-                        string dir = directions[i];
+                        string dir = DIRECTIONS[i];
                         int nextRow = enemy->getX();
                         int nextCol = enemy->getY();
                         if ( dir == NORTH){
@@ -219,8 +221,9 @@ void Floor::moveEnemies(){
 
 
 
-bool Floor::movePlayer(Player* player){
+bool Floor::movePlayer(){
     bool done = false;
+    Player* player = Player::getInstance();
      while(!done){
         int nextRow = player->getX();
         int nextCol = player->getY();

@@ -36,7 +36,7 @@ void Chamber::renderEnemy() {
         enemyType = ENEMY_MERCHANT;
     }
 
-    Enemy* enemy = EnemyFactory::createEnemy(enemyType, ChamberCrawler::getRace());
+    Enemy* enemy = EnemyFactory::createEnemy(enemyType, Player::getRace());
     Cell* cell = getRandomCell();
     cell->setSymbol(enemyType);
     cell->setCharacter(enemy);
@@ -44,7 +44,7 @@ void Chamber::renderEnemy() {
     enemy->setY(cell->getCol());
 }
 
-void Chamber::renderTreasure(Player* player) {
+void Chamber::renderTreasure() {
     Cell* cell = getRandomCell();
     int m = rand() % 8;
     char e;
@@ -56,6 +56,7 @@ void Chamber::renderTreasure(Player* player) {
     } else {
         e = SMALL_GOLD;
     }
+    Player* player = Player::getInstance();
     switch(e){
         case NORMAL_GOLD:
             gold = new NormalTreasure(player);
@@ -71,19 +72,20 @@ void Chamber::renderTreasure(Player* player) {
             break;
     }
     cell->setSymbol(GOLD);
-    cell->setCharacter(gold);
-    gold->setX(cell->getRow());
-    gold->setY(cell->getCol());
-}
+//     cell->setCharacter(gold);
+    // gold->setX(cell->getRow());
+    // gold->setY(cell->getCol());
+ }
 
 void Chamber::addCell(Cell* c) {
     chamberCells.push_back(c);
 }
 
-void Chamber::renderPotion(Player* player) {
+void Chamber::renderPotion() {
     Cell* cell = getRandomCell();
     int m = rand() % 6;
     ItemDecorator* potion;
+    Player* player = Player::getInstance();
     if (m == 0) {
         potion = new BoostAtkPotion(player);
     } else if (m == 1) {
@@ -98,9 +100,9 @@ void Chamber::renderPotion(Player* player) {
         potion = new PoisonHealthPotion(player);
     }
     cell->setSymbol(POTION);
-    cell->setCharacter(potion);
-    potion->setX(cell->getRow());
-    potion->setY(cell->getCol());
+    // cell->setCharacter(potion);
+    // potion->setX(cell->getRow());
+    // potion->setY(cell->getCol());
 }
 
 void Chamber::renderStairs() {

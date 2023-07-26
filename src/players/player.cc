@@ -3,9 +3,13 @@
 
 using namespace std;
 
-Player::Player(string race) {
-    this->setRace(race);
-}
+Player* Player::instance = nullptr;
+
+string Player::race = SHADE;
+
+// Player::Player(string race) {
+//     this->setRace(race);
+// }
 
 Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Character(hp, atk, def, race){
     this->setMaxHp(maxHp);
@@ -17,9 +21,16 @@ Player::~Player() {
     // todo:
 }
 
-// Player* Player::getInstance() {
-//     return instance;
-// }
+void Player::setRace(string s){
+    race = s;
+}
+
+Player* Player::getInstance() {
+    if(instance == nullptr){
+        instance = PlayerFactory::createPlayer(race);
+    }
+    return instance;
+}
 
 int Player::getGold() {
     return gold;
@@ -61,9 +72,10 @@ int Player::calculateDmgToEnemy(Enemy *en){
     return this->getAtk();
 }
 
-void Player::setRace(string race){
-    this->setRace(race);
+string Player::getRace(){
+    return race;
 }
+
 
 void Player::addReward(Enemy* en){
     

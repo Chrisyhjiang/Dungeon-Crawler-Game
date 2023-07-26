@@ -30,12 +30,12 @@ void Character::setDef(int def){
     this->def = def;
 }
  
-string Character::getRace(){
-    return race;
-}
-void Character::setRace(string r){
-    race = r;
-}
+// string Character::getRace(){
+//     return race;
+// }
+// void Character::setRace(string r){
+//     race = r;
+// }
 
 
 

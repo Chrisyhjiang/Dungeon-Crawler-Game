@@ -17,7 +17,7 @@ void Orc::setExtraDamage(double extraDamage){
 }
 
 int Orc::calculateDamageToPlayer(){
-    if( this->getRace() == GOBLIN){
+    if( Player::getRace() == GOBLIN){
         return (1 + extraDamage) * this->getAtk();
     }
     return this->getAtk();

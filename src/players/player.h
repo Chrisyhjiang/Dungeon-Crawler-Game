@@ -7,6 +7,7 @@
 #include "../enemies/enemy.h"
 #include "../character.h"
 #include "../floors/cell.h"
+#include "playerFactory.h"
 
 using namespace std;
 
@@ -15,10 +16,12 @@ class Player : public Character{
         int gold;
         int maxHp;
         char cellSymbol;
-       // static Player *instance;
+        static Player *instance;
+        static string race;
+           // Player(string race);
+        
 
     public:
-        Player(string race);
         Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player() override;
         void move(Cell* nextCell);
@@ -34,10 +37,11 @@ class Player : public Character{
         virtual int calculateDmgToEnemy(Enemy *en);
         bool isDead();
         virtual void addReward(Enemy *en);
-        //static Player* getInstance();
-        virtual void setRace(string race);
+        static Player* getInstance();
         char getSymbol();
         char getCellSymbol();
         void setCellSymbol (char symbol);
+        static void setRace(string race);
+        static string getRace();
 };
 #endif

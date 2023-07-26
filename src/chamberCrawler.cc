@@ -2,7 +2,6 @@
 #include <iostream>
 #include "chamberCrawler.h"
 
-string ChamberCrawler::race = SHADE;
 
 
 ChamberCrawler::ChamberCrawler(){}
@@ -15,9 +14,10 @@ void ChamberCrawler::start(string floorFile, int level){
 
     floorLayoutFile =  (floorFile == "") ? EMPTY_FLOOR_FILE : floorFile;
     floorStream = new ifstream(floorLayoutFile);
-    player = PlayerFactory::createPlayer(race);
-    loadFloor(player, level);
-    play();
+
+        // player = PlayerFactory::createPlayer(race);
+   loadFloor(level);
+   play();
 
 }
 
@@ -44,19 +44,19 @@ void  ChamberCrawler::setGameRace(){
     
     switch (number){
         case 1 :
-            ChamberCrawler::race = SHADE;
+            Player::setRace(SHADE);
             break;
         case 2 :
-            ChamberCrawler::race = DROW;
+            Player::setRace(DROW);
             break;
         case 3 :
-            ChamberCrawler::race = VAMPIRE;
+            Player::setRace(VAMPIRE);
             break;
         case 4 :
-            ChamberCrawler::race = TROLL;
+            Player::setRace(TROLL);
             break;
         case 5 :
-            ChamberCrawler::race = GOBLIN;
+            Player::setRace(GOBLIN);
             break;
         default:
             break;
@@ -64,34 +64,36 @@ void  ChamberCrawler::setGameRace(){
 
 }
 
-void ChamberCrawler::loadFloor(Player* player, int n){
+void ChamberCrawler::loadFloor(int n){
     floor = new Floor(n);
     floor->loadFromFile(floorStream);
-    floor->spawnPlayers(player);
-    floor->spawnFloor(player);
-    floor->displayFloor(player);
+    floor->spawnPlayers();
+    floor->spawnFloor();
+    floor->displayFloor();
 }
 
 bool ChamberCrawler::play(){
 
    while(true){
-        bool result = floor->movePlayer(player);
+       // Player* player = Player::getInstance();
+        bool result = floor->movePlayer();
         if(result){
+            Player* player = Player::getInstance();
             if(player->getCellSymbol() == SYM_STAIRS){
                 //setLevel(getLevel()+1);
                 start("", floor->getLevel()+1);
             }else{
-                floor->displayFloor(player);
+                floor->displayFloor();
             }
         }
         floor->moveEnemies();
-        floor->displayFloor(player);
+        floor->displayFloor();
     }
 }
  
-string ChamberCrawler::getRace(){
-    return race;
-}
+// string ChamberCrawler::getRace(){
+//     return race;
+// }
 
 
  

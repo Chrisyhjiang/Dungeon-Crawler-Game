@@ -3,6 +3,7 @@
 
 #include "enemy.h"
 #include "../constants.h"
+#include "../players/player.h"
 
 class Orc : public Enemy {
     private: 

@@ -3,7 +3,7 @@
 
 #include "../players/player.h"
 
-class ItemDecorator : public Player {
+class ItemDecorator {
     
     public:
         Player* target;

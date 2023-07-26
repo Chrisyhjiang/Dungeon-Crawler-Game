@@ -1,8 +1,7 @@
 #include "itemDecorator.h"
-#include "../players/player.h"
 
 
-ItemDecorator::ItemDecorator(Player* p) : Player(*p) {
+ItemDecorator::ItemDecorator(Player* p){
     target = p;
 }
 
