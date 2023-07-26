@@ -135,7 +135,7 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
         Player* player = Player::getInstance();
         int damage = player->calculateDmgToEnemy(enemy->getDef());
         enemy->takeDamage(damage);
-        actionMsg = "Enemy " + string(1, enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP()) + " | take damage: " + to_string(damage) + "\n";
+        actionMsg = "Player attcked Enemy " + string(1, enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP()) + " | enemy take damage: " + to_string(damage) + "\n";
 
     }
     return actionMsg;
