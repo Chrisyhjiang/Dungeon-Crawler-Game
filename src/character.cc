@@ -29,21 +29,3 @@ int Character::getDef(){
 void Character::setDef(int def){
     this->def = def;
 }
-
-
-
-// int Character::getX(){
-//     return x;
-// }
-
-// void Character::setX(int x){
-//     this->x = x;
-// }
-
-// int Character::getY(){
-//     return y;
-// }
-
-// void Character::setY(int y){
-//     this->y = y;
-// }

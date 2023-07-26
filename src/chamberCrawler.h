@@ -6,7 +6,6 @@
 #include <vector>
 #include "./floors/floor.h"
 #include "./players/player.h"
-//#include "./players/playerFactory.h"
 
 using namespace std;
  
@@ -14,18 +13,22 @@ class ChamberCrawler {
 	private:
 		string floorLayoutFile;
 		ifstream *floorStream;
-		//Player* player;
 		Floor* floor;
-		// static string race;
 		bool play();
+		string playerTakeTurn();
+		string enemiesTakeTurn();
+		string processPlayerAttackCmd(string direction);
+		void processPlayerMoveCmd(string direction);
+		void processPlayerUsePotionCmd();
+		bool isValidCmd(string cmd);
 
 	public:
 		ChamberCrawler();
 		~ChamberCrawler();
 		static void setGameRace();
-		// static string getRace();
 		void start(string floorFile, int level);
 		void loadFloor(int level);
+		void playGame();
 		
 };
 #endif

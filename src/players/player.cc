@@ -65,12 +65,12 @@ bool Player::isDead() {
 }
 
 void Player::attackEnemy(Enemy* enemy){
-    int dmg = this->calculateDmgToEnemy(enemy);
+    int dmg = this->calculateDmgToEnemy();
     enemy->takeDamage(dmg);
     this->addReward(enemy);
 }
 
-int Player::calculateDmgToEnemy(Enemy *en){
+int Player::calculateDmgToEnemy(){
     return this->getAtk();
 }
 

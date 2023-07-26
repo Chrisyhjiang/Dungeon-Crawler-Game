@@ -32,11 +32,10 @@ class Player : public Character{
         int getMaxHp();
         void setMaxHp(int maxHp);
         void takeDamage(int dmg);
-        virtual int calculateDmgToEnemy(Enemy *en);
+        virtual int calculateDmgToEnemy();
         bool isDead();
         virtual void addReward(Enemy *en);
         static Player* getInstance();
-        //char getSymbol();
         char getCellSymbol();
         void setCellSymbol (char symbol);
         static void setRace(string race);

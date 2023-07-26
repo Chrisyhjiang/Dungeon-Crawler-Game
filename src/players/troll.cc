@@ -4,7 +4,7 @@ Troll::Troll() : Player(120, 25, 15, TROLL, 120, 0) {
    // this->setCellSymbol(SYM_TILE);
 }
 
-int Troll::calculateDmgToEnemy(Enemy* en){
+int Troll::calculateDmgToEnemy(){
     return this->getAtk();
 }
 

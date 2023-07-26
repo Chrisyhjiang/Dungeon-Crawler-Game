@@ -22,10 +22,6 @@ class Character : public Entity{
         int getDef();
         void setDef(int def);
         virtual bool isDead() = 0;
-        // int getX();
-        // void setX(int x);
-        // int getY();
-        // void setY(int y);
 };
 
 #endif

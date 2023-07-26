@@ -71,7 +71,7 @@ int Floor::locateChamber(int i, int j) {
     }
 }
 
-void Floor::displayFloor() {
+void Floor::displayFloor(string actionMsg) {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
             if (cells[i][j]) {
@@ -93,7 +93,7 @@ void Floor::displayFloor() {
     cout << "HP: " << player->getHP() << endl;
     cout << "Atk: " << player->getAtk() << endl;
     cout << "Def: " << player->getDef() << endl;
-    cout << "Action: " << endl;
+    cout << "Action: " << actionMsg << endl;
 
 }
 
@@ -152,6 +152,36 @@ void Floor::spawnFloor() {
 bool Floor::canMovePlayer(Cell* cell){
     char symbol = cell->getSymbol();
     return (!cell->isOccupied()) || (symbol == SYM_DOORWAY) || (symbol == SYM_PASSAGE) || (symbol == SYM_STAIRS);
+}
+
+Enemy* Floor::canPlayerAttack(string direction){
+    Player* player = Player::getInstance();
+    int x = player->getX();
+    int y = player->getY();
+    if (direction == NORTH){
+        x--;
+    } else if (direction == SOUTH){
+        x++;
+    } else if (direction == WEST){
+        y--;
+    } else if (direction == EAST){
+        y++;
+    } else if (direction == NORTH_WEST){
+        x--;
+        y--;
+    } else if (direction == NORTH_EAST){
+        x--;
+        y++;
+    } else if (direction == SOUTH_WEST){
+        x++;
+        y--;
+    } else if (direction == SOUTH_EAST) {
+        x++;
+        y++;
+    }
+
+    Enemy* enemy = dynamic_cast<Enemy*>(cells[x][y]->getEntity());
+    return enemy;
 }
 
 void Floor::resetCurCell(Cell* cell, char symbol) {

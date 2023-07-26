@@ -1,11 +1,6 @@
 #ifndef ___ENTITY_H___
 #define ___ENTITY_H___
 
-// #include <string>
-// #include "constants.h"
-
-//using namespace std;
-
 class Entity{
     private:
         int x, y;

@@ -21,7 +21,7 @@ class Floor {
 		~Floor();
 		
 		void loadFromFile(std::ifstream *floorStream);
-		void displayFloor();
+		void displayFloor(string actionMsg);
         Cell *getCell(int i, int j);
 		void spawnFloor();
 		void spawnPlayers();
@@ -29,6 +29,8 @@ class Floor {
 		void moveEnemies();
 		int getLevel();
 		void setLevel(int n);
+		Enemy* canPlayerAttack(string direction);
+		
 
 	private:
 		int locateChamber(int i, int j);

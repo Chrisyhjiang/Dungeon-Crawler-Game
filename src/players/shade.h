@@ -6,7 +6,7 @@
 class Shade : public Player {
     public:
         Shade();
-        int calculateDmgToEnemy(Enemy* enemy) override;
+        int calculateDmgToEnemy() override;
         void addReward(Enemy* enemy) override;
         
 };

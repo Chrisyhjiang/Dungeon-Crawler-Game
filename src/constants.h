@@ -66,6 +66,7 @@ const string CMD_ATTACK = "a";
 const string CMD_POTION = "u";
 const string CMD_EXIT = "q";
 
+
 const string DIRECTIONS[] = { NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST};
 
 // ANSI escape codes for text colors
@@ -77,5 +78,6 @@ const string ANSI_BLUE = "\033[34m";
 
 // action 
 const string ACTION_MSG_PLAYER_SPAWNED = "Player character has spawned";
+
 
 #endif
