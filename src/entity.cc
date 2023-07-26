@@ -21,7 +21,7 @@ void Entity::setY(int n){
 }
 
 char Entity::getSymbol(){
-    return y;
+    return symbol;
 }
 
 void Entity::setSymbol(char c){
