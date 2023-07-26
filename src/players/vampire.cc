@@ -6,9 +6,9 @@ Vampire::Vampire() : Player(50, 25, 25, VAMPIRE, INT_MAX, 0) {
    // this->setCellSymbol(SYM_TILE);
 }
 
-int Vampire::calculateDmgToEnemy(){
-    return this->getAtk();
-}
+// int Vampire::calculateDmgToEnemy(){
+//     return this->getAtk();
+// }
 
 void Vampire::addReward(Enemy* enemy){
     // no reward to add

@@ -24,7 +24,7 @@ class Floor {
         Cell *getCell(int i, int j);
 		void spawnFloor();
 		void spawnPlayers();
-		bool movePlayer();
+		bool movePlayer(string direction);
 		string enemyTurn();
 		int getLevel();
 		void setLevel(int n);

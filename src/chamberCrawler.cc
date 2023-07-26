@@ -76,18 +76,12 @@ bool ChamberCrawler::play(){
         string actionMsg = "";
         actionMsg += playerTakeTurn();
         actionMsg += enemiesTakeTurn();
-        // bool result = floor->movePlayer();
-        // if(result){
-        //     Player* player = Player::getInstance();
-        //     if(player->getCellSymbol() == SYM_STAIRS){
-        //         //setLevel(getLevel()+1);
-        //         start("", floor->getLevel()+1);
-        //     }else{
-        //         floor->displayFloor();
-        //     }
-        // }
-        // floor->moveEnemies();
-        floor->displayFloor(actionMsg);
+        Player* player = Player::getInstance();
+        if(player->getCellSymbol() == SYM_STAIRS){
+            start("", floor->getLevel()+1);
+        }else{
+            floor->displayFloor(actionMsg);
+        }
     }
 }
 
@@ -104,7 +98,7 @@ string ChamberCrawler::playerTakeTurn(){
                 if(isValidCmd(dir)){
                     msg = processPlayerAttackCmd(dir);
                     if(msg.size() > 0){
-                        cout << msg;
+                        //cout << msg;
                         break;
                     }else {
                          cout << "invalid command: no enemy to be attacked !!!" << endl; 
@@ -120,8 +114,12 @@ string ChamberCrawler::playerTakeTurn(){
                 break;
 
             } else {
-                processPlayerMoveCmd(cmd);
-                break;
+                msg = processPlayerMoveCmd(cmd);
+                if(msg.size() > 0){
+                    break;
+                }else{
+                    cout << "invalid command: direction is not valid" << endl;
+                }
             }
         }else {
             cout << "command:" << cmd << " is invalid " << endl;
@@ -135,16 +133,20 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
     Enemy* enemy = floor->canPlayerAttack(direction);
     if(enemy){
         Player* player = Player::getInstance();
-        int damage = player->calculateDmgToEnemy();
+        int damage = player->calculateDmgToEnemy(enemy->getDef());
         enemy->takeDamage(damage);
-        actionMsg = "Enemy " + to_string(enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP()) + " | take damage: " + to_string(damage);
+        actionMsg = "Enemy " + string(1, enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP()) + " | take damage: " + to_string(damage) + "\n";
 
     }
     return actionMsg;
 }
 
-void ChamberCrawler::processPlayerMoveCmd(string direction){
-
+string ChamberCrawler::processPlayerMoveCmd(string direction){
+    string actionMsg = "";
+    if(floor->movePlayer(direction)){
+        actionMsg = "Player move to: " + direction + "\n";
+    }
+    return actionMsg;
 }
 
 void ChamberCrawler::processPlayerUsePotionCmd(){

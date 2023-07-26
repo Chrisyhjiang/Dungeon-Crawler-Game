@@ -20,7 +20,7 @@ class Enemy : public Character{
         void setSymbol(char symbol);
         virtual int attackPlayer(string playerRace, int playerDef);
         virtual bool isPlayerInRange(int px, int py);
-        void takeDamage(int damage);
+        virtual void takeDamage(int damage);
         virtual int calculateDamageToPlayer(string playerRace, int playerDef);
         bool isDead() override;
         bool hasMoved();

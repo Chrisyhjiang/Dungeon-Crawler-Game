@@ -267,52 +267,37 @@ string Floor::enemyTurn(){
 
 
 
-bool Floor::movePlayer(){
+bool Floor::movePlayer(string dir){
     bool done = false;
     Player* player = Player::getInstance();
-     while(!done){
-        int nextRow = player->getX();
-        int nextCol = player->getY();
-        bool isValid = true;
-        cout << "enter a valid move: {no,so,ea,we,ne,nw,se,sw}" << endl;
-        string dir;
-        std::cin >> dir;
-        if ( dir == NORTH){
+    int nextRow = player->getX();
+    int nextCol = player->getY();
+    if ( dir == NORTH){
              nextRow--;
-        } else if ( dir == SOUTH){
+    } else if ( dir == SOUTH){
             nextRow++;
-        } else if ( dir == EAST) {
+    } else if ( dir == EAST) {
             nextCol++;
-        } else if ( dir == WEST) {
+    } else if ( dir == WEST) {
             nextCol--;
-        } else if ( dir == NORTH_EAST) {
+    } else if ( dir == NORTH_EAST) {
             nextRow--;
             nextCol++;
-        } else if ( dir == NORTH_WEST ) {
+    } else if ( dir == NORTH_WEST ) {
             nextRow--;
             nextCol--;
-        } else if ( dir == SOUTH_EAST ) {
+    } else if ( dir == SOUTH_EAST ) {
             nextRow++;
             nextCol++;
-        } else if ( dir == SOUTH_WEST ) {
+    } else if ( dir == SOUTH_WEST ) {
             nextRow++;
             nextCol--;
-        } else {
-            cout << "Invalid move direction." << endl;
-            isValid = false;
-        }
-      
-        if(isValid){
-            Cell* nextCell = cells[nextRow][nextCol];
-            if(canMovePlayer(nextCell)){
-                resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
-                player->move(nextCell);
-                done = true;
-                break;
-            }else {
-                cout << "cell is occupied... " << endl;
-            }
-        }
+    }
+    Cell* nextCell = cells[nextRow][nextCol];
+    if(canMovePlayer(nextCell)){
+        resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
+        player->move(nextCell);
+        done = true;
     }
     return done;
 }

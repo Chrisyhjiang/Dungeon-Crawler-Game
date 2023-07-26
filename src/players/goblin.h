@@ -6,7 +6,7 @@
 class Goblin : public Player {
     public:
         Goblin();
-        int calculateDmgToEnemy() override;
+       // int calculateDmgToEnemy() override;
         void addReward(Enemy* enemy) override;
         
 };

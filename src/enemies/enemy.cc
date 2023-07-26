@@ -34,7 +34,7 @@ void Enemy::takeDamage(int damage){
 }
 
 int Enemy::calculateDamageToPlayer(string playerRace, int playerDef){
-    return std::ceil((100/(100 + playerDef)) * this->getAtk());
+    return std::ceil((100.0/(100.0 + playerDef)) * this->getAtk());
 }
 
 bool Enemy::isDead(){

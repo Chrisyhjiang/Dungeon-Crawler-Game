@@ -65,13 +65,15 @@ bool Player::isDead() {
 }
 
 void Player::attackEnemy(Enemy* enemy){
-    int dmg = this->calculateDmgToEnemy();
+    int dmg = this->calculateDmgToEnemy(enemy->getDef());
     enemy->takeDamage(dmg);
     this->addReward(enemy);
 }
 
-int Player::calculateDmgToEnemy(){
-    return this->getAtk();
+int Player::calculateDmgToEnemy(int enemyDef){
+    
+
+     return std::ceil((100.0/(100.0 + enemyDef)) * this->getAtk());
 }
 
 string Player::getRace(){
