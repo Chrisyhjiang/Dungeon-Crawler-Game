@@ -14,8 +14,6 @@ class Human: public Enemy{
         int getGoldToDrop();
         void setGoldToDrop(int gold);
         bool isMovable() override;
-        int calculateDamageToPlayer() override;
-
 };
 
 #endif

@@ -16,20 +16,25 @@ void Enemy::setSymbol(char symbol){
     this->symbol = symbol;
 }
 
-void Enemy::attachPlayer(){
-
+int Enemy::attackPlayer(string playerRace, int playerDef){
+    int x = rand() % 2;
+    int dmg = -1;
+    if (x == 0) {
+        dmg = calculateDamageToPlayer(playerRace, playerDef);
+    }
+    return dmg;
 }
 
-bool Enemy::isPlayerInRange(){
-   return true;
+bool Enemy::isPlayerInRange(int px, int py){
+    return std::abs(px - this->getX()) <= 1 && std::abs(py - this->getY()) <= 1;
 }
 
 void Enemy::takeDamage(int damage){
-
+    this->setHP(this->getHP() - damage);
 }
 
-int Enemy::calculateDamageToPlayer(){
-    return this->getAtk();
+int Enemy::calculateDamageToPlayer(string playerRace, int playerDef){
+    return std::ceil((100/(100 + playerDef)) * this->getAtk());
 }
 
 bool Enemy::isDead(){

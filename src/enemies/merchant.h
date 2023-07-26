@@ -13,7 +13,6 @@ class Merchant : public Enemy {
         ~Merchant();
         bool isHostile();
         void setHostile(bool hostile);
-        int calculateDamageToPlayer() override;
         bool isMovable() override;
 
 };

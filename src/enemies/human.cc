@@ -21,7 +21,3 @@ void Human::setGoldToDrop(int gold){
 bool Human::isMovable(){
     return true;
 }
-
-int Human::calculateDamageToPlayer(){
-    return this->getAtk();
-}

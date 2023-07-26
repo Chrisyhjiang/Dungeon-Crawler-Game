@@ -189,46 +189,61 @@ void Floor::resetCurCell(Cell* cell, char symbol) {
     cell->setEntity(nullptr);
 }
 
-void Floor::moveEnemies(){
+string Floor::enemyTurn(){
+    string msg = "";
+    Player* p = Player::getInstance();
     for(int i = 0 ; i < MAX_ROW; i++){
         for(int j = 0; j < MAX_COLUMN; j++){
             Cell* current = cells[i][j];
              if(current->getChamberID() > -1){
                   Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
-                  if(enemy && !enemy->hasMoved()){
-                    bool done = false;
-                    while(!done){
-                        int i = std::rand() % 8;
-                        string dir = DIRECTIONS[i];
-                        int nextRow = enemy->getX();
-                        int nextCol = enemy->getY();
-                        if ( dir == NORTH){
-                            nextRow--;
-                        } else if ( dir == SOUTH){
-                            nextRow++;
-                        } else if ( dir == EAST) {
-                            nextCol++;
-                        } else if ( dir == WEST) {
-                            nextCol--;
-                        } else if ( dir == NORTH_EAST) {
-                            nextRow--;
-                            nextCol++;
-                        } else if ( dir == NORTH_WEST ) {
-                            nextRow--;
-                            nextCol--;
-                        } else if ( dir == SOUTH_EAST ) {
-                            nextRow++;
-                            nextCol++;
-                        } else if ( dir == SOUTH_WEST ) {
-                            nextRow++;
-                            nextCol--;
+                  if(enemy){
+                        if (enemy->isDead()) {
+                            msg += p->getCellSymbol() + " was slain!\n";
+                            continue;
                         }
-                        Cell* next = cells[nextRow][nextCol];
-                        if(!next->isOccupied() ){
-                            done = true;
-                            enemy->move(next);
-                            resetCurCell(current, SYM_TILE);
-                        } 
+                        if (enemy->isPlayerInRange(p->getX(), p->getY())) {
+                            enemy->attackPlayer(p->getRace(), p->getDef());
+                            msg += p->getCellSymbol() + " dealt " + 
+                                                        std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
+                                                        + "to player\n";
+                        } else {
+                            if (!enemy->hasMoved()) {
+                            bool done = false;
+                            while(!done){
+                                int i = std::rand() % 8;
+                                string dir = DIRECTIONS[i];
+                                int nextRow = enemy->getX();
+                                int nextCol = enemy->getY();
+                                if ( dir == NORTH){
+                                    nextRow--;
+                                } else if ( dir == SOUTH){
+                                    nextRow++;
+                                } else if ( dir == EAST) {
+                                    nextCol++;
+                                } else if ( dir == WEST) {
+                                    nextCol--;
+                                } else if ( dir == NORTH_EAST) {
+                                    nextRow--;
+                                    nextCol++;
+                                } else if ( dir == NORTH_WEST ) {
+                                    nextRow--;
+                                    nextCol--;
+                                } else if ( dir == SOUTH_EAST ) {
+                                    nextRow++;
+                                    nextCol++;
+                                } else if ( dir == SOUTH_WEST ) {
+                                    nextRow++;
+                                    nextCol--;
+                                }
+                                Cell* next = cells[nextRow][nextCol];
+                                if(!next->isOccupied() ){
+                                    done = true;
+                                    enemy->move(next);
+                                    resetCurCell(current, SYM_TILE);
+                                } 
+                            }
+                        }
                     }
                 }
             }
@@ -246,7 +261,8 @@ void Floor::moveEnemies(){
                 }
             }
         }
-     }      
+     }
+     return msg;      
 }
 
 

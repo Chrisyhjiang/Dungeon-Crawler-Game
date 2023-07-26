@@ -14,7 +14,6 @@ class Halfling : public Enemy {
         int getChance();
         void setChance(double chance);
         bool chanceToMiss();
-        int calculateDamageToPlayer() override;
         bool isMovable() override;
 };
 

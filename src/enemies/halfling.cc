@@ -31,9 +31,6 @@ bool Halfling::chanceToMiss(){
 
 }
 
-int Halfling::calculateDamageToPlayer(){
-    return this->getAtk();
-}
 
 bool Halfling::isMovable(){
     return true;

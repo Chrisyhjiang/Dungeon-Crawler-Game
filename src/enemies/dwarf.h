@@ -10,7 +10,6 @@ class Dwarf : public Enemy {
         Dwarf(int hp, int atk, int def, string race, char symbol);
         ~Dwarf();
         bool isMovable() override;
-        int calculateDamageToPlayer() override;
 
 };
 

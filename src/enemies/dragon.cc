@@ -8,16 +8,12 @@ Dragon::~Dragon(){
 
 }
 
-TreasureHoard* Dragon::getHoard(){
+DragonTreasure* Dragon::getHoard(){
     return hoard;
 }
 
-void Dragon::setTreasureHoard(TreasureHoard* hoard){
+void Dragon::setTreasureHoard(DragonTreasure* hoard){
     this->hoard = hoard;
-}
-
-int Dragon::calculateDamageToPlayer(){
-    return this->getAtk();
 }
 
 void Dragon::guard(){
@@ -27,3 +23,8 @@ void Dragon::guard(){
  bool Dragon::isMovable(){
     return false;
  }
+
+bool Dragon::isPlayerInRange(int px, int py) {
+    // TODO INCLUDE DRAGON HOARD ENTITY LOCATION. 
+    return Enemy::isPlayerInRange(px, py);
+}

@@ -16,9 +16,6 @@ void  Merchant::setHostile(bool hostile){
     this->hostile = hostile;
 }
 
-int Merchant::calculateDamageToPlayer(){
-    return this->getAtk();
-}
 
 bool Merchant::isMovable(){
     return true;

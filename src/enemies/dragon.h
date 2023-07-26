@@ -2,21 +2,21 @@
 #define ___DRAGON_H___
 
 #include "enemy.h"
-#include "treasureHoard.h"
+#include "../items/dragonTreasure.h"
 
 class Dragon : public Enemy {
     private: 
-        TreasureHoard * hoard;
+        DragonTreasure * hoard;
 
     public:
         Dragon(string race);
         Dragon(int hp, int atk, int def, string race, char symbol);
         ~Dragon();
-        TreasureHoard* getHoard();
-        void setTreasureHoard(TreasureHoard* hoard);
-        int calculateDamageToPlayer() override;
+        DragonTreasure* getHoard();
+        void setTreasureHoard(DragonTreasure* hoard);
         void guard();
-         bool isMovable() override;
+        bool isMovable() override;
+        bool isPlayerInRange(int px, int py) override;
 };
 
 #endif

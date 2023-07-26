@@ -19,14 +19,13 @@ class Floor {
 	public:
 		Floor(int level);
 		~Floor();
-		
 		void loadFromFile(std::ifstream *floorStream);
 		void displayFloor(string actionMsg);
         Cell *getCell(int i, int j);
 		void spawnFloor();
 		void spawnPlayers();
 		bool movePlayer();
-		void moveEnemies();
+		string enemyTurn();
 		int getLevel();
 		void setLevel(int n);
 		Enemy* canPlayerAttack(string direction);
