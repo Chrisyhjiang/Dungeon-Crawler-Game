@@ -76,6 +76,7 @@ void ChamberCrawler::play(){
         actionMsg.erase(actionMsg.size() - 1);
         Player* player = Player::getInstance();
         if (player->isDead()) {
+            floor->displayFloor(actionMsg);
             cout << "You Died! Do you want to restart the game? [y/n]" << endl;
             char x; 
             while (true) {
