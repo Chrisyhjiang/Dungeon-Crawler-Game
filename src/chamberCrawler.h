@@ -21,7 +21,6 @@ class ChamberCrawler {
 		string processPlayerAttackCmd(string direction);
 		string processPlayerMoveCmd(string direction);
 		string processPlayerUsePotionCmd(string direction);
-		string processPlayerFetchGoldCmd(string direction);
 		bool isValidCmd(string cmd);
 
 	public:

@@ -124,7 +124,7 @@ string ChamberCrawler::playerTakeTurn(){
                     cout << "invalid command: direction is invalid" << endl;
                 } 
                
-            } else if ( cmd == CMD_POTION){
+            } else if (cmd == CMD_POTION){
                 string dir;
                 cin >> dir;
                 if(isValidCmd(dir)){
@@ -138,18 +138,8 @@ string ChamberCrawler::playerTakeTurn(){
                 break;
             } else if ( cmd == CMD_EXIT){
                 exit(0);
-            } else if (cmd == CMD_GOLD) {
-                string dir;
-                cin >> dir;
-                if (isValidCmd(dir)) {
-                    msg = processPlayerFetchGoldCmd(dir);
-                    if (msg.size() > 0) {
-                        break;
-                    } else {
-                        cout << "invalid command: no gold !!!" << endl;
-                    }
-                }
-            }else {
+            }
+            else {
                 msg = processPlayerMoveCmd(cmd);
                 if(msg.size() > 0){
                     break;
@@ -186,15 +176,7 @@ string ChamberCrawler::processPlayerMoveCmd(string direction){
     return actionMsg;
 }
 
-string ChamberCrawler::processPlayerFetchGoldCmd(string dir) {
-    string actionMsg = "";
-    ItemDecorator* gold = floor->canPlayerFetchGold(dir);
-    if (gold) {
-        gold->update();
-        actionMsg = "Player fetched gold: " + gold->getName() + "\n";
-    }
-    return actionMsg;
-}
+
                 
 string ChamberCrawler::processPlayerUsePotionCmd(string dir){
     string actionMsg = "";
@@ -207,7 +189,7 @@ string ChamberCrawler::processPlayerUsePotionCmd(string dir){
 }
 
 bool ChamberCrawler::isValidCmd(string cmd){
-    if ( cmd == CMD_ATTACK || cmd == CMD_POTION || cmd == CMD_EXIT || cmd == CMD_GOLD){
+    if ( cmd == CMD_ATTACK || cmd == CMD_POTION || cmd == CMD_EXIT){
         return true;
     }
     auto it = find(std::begin(DIRECTIONS), end(DIRECTIONS), cmd);

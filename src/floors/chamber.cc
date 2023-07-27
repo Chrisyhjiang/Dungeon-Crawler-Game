@@ -44,9 +44,9 @@ ItemDecorator* Chamber::renderTreasure() {
     int m = rand() % 8;
     char e;
     ItemDecorator* gold;
-    if (0 <= m && m < 5) {
+    if (0 <= m && m < NORMAL_GOLD_DISTRIBUTION) {
         e = NORMAL_GOLD;
-    } else if (5 <= m && m < 6) {
+    } else if (NORMAL_GOLD_DISTRIBUTION <= m && m < DRAGON_GOLD_DISTRIBUTION) {
         e = DRAGON_GOLD;
     } else {
         e = SMALL_GOLD;

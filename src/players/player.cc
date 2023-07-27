@@ -1,5 +1,6 @@
 #include "player.h"
 #include <algorithm>
+#include "../items/treasure.h"
 
 using namespace std;
 
@@ -7,9 +8,7 @@ Player* Player::instance = nullptr;
 
 string Player::race = SHADE;
 
-// Player::Player(string race) {
-//     this->setRace(race);
-// }
+ 
 
 Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Character(hp, atk, def, race){
     this->setMaxHp(maxHp);
@@ -96,10 +95,22 @@ void Player::setCellSymbol(char symbol){
 }
 
 
-void Player::move (Cell* nextCell) {
+void Player::move (Cell* nextCell, bool canPickupGold) {
+    if(canPickupGold){
+        Entity* entity = nextCell->getEntity();
+       
+            Treasure* treasure = dynamic_cast<Treasure*>(entity);
+            if(treasure){
+                this->setGold(this->getGold() + treasure->getGold());
+                cellSymbol = SYM_TILE;
+            }
+    }else{
+         cellSymbol = nextCell->getSymbol();
+
+    }
     this->setX(nextCell->getRow());
     this->setY(nextCell->getCol());
-    cellSymbol = nextCell->getSymbol();
+   
     nextCell->setSymbol(SYM_PLAYER);
     nextCell->setEntity(this);
 }

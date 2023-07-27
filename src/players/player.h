@@ -11,6 +11,8 @@
 
 using namespace std;
 
+class Treasure;
+
 class Player : public Character{
     private:
         int gold;
@@ -22,7 +24,7 @@ class Player : public Character{
     public:
         Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player() override;
-        void move(Cell* nextCell);
+        void move(Cell* nextCell, bool canPickupGold);
         void useItem(string dir);
         int getGold();
         void setGold(int g);

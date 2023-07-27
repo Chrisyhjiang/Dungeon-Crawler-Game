@@ -168,7 +168,7 @@ void Floor::spawnFloor() {
 
 bool Floor::canMovePlayer(Cell* cell){
     char symbol = cell->getSymbol();
-    return (!cell->isOccupied()) || (symbol == SYM_DOORWAY) || (symbol == SYM_PASSAGE) || (symbol == SYM_STAIRS);
+    return (!cell->isOccupied()) || (symbol == SYM_DOORWAY) || (symbol == SYM_PASSAGE) || (symbol == SYM_STAIRS) || (symbol == SYM_GOLD);
 }
 
 Enemy* Floor::canPlayerAttack(string direction){
@@ -188,15 +188,20 @@ ItemDecorator* Floor::canPlayerTakePotion(string direction){
     return nullptr;
 }
 
-ItemDecorator* Floor::canPlayerFetchGold(string direction) {
-    Cell* cell = getNeighbourCell(direction, Player::getInstance());
-    ItemDecorator* gold = dynamic_cast<ItemDecorator*>(cell->getEntity());
-    if (gold && gold->getSymbol() == SYM_GOLD){
-        cell->setSymbol(SYM_TILE);
-        cell->setEntity(nullptr);
-        return gold;
+bool Floor::hasDragonGuardTreasure(DragonTreasure* gold){
+    bool result = false;
+    int x = gold->getX();
+    int y = gold->getY();
+    for(int i =-1; i <= 1; i++){
+        for(int j = -1; j <= 1; j++){
+            Entity* item = cells[x+i][y+j]->getEntity();
+            Dragon* dragon = dynamic_cast<Dragon*>(item);
+            if(dragon){
+                return true;
+            } 
+        }
     }
-    return nullptr;
+    return result;
 }
 
 void Floor::resetCurCell(Cell* cell, char symbol) {
@@ -270,11 +275,31 @@ bool Floor::movePlayer(string dir){
     Player* player = Player::getInstance();
     Cell* nextCell = getNeighbourCell(dir, player);
     if(canMovePlayer(nextCell)){
-        resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
-        player->move(nextCell);
-        done = true;
+        if(nextCell->getSymbol() == SYM_GOLD){
+            bool pickUpGold = canPlayerPickUpGold(nextCell);
+            if(pickUpGold){
+                resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
+                player->move(nextCell, canPlayerPickUpGold(nextCell));
+                done = true;
+            }
+        }else{
+            resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
+            player->move(nextCell, false);
+            done = true;
+        }
     }
     return done;
+}
+
+
+bool Floor::canPlayerPickUpGold(Cell* cell) {
+    bool result = false;
+    if(cell->getSymbol() == SYM_GOLD){
+        Entity* entity = cell->getEntity();
+        DragonTreasure* treasure = dynamic_cast<DragonTreasure*>(entity);
+        return treasure ? !hasDragonGuardTreasure(treasure) :  true;
+    }
+    return result;
 }
 
 Cell* Floor::getNeighbourCell(string dir, Entity* entity){
