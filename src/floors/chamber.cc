@@ -1,9 +1,4 @@
 #include "chamber.h"
-// #include "../items/normalTreasure.h"
-// #include "../items/smallTreasure.h"
-// #include "../items/dragonTreasure.h"
-// #include "../items/boostAtk.h"
-// #include "../items/boostDef.h"
 
 Chamber::Chamber(int id) : id{id}{}
 
@@ -44,7 +39,7 @@ void Chamber::renderEnemy() {
     enemy->setY(cell->getCol());
 }
 
-void Chamber::renderTreasure() {
+ItemDecorator* Chamber::renderTreasure() {
     Cell* cell = getRandomCell();
     int m = rand() % 8;
     char e;
@@ -76,6 +71,7 @@ void Chamber::renderTreasure() {
     gold->setX(cell->getRow());
     gold->setY(cell->getCol());
     gold->setSymbol(SYM_GOLD);
+    return gold;
  }
 
 void Chamber::addCell(Cell* c) {

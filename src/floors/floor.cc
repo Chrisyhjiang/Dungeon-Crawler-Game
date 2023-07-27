@@ -113,10 +113,31 @@ void Floor::spawnEnemies() {
     }
 }
 
+ 
 void Floor::spawnTreasures() {
+   
     for (int i = 0; i < NUM_TREASURES; i++) {
         Chamber* c = Floor::getRandomChamber();
-        c->renderTreasure();
+        ItemDecorator* gold = c->renderTreasure();
+        DragonTreasure* dt =  dynamic_cast<DragonTreasure*>(gold);
+        if(dt){
+            cout << "dragonTreasure spawned ..." << endl;
+            // spawn a dragon
+            bool found = false;
+            while(!found){
+                string dir = DIRECTIONS[std::rand() % 8];
+                Cell* cell = getNeighbourCell(dir, dt);
+                if(!cell->isOccupied()){
+                    // spawn a dragon to guard the DragonTreasure
+                    found = true;
+                    Enemy* enemy = EnemyFactory::createEnemy(ENEMY_DRAGON, Player::getRace());
+                    cell->setSymbol(ENEMY_DRAGON);
+                    cell->setEntity(enemy);
+                    enemy->setX(cell->getRow());
+                    enemy->setY(cell->getCol());
+                }
+            }
+        }
     }
 }
 
@@ -140,10 +161,11 @@ void Floor::spawnPlayers(){
 }
 
 void Floor::spawnFloor() {
+    spawnTreasures();
     spawnStairs();
     spawnEnemies();
     spawnPotions();
-    spawnTreasures();
+    
 }
 
 bool Floor::canMovePlayer(Cell* cell){
@@ -199,16 +221,19 @@ string Floor::enemyTurn(){
                             msg += " missed\n";
                         }
                     } else {
-                        bool done = false;
-                        while(!done){
-                            int i = std::rand() % 8;
-                            string dir = DIRECTIONS[i];
-                            Cell* next = getNeighbourCell(dir, enemy);
-                            if(!next->isOccupied() ){
-                                done = true;
-                                enemy->move(next);
-                                resetCurCell(current, SYM_TILE);
-                            } 
+                        Dragon* dragon = dynamic_cast<Dragon*>(enemy);
+                        if(!dragon){
+                            bool done = false;
+                            while(!done){
+                                int i = std::rand() % 8;
+                                string dir = DIRECTIONS[i];
+                                Cell* next = getNeighbourCell(dir, enemy);
+                                if(!next->isOccupied() ){
+                                    done = true;
+                                    enemy->move(next);
+                                    resetCurCell(current, SYM_TILE);
+                                } 
+                            }
                         }
                     }
                 }
@@ -244,7 +269,6 @@ bool Floor::movePlayer(string dir){
 }
 
 Cell* Floor::getNeighbourCell(string dir, Entity* entity){
-    //Player* player = Player::getInstance();
     int nextRow = entity->getX();
     int nextCol = entity->getY();
     if ( dir == NORTH){

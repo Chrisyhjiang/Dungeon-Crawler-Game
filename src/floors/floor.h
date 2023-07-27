@@ -12,6 +12,7 @@
 #include "../constants.h"
 #include "../players/player.h"
 #include "../items/itemDecorator.h"
+#include "../enemies/dragon.h"
 
 class Chamber;
 

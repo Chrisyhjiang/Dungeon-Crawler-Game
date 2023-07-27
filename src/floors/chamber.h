@@ -26,16 +26,14 @@ class Potion;
 
 class Chamber {
     private:
-        // int size;
         int id;
         vector<Cell*> chamberCells;
-        
-      
+
     public:
         Chamber(int id);
         ~Chamber();
         void renderPotion();
-        void renderTreasure();
+        ItemDecorator* renderTreasure();
         void renderEnemy();
         void renderStairs();
         void addCell(Cell* c);
