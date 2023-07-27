@@ -1,7 +1,5 @@
 #include "floor.h"
 
-
-
 using namespace std;
 
 class Chamber;
@@ -154,64 +152,17 @@ bool Floor::canMovePlayer(Cell* cell){
 }
 
 Enemy* Floor::canPlayerAttack(string direction){
-    Player* player = Player::getInstance();
-    int x = player->getX();
-    int y = player->getY();
-    if (direction == NORTH){
-        x--;
-    } else if (direction == SOUTH){
-        x++;
-    } else if (direction == WEST){
-        y--;
-    } else if (direction == EAST){
-        y++;
-    } else if (direction == NORTH_WEST){
-        x--;
-        y--;
-    } else if (direction == NORTH_EAST){
-        x--;
-        y++;
-    } else if (direction == SOUTH_WEST){
-        x++;
-        y--;
-    } else if (direction == SOUTH_EAST) {
-        x++;
-        y++;
-    }
-
-    Enemy* enemy = dynamic_cast<Enemy*>(cells[x][y]->getEntity());
+    Cell* cell = getNeighbourCell(direction, Player::getInstance());
+    Enemy* enemy = dynamic_cast<Enemy*>(cell->getEntity());
     return enemy;
 }
 
 ItemDecorator* Floor::canPlayerTakePotion(string direction){
-    Player* player = Player::getInstance();
-    int x = player->getX();
-    int y = player->getY();
-    if (direction == NORTH){
-        x--;
-    } else if (direction == SOUTH){
-        x++;
-    } else if (direction == WEST){
-        y--;
-    } else if (direction == EAST){
-        y++;
-    } else if (direction == NORTH_WEST){
-        x--;
-        y--;
-    } else if (direction == NORTH_EAST){
-        x--;
-        y++;
-    } else if (direction == SOUTH_WEST){
-        x++;
-        y--;
-    } else if (direction == SOUTH_EAST) {
-        x++;
-        y++;
-    }
-    ItemDecorator* potion = dynamic_cast<ItemDecorator*>(cells[x][y]->getEntity());
-    if(potion && potion->getSymbol() == SYM_POTION ){
-        cells[x][y]->setSymbol(SYM_TILE);
-        cells[x][y]->setEntity(nullptr);
+    Cell* cell = getNeighbourCell(direction, Player::getInstance());
+    ItemDecorator* potion = dynamic_cast<ItemDecorator*>(cell->getEntity());
+    if (potion && potion->getSymbol() == SYM_POTION){
+        cell->setSymbol(SYM_TILE);
+        cell->setEntity(nullptr);
         return potion;
     }
     return nullptr;
@@ -232,7 +183,7 @@ string Floor::enemyTurn(){
                   Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
                   if(enemy && !enemy->hasMoved()){
                     if (enemy->isDead()) {
-                        msg += string(1, p->getSymbol()) + " was slain!\n";
+                        msg += string(1, enemy->getSymbol()) + " was slain!\n";
                         continue;
                     }
                     if (enemy->isPlayerInRange(p->getX(), p->getY())) {
@@ -250,30 +201,7 @@ string Floor::enemyTurn(){
                         while(!done){
                             int i = std::rand() % 8;
                             string dir = DIRECTIONS[i];
-                            int nextRow = enemy->getX();
-                            int nextCol = enemy->getY();
-                            if ( dir == NORTH){
-                                nextRow--;
-                            } else if ( dir == SOUTH){
-                                nextRow++;
-                            } else if ( dir == EAST) {
-                                nextCol++;
-                            } else if ( dir == WEST) {
-                                nextCol--;
-                            } else if ( dir == NORTH_EAST) {
-                                nextRow--;
-                                nextCol++;
-                            } else if ( dir == NORTH_WEST ) {
-                                nextRow--;
-                                nextCol--;
-                            } else if ( dir == SOUTH_EAST ) {
-                                nextRow++;
-                                nextCol++;
-                            } else if ( dir == SOUTH_WEST ) {
-                                nextRow++;
-                                nextCol--;
-                            }
-                            Cell* next = cells[nextRow][nextCol];
+                            Cell* next = getNeighbourCell(dir, enemy);
                             if(!next->isOccupied() ){
                                 done = true;
                                 enemy->move(next);
@@ -301,40 +229,43 @@ string Floor::enemyTurn(){
      return msg;      
 }
 
-
-
 bool Floor::movePlayer(string dir){
     bool done = false;
     Player* player = Player::getInstance();
-    int nextRow = player->getX();
-    int nextCol = player->getY();
-    if ( dir == NORTH){
-             nextRow--;
-    } else if ( dir == SOUTH){
-            nextRow++;
-    } else if ( dir == EAST) {
-            nextCol++;
-    } else if ( dir == WEST) {
-            nextCol--;
-    } else if ( dir == NORTH_EAST) {
-            nextRow--;
-            nextCol++;
-    } else if ( dir == NORTH_WEST ) {
-            nextRow--;
-            nextCol--;
-    } else if ( dir == SOUTH_EAST ) {
-            nextRow++;
-            nextCol++;
-    } else if ( dir == SOUTH_WEST ) {
-            nextRow++;
-            nextCol--;
-    }
-    Cell* nextCell = cells[nextRow][nextCol];
+    Cell* nextCell = getNeighbourCell(dir, player);
     if(canMovePlayer(nextCell)){
         resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
         player->move(nextCell);
         done = true;
     }
     return done;
+}
+
+Cell* Floor::getNeighbourCell(string dir, Entity* entity){
+    //Player* player = Player::getInstance();
+    int nextRow = entity->getX();
+    int nextCol = entity->getY();
+    if ( dir == NORTH){
+        nextRow--;
+    } else if ( dir == SOUTH){
+        nextRow++;
+    } else if ( dir == EAST) {
+        nextCol++;
+    } else if ( dir == WEST) {
+        nextCol--;
+    } else if ( dir == NORTH_EAST) {
+        nextRow--;
+        nextCol++;
+    } else if ( dir == NORTH_WEST ) {
+        nextRow--;
+        nextCol--;
+    } else if ( dir == SOUTH_EAST ) {
+        nextRow++;
+        nextCol++;
+    } else if ( dir == SOUTH_WEST ) {
+        nextRow++;
+        nextCol--;
+    }
+    return cells[nextRow][nextCol];
 }
 

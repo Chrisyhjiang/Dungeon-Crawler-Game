@@ -32,8 +32,6 @@ class Floor {
 		Enemy* canPlayerAttack(string direction);
 		ItemDecorator* canPlayerTakePotion(string direction);
 
-		
-
 	private:
 		int locateChamber(int i, int j);
 		Cell* cells[MAX_ROW][MAX_COLUMN];
@@ -50,8 +48,7 @@ class Floor {
 		void spawnStairs();
 		bool canMovePlayer(Cell* cell);
 		void resetCurCell(Cell* cell, char symbol);
-		// void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
 		Chamber *getRandomChamber();
-		//string getColorCode(char c);
+		Cell* getNeighbourCell(string direction, Entity* entity);
 };
 #endif
