@@ -71,10 +71,11 @@ void Chamber::renderTreasure() {
             gold = nullptr;
             break;
     }
-    cell->setSymbol(GOLD);
+    cell->setSymbol(SYM_GOLD);
     cell->setEntity(gold);
     gold->setX(cell->getRow());
     gold->setY(cell->getCol());
+    gold->setSymbol(SYM_GOLD);
  }
 
 void Chamber::addCell(Cell* c) {
@@ -99,10 +100,11 @@ void Chamber::renderPotion() {
     } else {
         potion = new PoisonHealthPotion(player);
     }
-    cell->setSymbol(POTION);
+    cell->setSymbol(SYM_POTION);
     cell->setEntity(potion);
     potion->setX(cell->getRow());
     potion->setY(cell->getCol());
+    potion->setSymbol(SYM_POTION);
 }
 
 void Chamber::renderStairs() {

@@ -4,13 +4,18 @@
 #include "../players/player.h"
 
 class ItemDecorator : public Entity {
-    
-    public:
+    private:
         Player* target;
-        ItemDecorator(Player* p);
+        string name;
+
+    public:
+        ItemDecorator(Player* player, string name);
         ~ItemDecorator();
+        Player* getTarget();
         void setTarget(Player *p);
         virtual void update();
+        string getName();
+        void setName(string s);
 };
 
 

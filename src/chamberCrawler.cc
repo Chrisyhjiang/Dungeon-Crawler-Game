@@ -122,11 +122,19 @@ string ChamberCrawler::playerTakeTurn(){
                 } 
                
             } else if ( cmd == CMD_POTION){
-                processPlayerUsePotionCmd();
+                string dir;
+                cin >> dir;
+                if(isValidCmd(dir)){
+                    msg = processPlayerUsePotionCmd(dir);
+                    if(msg.size() > 0){
+                        break;
+                    }else{
+                         cout << "invalid command: no potion !!!" << endl; 
+                    }
+                }
                 break;
             } else if ( cmd == CMD_EXIT){
-                break;
-
+                exit(0);
             } else {
                 msg = processPlayerMoveCmd(cmd);
                 if(msg.size() > 0){
@@ -160,11 +168,18 @@ string ChamberCrawler::processPlayerMoveCmd(string direction){
     if(floor->movePlayer(direction)){
         actionMsg = "Player move to: " + direction + "\n";
     }
+    
     return actionMsg;
 }
-
-void ChamberCrawler::processPlayerUsePotionCmd(){
-
+                
+string ChamberCrawler::processPlayerUsePotionCmd(string dir){
+    string actionMsg = "";
+    ItemDecorator* potion = floor->canPlayerTakePotion(dir);
+    if(potion){
+        potion->update();
+        actionMsg = "Player take potion: " + potion->getName() + "\n";
+    }
+    return actionMsg;
 }
 
 bool ChamberCrawler::isValidCmd(string cmd){

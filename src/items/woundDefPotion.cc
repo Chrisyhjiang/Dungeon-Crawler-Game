@@ -1,14 +1,10 @@
 #include "woundDefPotion.h"
 
- WoundDefPotion::WoundDefPotion(Player* p) : ItemDecorator(p) {
-    target = p;
- }
+WoundDefPotion::WoundDefPotion(Player* p) : ItemDecorator(p, POTION_WD) {}
 
-
-WoundDefPotion::~WoundDefPotion(){
-    
-} 
+WoundDefPotion::~WoundDefPotion(){} 
 
 void WoundDefPotion::update() {
+    Player* target = this->getTarget();
     target->setDef(target->getDef() - 5);
 }

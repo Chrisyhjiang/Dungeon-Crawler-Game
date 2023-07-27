@@ -1,14 +1,11 @@
 #include "merchantHoard.h"
 
 
-MerchantTreasure::MerchantTreasure(Player* player) : ItemDecorator(player) {
+MerchantTreasure::MerchantTreasure(Player* player) : ItemDecorator(player, GOLD_MERCHANT) {}
 
-}
-
-MerchantTreasure::~MerchantTreasure(){
-
-}
+MerchantTreasure::~MerchantTreasure(){}
 
 void MerchantTreasure::update() {
-    target->setGold(target->getGold() + 4);
+    Player* player = this->getTarget();
+    player->setGold(player->getGold() + 4);
 }

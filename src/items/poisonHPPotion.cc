@@ -1,13 +1,10 @@
 #include "poisonHPPotion.h"
 
-PoisonHealthPotion::PoisonHealthPotion(Player* player) : ItemDecorator(player){
+PoisonHealthPotion::PoisonHealthPotion(Player* player) : ItemDecorator(player, POTION_PH){}
 
-}
-
-PoisonHealthPotion::~PoisonHealthPotion(){
-
-}
+PoisonHealthPotion::~PoisonHealthPotion(){}
 
 void PoisonHealthPotion::update() {
-    target->setHP(target->getHP() - 10);
+    Player* player = this->getTarget();
+    player->setHP(player->getHP() - 10);
 }

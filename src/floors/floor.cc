@@ -111,7 +111,6 @@ void Floor::spawnPotions() {
 void Floor::spawnEnemies() {
     for (int i = 0; i < NUM_ENEMY; i++) {
         Chamber* chamber = getRandomChamber();
-        //cout <<  "chamber id: " << chamber->getChamberID() << endl;
         chamber->renderEnemy();
     }
 }
@@ -182,6 +181,40 @@ Enemy* Floor::canPlayerAttack(string direction){
 
     Enemy* enemy = dynamic_cast<Enemy*>(cells[x][y]->getEntity());
     return enemy;
+}
+
+ItemDecorator* Floor::canPlayerTakePotion(string direction){
+    Player* player = Player::getInstance();
+    int x = player->getX();
+    int y = player->getY();
+    if (direction == NORTH){
+        x--;
+    } else if (direction == SOUTH){
+        x++;
+    } else if (direction == WEST){
+        y--;
+    } else if (direction == EAST){
+        y++;
+    } else if (direction == NORTH_WEST){
+        x--;
+        y--;
+    } else if (direction == NORTH_EAST){
+        x--;
+        y++;
+    } else if (direction == SOUTH_WEST){
+        x++;
+        y--;
+    } else if (direction == SOUTH_EAST) {
+        x++;
+        y++;
+    }
+    ItemDecorator* potion = dynamic_cast<ItemDecorator*>(cells[x][y]->getEntity());
+    if(potion && potion->getSymbol() == SYM_POTION ){
+        cells[x][y]->setSymbol(SYM_TILE);
+        cells[x][y]->setEntity(nullptr);
+        return potion;
+    }
+    return nullptr;
 }
 
 void Floor::resetCurCell(Cell* cell, char symbol) {

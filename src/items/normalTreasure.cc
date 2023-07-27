@@ -1,13 +1,10 @@
 #include "normalTreasure.h"
 
-NormalTreasure::NormalTreasure(Player* p) : ItemDecorator(p) {
-   // target = p;
-}
+NormalTreasure::NormalTreasure(Player* p) : ItemDecorator(p, GOLD_NORMAL) {}
 
-NormalTreasure::~NormalTreasure() {
-   
-}
+NormalTreasure::~NormalTreasure() {}
 
 void NormalTreasure::update() {
-    target->setGold(target->getGold() + 2);
+    Player* player = this->getTarget();
+    player->setGold(player->getGold() + 2);
 }

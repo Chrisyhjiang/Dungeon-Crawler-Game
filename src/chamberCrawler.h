@@ -20,7 +20,7 @@ class ChamberCrawler {
 		string enemiesTakeTurn();
 		string processPlayerAttackCmd(string direction);
 		string processPlayerMoveCmd(string direction);
-		void processPlayerUsePotionCmd();
+		string processPlayerUsePotionCmd(string direction);
 		bool isValidCmd(string cmd);
 
 	public:

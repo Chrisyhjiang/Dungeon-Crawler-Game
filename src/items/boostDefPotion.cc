@@ -1,13 +1,10 @@
 #include "boostDefPotion.h"
 
-BoostDefPotion::BoostDefPotion(Player* p) : ItemDecorator(p) {
+BoostDefPotion::BoostDefPotion(Player* p) : ItemDecorator(p, POTION_BD) {}
 
-}
-
-BoostDefPotion::~BoostDefPotion(){
-
-}
+BoostDefPotion::~BoostDefPotion(){}
 
 void BoostDefPotion::update() {
-    target->setDef(target->getDef() + 5);
+    Player* player = this->getTarget();
+    player->setDef(player->getDef() + 5);
 }

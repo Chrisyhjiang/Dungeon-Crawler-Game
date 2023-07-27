@@ -33,9 +33,21 @@ const char SYM_PASSAGE = '#';
 const char SYM_TILE = '.';
 const char SYM_STAIRS = '\\';
 
+
+const char SYM_GOLD = 'G';
+const char SYM_POTION = 'P';
+
 // constants for potion and gold
-const char GOLD = 'G';
-const char POTION = 'P';
+const string POTION_RH = "RH";
+const string POTION_BA = "BA";
+const string POTION_BD = "BD";
+const string POTION_PH = "PH";
+const string POTION_WA = "WA";
+const string POTION_WD = "WD";
+const string GOLD_SMALL = "GS";
+const string GOLD_NORMAL = "GN";
+const string GOLD_MERCHANT = "GM";
+const string GOLD_DRAGON = "GD";
 
 // constants for Enemy 
 const char ENEMY_HUMAN = 'H';

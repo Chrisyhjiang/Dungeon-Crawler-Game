@@ -11,6 +11,7 @@
 #include "chamber.h"
 #include "../constants.h"
 #include "../players/player.h"
+#include "../items/itemDecorator.h"
 
 class Chamber;
 
@@ -29,14 +30,16 @@ class Floor {
 		int getLevel();
 		void setLevel(int n);
 		Enemy* canPlayerAttack(string direction);
+		ItemDecorator* canPlayerTakePotion(string direction);
+
 		
 
 	private:
 		int locateChamber(int i, int j);
 		Cell* cells[MAX_ROW][MAX_COLUMN];
 		Chamber* chambers[MAX_CHAMBERS];
-		map<char, string> colorMap = {	{SYM_PLAYER, ANSI_BLUE}, {SYM_STAIRS, ANSI_BLUE}, {GOLD, ANSI_YELLOW},
-										{POTION, ANSI_GREEN},  {ENEMY_MERCHANT, ANSI_RED}, {ENEMY_DRAGON, ANSI_RED},
+		map<char, string> colorMap = {	{SYM_PLAYER, ANSI_BLUE}, {SYM_STAIRS, ANSI_BLUE}, {SYM_GOLD, ANSI_YELLOW},
+										{SYM_POTION, ANSI_GREEN},  {ENEMY_MERCHANT, ANSI_RED}, {ENEMY_DRAGON, ANSI_RED},
 										{ENEMY_DWARF, ANSI_RED}, {ENEMY_ELF, ANSI_RED}, {ENEMY_HUMAN, ANSI_RED}, 
 										{ENEMY_ORC, ANSI_RED}, {ENEMY_HALFING, ANSI_RED}};
 
@@ -49,8 +52,6 @@ class Floor {
 		void resetCurCell(Cell* cell, char symbol);
 		// void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
 		Chamber *getRandomChamber();
-		string getColorCode(char c);
-		 
-		// Tile *getRandomTile();
+		//string getColorCode(char c);
 };
 #endif
