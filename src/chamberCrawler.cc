@@ -92,6 +92,8 @@ void ChamberCrawler::play(){
         } else {
             if(player->getCellSymbol() == SYM_STAIRS){
                 start("", floor->getLevel()+1);
+                player->setAtk(player->getDefaultAtk());
+                player->setDef(player->getDefaultDef());
             }else{
                 floor->displayFloor(actionMsg);
             }

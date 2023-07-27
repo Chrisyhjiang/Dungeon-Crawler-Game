@@ -184,6 +184,8 @@ string Floor::enemyTurn(){
                   if(enemy && !enemy->hasMoved()){
                     if (enemy->isDead()) {
                         msg += string(1, enemy->getSymbol()) + " was slain!\n";
+                        current->setSymbol(SYM_TILE);
+                        current->setEntity(nullptr);
                         continue;
                     }
                     if (enemy->isPlayerInRange(p->getX(), p->getY())) {
