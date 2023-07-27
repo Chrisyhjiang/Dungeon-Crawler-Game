@@ -121,7 +121,6 @@ void Floor::spawnTreasures() {
         ItemDecorator* gold = c->renderTreasure();
         DragonTreasure* dt =  dynamic_cast<DragonTreasure*>(gold);
         if(dt){
-            cout << "dragonTreasure spawned ..." << endl;
             // spawn a dragon
             bool found = false;
             while(!found){
@@ -161,11 +160,10 @@ void Floor::spawnPlayers(){
 }
 
 void Floor::spawnFloor() {
-    spawnTreasures();
     spawnStairs();
-    spawnEnemies();
     spawnPotions();
-    
+    spawnTreasures();
+    spawnEnemies();
 }
 
 bool Floor::canMovePlayer(Cell* cell){
