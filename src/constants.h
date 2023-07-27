@@ -76,6 +76,7 @@ const string SOUTH_EAST = "se";
 const string SOUTH_WEST = "sw";
 const string CMD_ATTACK = "a";
 const string CMD_POTION = "u";
+const string CMD_GOLD = "f";
 const string CMD_EXIT = "q";
 
 

@@ -188,6 +188,17 @@ ItemDecorator* Floor::canPlayerTakePotion(string direction){
     return nullptr;
 }
 
+ItemDecorator* Floor::canPlayerFetchGold(string direction) {
+    Cell* cell = getNeighbourCell(direction, Player::getInstance());
+    ItemDecorator* gold = dynamic_cast<ItemDecorator*>(cell->getEntity());
+    if (gold && gold->getSymbol() == SYM_GOLD){
+        cell->setSymbol(SYM_TILE);
+        cell->setEntity(nullptr);
+        return gold;
+    }
+    return nullptr;
+}
+
 void Floor::resetCurCell(Cell* cell, char symbol) {
     cell->setSymbol(symbol);
     cell->setEntity(nullptr);
