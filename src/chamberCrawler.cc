@@ -92,6 +92,10 @@ void ChamberCrawler::play(){
             }
         } else {
             if(player->getCellSymbol() == SYM_STAIRS){
+                if (floor->getLevel() == 5) {
+                    cout << "you beat the game!!!" << endl;
+                    exit(0);
+                }
                 start("", floor->getLevel()+1);
                 player->setAtk(player->getDefaultAtk());
                 player->setDef(player->getDefaultDef());
