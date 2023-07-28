@@ -17,15 +17,15 @@ vector<Cell*> Chamber::getCells(){
 void Chamber::renderEnemy() {
     int m = rand() % TOTAL_PROBABILITY_DISTRIBUTION;
     char enemyType;
-    if (0 <= m && m < 4) {
+    if (0 <= m && m < ENEMY_HUMAN_DISTRIBUTION) {
         enemyType = ENEMY_HUMAN;
-    } else if (4 <= m && m < 7) {
+    } else if (ENEMY_HUMAN_DISTRIBUTION <= m && m < ENEMY_DWARF_DISTRIBUTION) {
         enemyType = ENEMY_DWARF;
-    } else if (7 <= m && m < 12) {
+    } else if (ENEMY_DWARF_DISTRIBUTION <= m && m < ENEMY_HALFLING_DISTRIBUTION) {
         enemyType= ENEMY_HALFING; 
-    } else if (12 <= m && m < 14) {
+    } else if (ENEMY_HALFLING_DISTRIBUTION <= m && m < ENEMY_ELF_DISTRIBUTION) {
         enemyType = ENEMY_ELF;
-    } else if (14 <= m && m < 16) {
+    } else if (ENEMY_ELF_DISTRIBUTION <= m && m < ENEMY_ORC_DISTRIBUTION) {
         enemyType = ENEMY_ORC;
     } else {
         enemyType = ENEMY_MERCHANT;

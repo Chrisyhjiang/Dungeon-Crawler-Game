@@ -28,7 +28,7 @@ class Player : public Character{
         void useItem(string dir);
         int getGold();
         void setGold(int g);
-        void attackEnemy(Enemy *en);
+        virtual void attackEnemy(Enemy *en);
         bool isEnemyInRange();
         void magnifyPotion(double m);
         int getMaxHp();

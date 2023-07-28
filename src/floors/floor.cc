@@ -225,14 +225,17 @@ string Floor::enemyTurn(){
                         continue;
                     }
                     if (enemy->isPlayerInRange(p->getX(), p->getY())) {
-                        int x = enemy->attackPlayer(p->getRace(), p->getDef());
-                        msg += string(1, enemy->getSymbol());
-                        if (x > 0) {
-                            p->takeDamage(x);
-                            msg += " dealt " + std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
+                        Merchant* m = dynamic_cast<Merchant*>(current->getEntity());
+                        if (!m || Merchant::isHostile()) {
+                            int x = enemy->attackPlayer(p->getRace(), p->getDef());
+                            msg += string(1, enemy->getSymbol());
+                            if (x > 0) {
+                                p->takeDamage(x);
+                                msg += " dealt " + std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
                                                     + " damage to player\n";
-                        } else {
-                            msg += " missed\n";
+                            } else {
+                                msg += " missed\n";
+                            }
                         }
                     } else {
                         Dragon* dragon = dynamic_cast<Dragon*>(enemy);

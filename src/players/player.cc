@@ -68,8 +68,6 @@ void Player::attackEnemy(Enemy* enemy){
 }
 
 int Player::calculateDmgToEnemy(int enemyDef){
-    
-
      return std::ceil((100.0/(100.0 + enemyDef)) * this->getAtk());
 }
 

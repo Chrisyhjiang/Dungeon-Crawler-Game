@@ -4,15 +4,13 @@
 #include "enemy.h"
 
 class Merchant : public Enemy {
-    private: 
-        bool hostile;
-
     public:
+        static bool hostile;
         Merchant(string race);
         Merchant(int hp, int atk, int def, string race, char symbol);
         ~Merchant();
-        bool isHostile();
-        void setHostile(bool hostile);
+        static bool isHostile();
+        static void setHostile();
         bool isMovable() override;
 
 };

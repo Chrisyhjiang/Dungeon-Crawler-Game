@@ -7,9 +7,10 @@
 #include <cstdlib>
 #include "./floors/floor.h"
 #include "./players/player.h"
+#include "./enemies/merchant.h"
 
 using namespace std;
- 
+
 class ChamberCrawler {
 	private:
 		string floorLayoutFile;

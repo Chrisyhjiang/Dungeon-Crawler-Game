@@ -78,13 +78,13 @@ void ChamberCrawler::play(){
         if (player->isDead()) {
             floor->displayFloor(actionMsg);
             cout << "You Died! Do you want to restart the game? [y/n]" << endl;
-            char x; 
+            string x; 
             while (true) {
                 cin >> x;
-                if (x == 'y') {
+                if (x == "y") {
                     Player::setInstance();
                     this->start("", 1);
-                } else if (x == 'n') {
+                } else if (x == "n") {
                     exit(0);
                 } else {
                     cout << "Please input [y/n]" << endl;
@@ -162,6 +162,10 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
     string actionMsg = "";
     Enemy* enemy = floor->canPlayerAttack(direction);
     if(enemy){
+        Merchant* m = dynamic_cast<Merchant*>(enemy);
+        if (m) {
+            Merchant::setHostile();
+        }
         Player* player = Player::getInstance();
         int damage = player->calculateDmgToEnemy(enemy->getDef());
         enemy->takeDamage(damage);
