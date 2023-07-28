@@ -220,9 +220,20 @@ string Floor::enemyTurn(){
                   if(enemy && !enemy->hasMoved()){
                     if (enemy->isDead()) {
                         msg += string(1, enemy->getSymbol()) + " was slain!\n";
-                        current->setSymbol(SYM_TILE);
-                        current->setEntity(nullptr);
-                        continue;
+                        Human* h = dynamic_cast<Human*>(enemy);
+                        Merchant* m = dynamic_cast<Merchant*>(enemy);
+                        if (h || m) {
+                            Treasure* gold = new MerchantTreasure(p);
+                            current->setSymbol(SYM_GOLD);
+                            current->setEntity(gold);
+                            gold->setX(current->getRow());
+                            gold->setY(current->getCol());
+                            gold->setSymbol(SYM_GOLD);
+                        } else {
+                            current->setSymbol(SYM_TILE);
+                            current->setEntity(nullptr);
+                            continue;
+                        }
                     }
                     if (enemy->isPlayerInRange(p->getX(), p->getY())) {
                         Merchant* m = dynamic_cast<Merchant*>(current->getEntity());

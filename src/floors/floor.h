@@ -14,6 +14,9 @@
 #include "../items/itemDecorator.h"
 #include "../enemies/dragon.h"
 #include "../enemies/merchant.h"
+#include "../enemies/human.h"
+#include "../items/treasure.h"
+#include "../items/merchantHoard.h"
 
 class Chamber;
 

@@ -17,8 +17,6 @@ void ChamberCrawler::start(string floorFile, int level){
     play();
 }
 
-
-
 void  ChamberCrawler::setGameRace(){
     cout << "please choose a game race from the following options: \n";
     for(int i = 0; i < 5; i++){
@@ -41,7 +39,6 @@ void  ChamberCrawler::setGameRace(){
             }
         }  
         std::cout << "Invalid input. Please enter an integer between 1 and 5" << endl;
-        
     }
     
     switch (n){

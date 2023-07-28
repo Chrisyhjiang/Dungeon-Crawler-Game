@@ -12,7 +12,7 @@ class Merchant : public Enemy {
         static bool isHostile();
         static void setHostile();
         bool isMovable() override;
-
+        
 };
 
 
