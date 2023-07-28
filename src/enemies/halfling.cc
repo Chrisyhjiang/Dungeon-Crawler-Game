@@ -18,17 +18,9 @@ void Halfling::setChance(double chance){
 }
 
 bool Halfling::chanceToMiss(){
-
-  //  std::srand(static_cast<unsigned>(std::time(0)));
-
-    // Generate a random integer between 0 and RAND_MAX
     int r = std::rand();
-
-    // Convert the integer to a double between 0 and 1
     double rv = static_cast<double>(r) / RAND_MAX;
-    
     return (rv < chance);
-
 }
 
 

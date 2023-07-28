@@ -3,6 +3,13 @@
 
 #include <string>
 #include "enemy.h"
+#include "human.h"
+#include "dwarf.h"
+#include "elf.h"
+#include "merchant.h"
+#include "orc.h"
+#include "dragon.h"
+#include "../constants.h"
 
 using namespace std;
 

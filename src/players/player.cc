@@ -62,9 +62,19 @@ bool Player::isDead() {
 }
 
 void Player::attackEnemy(Enemy* enemy){
-    int dmg = this->calculateDmgToEnemy(enemy->getDef());
-    enemy->takeDamage(dmg);
-    this->addReward(enemy);
+    Halfling* h = dynamic_cast<Halfling*>(enemy);
+    if (h) {
+        bool b = h->chanceToMiss();
+        if (!b) {
+            int dmg = this->calculateDmgToEnemy(enemy->getDef());
+            enemy->takeDamage(dmg);
+            this->addReward(enemy);
+        }
+    }else {
+        int dmg = this->calculateDmgToEnemy(enemy->getDef());
+        enemy->takeDamage(dmg);
+        this->addReward(enemy);
+    }
 }
 
 int Player::calculateDmgToEnemy(int enemyDef){

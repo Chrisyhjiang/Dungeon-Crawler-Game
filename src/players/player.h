@@ -7,6 +7,7 @@
 #include "../enemies/enemy.h"
 #include "../character.h"
 #include "../floors/cell.h"
+#include "../enemies/halfling.h"
 #include "playerFactory.h"
 
 using namespace std;

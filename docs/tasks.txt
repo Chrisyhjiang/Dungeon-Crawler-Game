@@ -13,12 +13,15 @@
 13. Display end game message                            - done
 14. Add the singleton for the Player class              - done
 15. reset the initial state when floor reload..         - done
-16. player pick up treasure                             In progress  
+16. player pick up treasure                             - done 
 17. Spawn Dragon...                                     - done
-18. Human slain drop two pile gold                      ???
+18. Human slain drop two pile gold                      - done
 19. format Action msg:                                  ???
 20. Player slain                                        - done
-21. Set Merchant hostile                                - done                                                  
+21. Set Merchant hostile                                - done      
+22. Goblin steal gold                                   - done
+23. Troll gain HP every turn                            - done
+24. Vampire HP Buff                                     - done
 
 changes:
 -- add a new field cellSymbol to the player.h to track the cell symbol as we need reset back this symbol after moving away from the current cell.
