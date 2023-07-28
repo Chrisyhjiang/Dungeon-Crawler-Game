@@ -6,9 +6,6 @@
 6. player attack enemy                                  - done                            
 7. enemy attack player                                  - done
 8. player take potion                                   - done
-9. final UML                                            ???
-10. design documentation                                ???
-11. testing                                             - In progress
 12. Polish display                                      - done
 13. Display end game message                            - done
 14. Add the singleton for the Player class              - done
@@ -16,12 +13,23 @@
 16. player pick up treasure                             - done 
 17. Spawn Dragon...                                     - done
 18. Human slain drop two pile gold                      - done
-19. format Action msg:                                  ???
 20. Player slain                                        - done
 21. Set Merchant hostile                                - done      
 22. Goblin steal gold                                   - done
 23. Troll gain HP every turn                            - done
 24. Vampire HP Buff                                     - done
+
+Todo:
+1. Final UML
+2. design documentation 
+3. format Action msg:  
+4. testing         
+5. Vampire vs ENEMY_DWARF
+6. elf vs DROW                                                     
+7. orc vs Goblin
+8. Upon their demise, any enemy that is not a dragon, human, or merchant will drop either a small pile or normal pile of gold
+(discussed below). This gold is immediately added to the player character’s total.
+9. verify enemies are moved line by line
 
 changes:
 -- add a new field cellSymbol to the player.h to track the cell symbol as we need reset back this symbol after moving away from the current cell.
