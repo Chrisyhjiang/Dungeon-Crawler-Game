@@ -17,6 +17,8 @@ void ChamberCrawler::start(string floorFile, int level){
     play();
 }
 
+
+
 void  ChamberCrawler::setGameRace(){
     cout << "please choose a game race from the following options: \n";
     for(int i = 0; i < 5; i++){
@@ -116,13 +118,17 @@ string ChamberCrawler::playerTakeTurn(){
         string cmd;
         cin >> cmd;
         if(isValidCmd(cmd)){
+            Troll *t = dynamic_cast<Troll*>(Player::getInstance());
+            if (t) {
+                t->setHP(min(t->getMaxHp(), t->getHP() + 5));
+            }
             if (cmd == CMD_ATTACK){
                 string dir;
                 cin >> dir;
                 if(isValidCmd(dir)){
                     msg = processPlayerAttackCmd(dir);
                     if(msg.size() > 0){
-                        //cout << msg;
+                        cout << msg;
                         break;
                     }else {
                          cout << "invalid command: no enemy to be attacked !!!" << endl; 
@@ -171,7 +177,8 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
         }
         Player* player = Player::getInstance();
         int damage = player->calculateDmgToEnemy(enemy->getDef());
-        enemy->takeDamage(damage);
+        // enemy->takeDamage(damage);
+        player->attackEnemy(enemy);
         actionMsg = "Player attcked Enemy " + string(1, enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP()) + " | enemy take damage: " + to_string(damage) + "\n";
 
     }

@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include "./floors/floor.h"
 #include "./players/player.h"
+#include "./players/troll.h"
 #include "./enemies/merchant.h"
 
 using namespace std;

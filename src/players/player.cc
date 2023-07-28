@@ -11,7 +11,7 @@ string Player::race = SHADE;
  
 
 Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Character(hp, atk, def, race){
-    this->setMaxHp(maxHp);
+    this->setMaxHp(maxHP);
     this->setGold(gold);
     this->setSymbol(SYM_PLAYER);
     this->setCellSymbol(SYM_TILE);
