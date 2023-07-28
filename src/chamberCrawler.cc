@@ -25,12 +25,18 @@ void  ChamberCrawler::setGameRace(){
         cout << "enter " << i+1 << " for choosing " << PLAYERS[i] << endl;
     }
     std::cout << "Enter an integer between 1 and 5: ";
-    int number;
+    string number;
     string input;
+    int n = -1;
     while (getline(cin, input)) {
         stringstream ss(input);
         if (ss >> number) {
-            if( number >= 1 && number <= 5) {
+            try {
+                n = stoi(number);
+            } catch(...) {
+                
+            }
+            if(n >= 1 && n <= 5) {
                 break;
             }
         }  
@@ -38,7 +44,7 @@ void  ChamberCrawler::setGameRace(){
         
     }
     
-    switch (number){
+    switch (n){
         case 1 :
             Player::setRace(SHADE);
             break;
