@@ -13,6 +13,13 @@ void Vampire::addReward(Enemy* enemy){
 }
 
 void Vampire::attackEnemy(Enemy* en) {
+    
     Player::attackEnemy(en);
-    this->setHP(this->getHP() + 5);
+    Dwarf* d = dynamic_cast<Dwarf*>(en);
+    if (d) {
+        this->setHP(this->getHP() - 5);
+    } else {
+        this->setHP(this->getHP() + 5);
+    }
+    
 }
