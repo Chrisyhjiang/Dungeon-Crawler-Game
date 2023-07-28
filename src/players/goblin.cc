@@ -1,6 +1,6 @@
 #include "goblin.h"
 
-Goblin::Goblin() : Player(125, 25, 25, GOBLIN, 125, 0){
+Goblin::Goblin() : Player(110, 15, 20, GOBLIN, 110, 0){
   //  this->setCellSymbol(SYM_TILE);
 }
 
