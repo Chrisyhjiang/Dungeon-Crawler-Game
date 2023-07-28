@@ -1,0 +1,119 @@
+Specifications:
+
+Player Character (@):
+- check starting stats of all races
+- shade   (125 HP 25 ATK 25 DEF)
+- drow    (150 HP 25 ATK 15 DEF) potion effects are multiplied by 1.5
+- vampire ( 50 HP 25 ATK 25 DEF) gains 5 HP after each successful attack, no cap on HP
+- troll   (120 HP 25 ATK 15 DEF) gains 5 HP each turn, HP cap at 120
+- goblin  (110 HP 15 ATK 20 DEF) steals 5 gold from each slain enemy
+- HP cap at starting HP for all except vampire
+
+Enemies:
+- check that all enemies except for dragons move one square randomly within the confines of the chamber they were spawned in
+- other than human, dragon and merchants, enemies drop either small or normal pile of gold which is immediately added to player
+- (H) human    (140 HP 20 ATK 20 DEF) drops 2 normal piles of gold
+- (W) dwarf    (100 HP 20 ATK 30 DEF) vampires lose 5 HP instead of gain 5 HP
+- (E) elf      (140 HP 30 ATK 10 DEF) gets 2 attacks against all race except drow
+- (O) orcs     (180 HP 30 ATK 25 DEF) deals 50 % more damage to goblins
+- (M) merchant ( 30 HP 70 ATK  5 DEF) neutral to all parties, being attacked or slain makes all merchants hostile
+- (D) dragon   (150 HP 20 ATK 20 DEF) stationary, always guards treasure hoard, spawned in one block radius of its dragon hoard
+- (L) halfling (100 HP 15 ATK 20 DEF) 50 % chance to cause player to miss
+
+Potions (P):
+- potion cannot be used unless player standing within 1 block radius
+- effects of potion is not known until used for the first time, only learns about effect of that one potion
+- potions purchased from Merchants should have abilities displayed
+- Restore HP: restores up to 10 HP      (permanent effect)
+    - test when player is missing > 10 HP
+    - test when player is missing 10 HP
+    - test when player is missinig < 10 HP
+    - test when player is vampire and has > 50 HP
+- Boost ATK:      increase ATK by 5         (effect limited to floor)
+- Boost DEF:      increase DEF by 5         (effect limited to floor)
+- Poison HP:  lose up to 10 HP          (permanent effect)
+    - test when player has < 10 HP
+    - test when player has 10 HP
+    - test when player has > 10 HP
+- Wound ATK:      decrease ATK by 5         (effect limited to floor)
+    - test when player has > 5 ATK
+    - test when player has < 5 ATK
+    - test when player has 5 ATK
+- Wound DEF:      decrease DEF by 5         (effect limited to floor)
+    - test when player has > 5 DEF
+    - test when player has < 5 DEF
+    - test when player has 5 DEF
+
+Gold (G):
+- small          (1)
+- normal         (2)
+    - test humans drop 4 (2x2) gold, and have to walk over it to pick up
+- merchant hoard (4)
+    - test merchant drops 4 gold, and have to walk over it to pick up
+- dragon hoard   (6)
+    - test trying to pick up before dragon is slain
+    - test trying to pick up after dragon is slain
+
+Floors:
+- test that players will not be spawned in chamber with stairs (\) to next floor
+- check 10 potions spawned on each floor
+- check 20 enemies spawned on each floor not including dragons
+- test next level is generated and displayed when player tries to move onto stairway
+- check items and enemies are not spawned on doorway, passage, or stairs
+
+Combat:
+- check merchants and dragons are not initially hostile to player
+- test hostility of other enemies, see if player is attacked when entering 1 block radius
+- test hostility of dragons when next to dragon/dragon hoard
+- check enemies resume random movement when out of 1 block radius
+- 50 % chance for enemies to miss, player never misses except against halfling
+- check damage is calculated by: ceiling((100 / (100 + Def(Defender))) ∗ Atk(Attacker))
+
+Display:
+- test player can occupy:
+    - doorways    '+'
+    - passages    '#'
+    - floor tiles '.'
+- test players cannot move out to ' ' from passages, or to walls '|' or '−'
+- player and stairway:  blue
+- gold:                 yellow
+- potions:              green
+- enemies:              red
+
+Command Interpreter:
+- all 8 cardinal directions work (no, so, ea, we, ne, nw, se, sw)
+- u [DIRECTION] works: potion effects are applied and can't stand over a potion unless you use it
+    - test using potion on floor tile
+    - test using potion on potion
+    - test standing over potion before used (should not be able to)
+    - test standing over potion after using
+- a [DIRECTION]: attacks enemy in specified direction
+    - test enemy is one block to the specified direction
+    - test enemy is not in the specified block
+    - test standing over enemy (should not be able to)
+    - test standing over enemy after killed
+- s, d, v, g, t: specifies race when starting a game
+- f: stops enemies from moving until key is pressed again
+- r: restarts the game, make sure stats, inventory and gold are reset. New race should be selected
+- q or EOF causes termination, does not give option of playing again
+- game continues until player restarts, reaches end of floor 5, player dies, or player quits
+- game gives option to play again or quit if player reaches end of floor 5 or player dies
+- supplying valid race selection will start game using that race, other values will be ignored
+
+Ending the Game and Scoring:
+- score only generated for if player reaches stairs on floor 5 or if health reaches 0
+- score is not generated if player restarts the game or quits
+- score is amount of gold player has collected in the character's life time, shades get 50% increase to score
+
+Command Line options:
+- 0 - Restore HP
+- 1 - Boost ATK
+- 2 - Boost DEF
+- 3 - Poison HP
+- 4 - Wound ATK
+- 5 - Would DEF
+- 6 - normal gold pile
+- 7 - small hoard (small gold pile?)
+- 8 - merchant hoard
+- 9 - dragon hoard
+- second optional argument that represents a seed for your random number generation (to get reproducible results) optional
