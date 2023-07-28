@@ -183,7 +183,7 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
         actionMsg += "Player attcked Enemy " + string(1, enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP());
         
         if(enemy->getSymbol() == ENEMY_HALFING && HP == enemy->getHP()){
-            actionMsg += "player missed attack (HALFING)...\n";
+            actionMsg += " player missed attack (HALFING)...\n";
 
         }else{
             actionMsg += " | enemy take damage: " + to_string(damage) + "\n";
