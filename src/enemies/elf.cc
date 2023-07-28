@@ -8,7 +8,9 @@ bool Elf::isMovable(){
 }
 
 int Elf::attackPlayer(string playerRace, int playerDef) {
-    int x = Enemy::attackPlayer(playerRace, playerDef);
-    int y = Enemy::attackPlayer(playerRace, playerDef);
-    return x + y;
+    int amount = Enemy::attackPlayer(playerRace, playerDef);
+    if( playerRace != DROW){
+         amount *= 2;
+    }
+    return amount;
 }
