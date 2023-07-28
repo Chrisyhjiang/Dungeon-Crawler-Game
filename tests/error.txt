@@ -391,6 +391,8 @@
 - r and f not implemented yet
 - vampire does not lose 5 HP when attacking dwarf and instead gains 5 HP
 - negative HP value
+- missing "Player character has spawned." after Action:
+- follow template for action in combat? "PC deals 5 damage to H (135 HP). H deals 5 damage to PC."
         please choose a game race from the following options: 
         enter 1 for choosing Shade
         enter 2 for choosing Drow
@@ -1034,3 +1036,4 @@
 
 
 - player never misses against L? combat system is a bit wonky
+- when moving towards potion, needs something like "Action: PC moves East and sees an unknown potion."
