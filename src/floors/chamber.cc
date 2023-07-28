@@ -81,20 +81,24 @@ void Chamber::addCell(Cell* c) {
 void Chamber::renderPotion() {
     Cell* cell = getRandomCell();
     int m = rand() % 6;
-    ItemDecorator* potion;
+    Potion* potion;
     Player* player = Player::getInstance();
+    double mag = 1;
+    if(Player::getRace() == DROW){
+        mag = POTION_MAGNIFY;
+    }
     if (m == 0) {
-        potion = new BoostAtkPotion(player);
+       potion = new BoostAtkPotion(player, mag);  
     } else if (m == 1) {
-        potion = new WoundAtkPotion(player);
+        potion = new WoundAtkPotion(player, mag);
     } else if (m == 2) {
-        potion = new BoostDefPotion(player);
+        potion = new BoostDefPotion(player, mag);
     } else if (m == 3) {
-        potion = new WoundDefPotion(player);
+        potion = new WoundDefPotion(player, mag);
     } else if (m == 4) {
-        potion = new RestoreHealthPotion(player);
+        potion = new RestoreHealthPotion(player, mag);
     } else {
-        potion = new PoisonHealthPotion(player);
+        potion = new PoisonHealthPotion(player, mag);
     }
     cell->setSymbol(SYM_POTION);
     cell->setEntity(potion);
