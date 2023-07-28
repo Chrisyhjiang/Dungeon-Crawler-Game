@@ -3,7 +3,6 @@
 #include <algorithm>
 #include "chamberCrawler.h"
 
-
 ChamberCrawler::ChamberCrawler(){}
 
 ChamberCrawler::~ChamberCrawler(){
@@ -16,8 +15,6 @@ void ChamberCrawler::start(string floorFile, int level){
     loadFloor(level);
     play();
 }
-
-
 
 void  ChamberCrawler::setGameRace(){
     cout << "please choose a game race from the following options: \n";
@@ -77,8 +74,8 @@ void ChamberCrawler::play(){
    while(true){
         string actionMsg = "";
         actionMsg += playerTakeTurn();
-        actionMsg += enemiesTakeTurn();
-        actionMsg.erase(actionMsg.size() - 1);
+        actionMsg +=enemiesTakeTurn();
+        //actionMsg.erase(actionMsg.size() - 1);
         Player* player = Player::getInstance();
         if (player->isDead()) {
             floor->displayFloor(actionMsg);
@@ -128,7 +125,6 @@ string ChamberCrawler::playerTakeTurn(){
                 if(isValidCmd(dir)){
                     msg = processPlayerAttackCmd(dir);
                     if(msg.size() > 0){
-                        cout << msg;
                         break;
                     }else {
                          cout << "invalid command: no enemy to be attacked !!!" << endl; 
@@ -153,7 +149,7 @@ string ChamberCrawler::playerTakeTurn(){
                 exit(0);
             }
             else {
-                msg = processPlayerMoveCmd(cmd);
+                msg = floor->movePlayer(cmd);
                 if(msg.size() > 0){
                     break;
                 }else{
@@ -176,25 +172,28 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
             Merchant::setHostile();
         }
         Player* player = Player::getInstance();
+        int HP = enemy->getHP();
         int damage = player->calculateDmgToEnemy(enemy->getDef());
         // enemy->takeDamage(damage);
         player->attackEnemy(enemy);
-        actionMsg = "Player attcked Enemy " + string(1, enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP()) + " | enemy take damage: " + to_string(damage) + "\n";
+        if(Player::getRace() == TROLL && player->getHP() < player->getDefaultHP()){
+            actionMsg += "Player gain HP | ";
+        }
+        
+        actionMsg += "Player attcked Enemy " + string(1, enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP());
+        
+        if(enemy->getSymbol() == ENEMY_HALFING && HP == enemy->getHP()){
+            actionMsg += "player missed attack (HALFING)...\n";
+
+        }else{
+            actionMsg += " | enemy take damage: " + to_string(damage) + "\n";
+        }
+        
+      
 
     }
     return actionMsg;
 }
-
-string ChamberCrawler::processPlayerMoveCmd(string direction){
-    string actionMsg = "";
-    if(floor->movePlayer(direction)){
-        actionMsg = "Player move to: " + direction + "\n";
-    }
-    
-    return actionMsg;
-}
-
-
                 
 string ChamberCrawler::processPlayerUsePotionCmd(string dir){
     string actionMsg = "";
@@ -215,6 +214,17 @@ bool ChamberCrawler::isValidCmd(string cmd){
 }
 
 string ChamberCrawler::enemiesTakeTurn(){
-    return "enemy action: " + floor->enemyTurn();
+    vector<string> msg = floor->enemyTurn();
+    string result = "Action: Enemy ";
+    if(msg.size() == 0){
+        result += " take move randomly...";
+
+    }else {
+        for(string s : msg){
+            result += s;
+            result += " | ";
+        }
+    }
+    return result;
 }
 

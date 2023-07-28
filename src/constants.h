@@ -53,12 +53,14 @@ const char SYM_GOLD = 'G';
 const char SYM_POTION = 'P';
 
 // constants for potion and gold
-const string POTION_RH = "RH";
-const string POTION_BA = "BA";
-const string POTION_BD = "BD";
-const string POTION_PH = "PH";
-const string POTION_WA = "WA";
-const string POTION_WD = "WD";
+const string POTION_RH = "Restore health (RH): restore up to 10 HP (cannot exceed maximum prescribed by race)";
+const string POTION_BA = "Boost Atk (BA): increase ATK by 5";
+const string POTION_BD = "Boost Def (BD): increase Def by 5";
+const string POTION_PH = "Poison health (PH): lose up to 10 HP (cannot fall below 0 HP)";
+const string POTION_WA = "Wound Atk (WA): decrease Atk by 5";
+const string POTION_WD = "Wound Def (WD): decrease Def by 5";
+
+
 const string GOLD_SMALL = "GS";
 const string GOLD_NORMAL = "GN";
 const string GOLD_MERCHANT = "GM";

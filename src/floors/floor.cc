@@ -209,12 +209,12 @@ void Floor::resetCurCell(Cell* cell, char symbol) {
     cell->setEntity(nullptr);
 }
 
-string Floor::enemyTurn(){
-    string msg = "";
+vector<string> Floor::enemyTurn(){
+    vector<string> msg;
     Player* p = Player::getInstance();
     for(int i = 0 ; i < MAX_ROW; i++){
         for(int j = 0; j < MAX_COLUMN; j++){
-            Cell* current = cells[i][j];
+             Cell* current = cells[i][j];
              if(current->getChamberID() > -1){
                   Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
                   if(enemy && !enemy->hasMoved()){
@@ -223,7 +223,8 @@ string Floor::enemyTurn(){
                         if (g) {
                             p->setGold(p->getGold() + 5);
                         }
-                        msg += string(1, enemy->getSymbol()) + " was slain!\n";
+                        string s = string(1, enemy->getSymbol()) + " was slain!";
+                        msg.push_back(s);
                         Human* h = dynamic_cast<Human*>(enemy);
                         Merchant* m = dynamic_cast<Merchant*>(enemy);
                         if (h || m) {
@@ -243,14 +244,17 @@ string Floor::enemyTurn(){
                         Merchant* m = dynamic_cast<Merchant*>(current->getEntity());
                         if (!m || Merchant::isHostile()) {
                             int x = enemy->attackPlayer(p->getRace(), p->getDef());
-                            msg += string(1, enemy->getSymbol());
+                            string s = string(1, enemy->getSymbol());
                             if (x > 0) {
                                 p->takeDamage(x);
-                                msg += " dealt " + std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
-                                                    + " damage to player\n";
+                                // msg += " dealt " + std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
+                                //                     + " damage to player\n";
+
+                                s += " dealt " + std::to_string(x) + " damage to player";
                             } else {
-                                msg += " missed\n";
+                                s += " missed ";
                             }
+                            msg.push_back(s);
                         }
                     } else {
                         Dragon* dragon = dynamic_cast<Dragon*>(enemy);
@@ -264,6 +268,7 @@ string Floor::enemyTurn(){
                                     done = true;
                                     enemy->move(next);
                                     resetCurCell(current, SYM_TILE);
+                                   
                                 } 
                             }
                         }
@@ -288,8 +293,8 @@ string Floor::enemyTurn(){
      return msg;      
 }
 
-bool Floor::movePlayer(string dir){
-    bool done = false;
+string Floor::movePlayer(string dir){
+    string msg = "";
     Player* player = Player::getInstance();
     Cell* nextCell = getNeighbourCell(dir, player);
     if(canMovePlayer(nextCell)){
@@ -298,15 +303,16 @@ bool Floor::movePlayer(string dir){
             if(pickUpGold){
                 resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
                 player->move(nextCell, canPlayerPickUpGold(nextCell));
-                done = true;
+                msg = "Player move to : " + dir + " | player pick up gold\n";
             }
         }else{
             resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
             player->move(nextCell, false);
-            done = true;
+            msg = "Player move to: " + dir + "\n";
+            
         }
     }
-    return done;
+    return msg;
 }
 
 

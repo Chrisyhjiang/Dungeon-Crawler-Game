@@ -31,8 +31,8 @@ class Floor {
         Cell *getCell(int i, int j);
 		void spawnFloor();
 		void spawnPlayers();
-		bool movePlayer(string direction);
-		string enemyTurn();
+		string movePlayer(string direction);
+		vector<string> enemyTurn();
 		int getLevel();
 		void setLevel(int n);
 		Enemy* canPlayerAttack(string direction);
