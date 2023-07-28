@@ -15,6 +15,21 @@ const int NUM_POTION = 10;
 const int NUM_ENEMY = 20;
 const int NUM_TREASURES = 10;
 const int TOTAL_PROBABILITY_DISTRIBUTION = 18;
+const int NORMAL_GOLD_DISTRIBUTION = 5;
+const int DRAGON_GOLD_DISTRIBUTION = 6;
+const int ENEMY_HUMAN_DISTRIBUTION = 4;
+const int ENEMY_DWARF_DISTRIBUTION = 7;
+const int ENEMY_HALFLING_DISTRIBUTION = 12;
+const int ENEMY_ELF_DISTRIBUTION = 14;
+const int ENEMY_ORC_DISTRIBUTION = 16;
+const double POTION_MAGNIFY = 1.5;
+
+// const int ENEMY_HUMAN_DISTRIBUTION = 1;
+// const int ENEMY_DWARF_DISTRIBUTION = 2;
+// const int ENEMY_HALFLING_DISTRIBUTION = 3;
+// const int ENEMY_ELF_DISTRIBUTION = 4;
+// const int ENEMY_ORC_DISTRIBUTION = 5;
+
 
 // constants for players
 const string SHADE = "Shade";
@@ -33,9 +48,21 @@ const char SYM_PASSAGE = '#';
 const char SYM_TILE = '.';
 const char SYM_STAIRS = '\\';
 
+
+const char SYM_GOLD = 'G';
+const char SYM_POTION = 'P';
+
 // constants for potion and gold
-const char GOLD = 'G';
-const char POTION = 'P';
+const string POTION_RH = "RH";
+const string POTION_BA = "BA";
+const string POTION_BD = "BD";
+const string POTION_PH = "PH";
+const string POTION_WA = "WA";
+const string POTION_WD = "WD";
+const string GOLD_SMALL = "GS";
+const string GOLD_NORMAL = "GN";
+const string GOLD_MERCHANT = "GM";
+const string GOLD_DRAGON = "GD";
 
 // constants for Enemy 
 const char ENEMY_HUMAN = 'H';
@@ -62,12 +89,12 @@ const string NORTH_EAST = "ne";
 const string NORTH_WEST = "nw";
 const string SOUTH_EAST = "se";
 const string SOUTH_WEST = "sw";
-const char USE_POTION = 'u';
-const char EXIT = 'q';
+const string CMD_ATTACK = "a";
+const string CMD_POTION = "u";
+const string CMD_EXIT = "q";
 
-const string directions[] = { NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST};
 
-#include <iostream>
+const string DIRECTIONS[] = { NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST};
 
 // ANSI escape codes for text colors
 const string ANSI_RESET = "\033[0m";
@@ -75,5 +102,9 @@ const string ANSI_RED = "\033[31m";
 const string ANSI_GREEN = "\033[32m";
 const string ANSI_YELLOW = "\033[33m";
 const string ANSI_BLUE = "\033[34m";
+
+// action 
+const string ACTION_MSG_PLAYER_SPAWNED = "Player character has spawned";
+
 
 #endif

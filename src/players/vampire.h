@@ -2,12 +2,13 @@
 #define ___VAMPIRE_H___
 
 #include "player.h"
-
+#include "../enemies/dwarf.h"
 class Vampire : public Player {
     public:
         Vampire();
-        int calculateDmgToEnemy(Enemy* enemy) override;
+        //int calculateDmgToEnemy() override;
         void addReward(Enemy* enemy) override;
+        void attackEnemy(Enemy* enemy) override;
         
 };
 

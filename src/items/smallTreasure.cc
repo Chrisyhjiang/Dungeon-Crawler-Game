@@ -1,11 +1,10 @@
 #include "smallTreasure.h"
 
-SmallTreasure::SmallTreasure (Player* p) : ItemDecorator(p) {
-    target = p;
-}
+SmallTreasure::SmallTreasure (Player* p) : Treasure(p, GOLD_SMALL, 1) {}
 
 SmallTreasure::~SmallTreasure() {}
 
 void SmallTreasure::update() {
-    target->setGold(target->getGold() + 1);
+    Player* player = this->getTarget();
+    player->setGold(player->getGold() + this->getGold());
 }

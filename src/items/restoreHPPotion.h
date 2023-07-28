@@ -1,11 +1,11 @@
 #ifndef RESTOREHP_H
 #define RESTOREHP_H
 
-#include "itemDecorator.h"
+#include "potion.h"
 
-class RestoreHealthPotion : public ItemDecorator{
+class RestoreHealthPotion : public Potion {
     public:
-        RestoreHealthPotion(Player* p);
+        RestoreHealthPotion(Player* p, double magnify);
         ~RestoreHealthPotion();
         void update();
 };

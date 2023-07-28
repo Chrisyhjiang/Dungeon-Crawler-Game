@@ -2,6 +2,7 @@
 #define ___CELL_H___
 
 #include "../constants.h"
+#include "../entity.h"
 
 // Forward declaration
 class Character;
@@ -33,14 +34,13 @@ class Cell {
         int getChamberID();
         void setChamberID(int id);
         virtual bool isWalkable();
-        //virtual Character* occupiedBy();
-        Character* getCharacter();
-        void setCharacter(Character* a);
+        Entity* getEntity();
+        void setEntity(Entity* a);
     private:
 		int row, col, chamberID, level;
 		char symbol;
         bool walkable;
         CellType cellType;
-        Character* ch;
+        Entity* entity;
 };
 #endif

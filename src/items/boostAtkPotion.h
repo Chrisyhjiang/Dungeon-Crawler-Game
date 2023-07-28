@@ -1,11 +1,11 @@
 #ifndef BOOSTATTACK_H
 #define BOOSTATTACK_H
 
-#include "itemDecorator.h"
+#include "potion.h"
 
-class BoostAtkPotion : public ItemDecorator{
+class BoostAtkPotion : public Potion {
     public:
-        BoostAtkPotion(Player* p);
+        BoostAtkPotion(Player* p, double magnify);
         ~BoostAtkPotion();
         void update();
 };

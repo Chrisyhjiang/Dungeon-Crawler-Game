@@ -1,9 +1,10 @@
 #ifndef SMALLTREASURE_H
 #define SMALLTREASURE_H
 
-#include "itemDecorator.h"
+#include "treasure.h"
 
-class SmallTreasure : public ItemDecorator {
+
+class SmallTreasure : public Treasure {
     public:
         SmallTreasure(Player* p);
         ~SmallTreasure();

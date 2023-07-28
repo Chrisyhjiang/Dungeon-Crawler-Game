@@ -4,7 +4,8 @@ Character::Character(){};
 
 Character::~Character(){};
 
-Character::Character(int hp, int atk, int def, string race) : hp(hp), atk(atk), def(def), race(race){}
+Character::Character(int hp, int atk, int def, string race) 
+    : hp(hp), atk(atk), def(def), default_hp(hp), default_atk(atk), default_def(def), race(race){}
 
 int Character::getHP(){
     return hp;
@@ -12,6 +13,14 @@ int Character::getHP(){
 
 void Character::setHP(int hp){
     this->hp = hp;
+}
+
+int Character::getDefaultHP(){
+    return default_hp;
+}
+
+void Character::setDefaultHP(int hp){
+    default_hp = hp;
 }
 
 int Character::getAtk(){
@@ -22,6 +31,15 @@ void Character::setAtk(int atk){
     this->atk = atk;
 }
 
+int Character::getDefaultAtk(){
+    return def;
+}
+
+void Character::setDefaultAtk(int atk){
+    this->default_atk = atk;
+}
+
+
 int Character::getDef(){
     return def;
 }
@@ -29,28 +47,11 @@ int Character::getDef(){
 void Character::setDef(int def){
     this->def = def;
 }
- 
-string Character::getRace(){
-    return race;
-}
-void Character::setRace(string r){
-    race = r;
+
+int Character::getDefaultDef(){
+    return default_def;
 }
 
-
-
-int Character::getX(){
-    return x;
-}
-
-void Character::setX(int x){
-    this->x = x;
-}
-
-int Character::getY(){
-    return y;
-}
-
-void Character::setY(int y){
-    this->y = y;
+void Character::setDefaultDef(int def){
+    default_def = def;
 }

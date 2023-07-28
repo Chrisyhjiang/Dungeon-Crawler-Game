@@ -4,7 +4,8 @@
 #include <string>
 #include "../character.h"
 #include "../floors/cell.h"
-
+#include <cmath>
+#include <algorithm>
 
 class Enemy : public Character{
     private:
@@ -18,10 +19,10 @@ class Enemy : public Character{
         ~Enemy() override;
         char getSymbol();
         void setSymbol(char symbol);
-        void attachPlayer();
-        bool isPlayerInRange();
-        void takeDamage(int damage);
-        virtual int calculateDamageToPlayer() = 0;
+        virtual int attackPlayer(string playerRace, int playerDef);
+        virtual bool isPlayerInRange(int px, int py);
+        virtual void takeDamage(int damage);
+        virtual int calculateDamageToPlayer(string playerRace, int playerDef);
         bool isDead() override;
         bool hasMoved();
         void setMoved(bool moved);

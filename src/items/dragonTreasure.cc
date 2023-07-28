@@ -1,12 +1,10 @@
 #include "dragonTreasure.h"
 
-DragonTreasure::DragonTreasure(Player* p) : ItemDecorator(p) {
-    target = p;
-}
+DragonTreasure::DragonTreasure(Player* p) : Treasure(p, GOLD_DRAGON, 6) {}
 
-DragonTreasure::~DragonTreasure(){
-}
+DragonTreasure::~DragonTreasure(){}
 
 void DragonTreasure::update() {
-    target->setGold(target->getGold() + 6);
+    Player* player = this->getTarget();
+    player->setGold(player->getGold() + this->getGold());
 }

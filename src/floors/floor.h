@@ -11,6 +11,13 @@
 #include "chamber.h"
 #include "../constants.h"
 #include "../players/player.h"
+#include "../items/itemDecorator.h"
+#include "../enemies/dragon.h"
+#include "../enemies/merchant.h"
+#include "../enemies/human.h"
+#include "../players/goblin.h"
+#include "../items/treasure.h"
+#include "../items/merchantHoard.h"
 
 class Chamber;
 
@@ -19,37 +26,38 @@ class Floor {
 	public:
 		Floor(int level);
 		~Floor();
-		
 		void loadFromFile(std::ifstream *floorStream);
-		void displayFloor(Player* player);
+		void displayFloor(string actionMsg);
         Cell *getCell(int i, int j);
-		void spawnFloor(Player* player);
-		void spawnPlayers(Player* player);
-		bool movePlayer(Player* player);
-		void moveEnemies();
+		void spawnFloor();
+		void spawnPlayers();
+		bool movePlayer(string direction);
+		string enemyTurn();
 		int getLevel();
 		void setLevel(int n);
-
+		Enemy* canPlayerAttack(string direction);
+		ItemDecorator* canPlayerTakePotion(string direction);
+		ItemDecorator* canPlayerFetchGold(string direction);
 	private:
 		int locateChamber(int i, int j);
 		Cell* cells[MAX_ROW][MAX_COLUMN];
 		Chamber* chambers[MAX_CHAMBERS];
-		map<char, string> colorMap = {	{SYM_PLAYER, ANSI_BLUE}, {SYM_STAIRS, ANSI_BLUE}, {GOLD, ANSI_YELLOW},
-										{POTION, ANSI_GREEN},  {ENEMY_MERCHANT, ANSI_RED}, {ENEMY_DRAGON, ANSI_RED},
+		map<char, string> colorMap = {	{SYM_PLAYER, ANSI_BLUE}, {SYM_STAIRS, ANSI_BLUE}, {SYM_GOLD, ANSI_YELLOW},
+										{SYM_POTION, ANSI_GREEN},  {ENEMY_MERCHANT, ANSI_RED}, {ENEMY_DRAGON, ANSI_RED},
 										{ENEMY_DWARF, ANSI_RED}, {ENEMY_ELF, ANSI_RED}, {ENEMY_HUMAN, ANSI_RED}, 
 										{ENEMY_ORC, ANSI_RED}, {ENEMY_HALFING, ANSI_RED}};
 
 		int level;
 		void spawnEnemies();
-		void spawnPotions(Player* player);
-		void spawnTreasures(Player* player);
+		void spawnPotions();
+		void spawnTreasures();
 		void spawnStairs();
 		bool canMovePlayer(Cell* cell);
 		void resetCurCell(Cell* cell, char symbol);
-		// void floodChamber(int i, int j, std::string (*rows)[MAX_ROW], std::vector<Tile *> *tiles);
 		Chamber *getRandomChamber();
-		string getColorCode(char c);
-		 
-		// Tile *getRandomTile();
+		Cell* getNeighbourCell(string direction, Entity* entity);
+		bool hasDragonGuardTreasure(DragonTreasure* gold);
+		bool canPlayerPickUpGold(Cell* cell);
+
 };
 #endif

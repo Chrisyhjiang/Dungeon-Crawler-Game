@@ -1,14 +1,11 @@
 #include "restoreHPPotion.h"
 
 
- RestoreHealthPotion::RestoreHealthPotion(Player* p) : ItemDecorator(p) {
+RestoreHealthPotion::RestoreHealthPotion(Player* p, double magnify) : Potion (p, POTION_RH, magnify) {}
 
- }
-
- RestoreHealthPotion::~RestoreHealthPotion(){
-    
- }
+RestoreHealthPotion::~RestoreHealthPotion(){}
 
 void RestoreHealthPotion::update() {
-    target->setHP(target->getHP() + 10);
+    Player* player = this->getTarget();
+    player->setHP(player->getHP() + 10 * this->getMagnify());
 }

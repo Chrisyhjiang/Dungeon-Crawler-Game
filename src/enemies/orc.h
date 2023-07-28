@@ -3,18 +3,14 @@
 
 #include "enemy.h"
 #include "../constants.h"
+#include "../players/player.h"
 
 class Orc : public Enemy {
-    private: 
-        double extraDamage;
-
     public:
         Orc(string race);
         Orc(int hp, int atk, int def, string race, char symbol, double extraDamage);
         ~Orc();
-        double getExtraDamage();
-        void setExtraDamage(double extraDamage);
-        int calculateDamageToPlayer() override;
+        int calculateDamageToPlayer(string playerRace, int playerDef) override;
         bool isMovable() override;
 
 };

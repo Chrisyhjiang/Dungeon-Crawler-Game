@@ -4,28 +4,34 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <cstdlib>
 #include "./floors/floor.h"
 #include "./players/player.h"
-#include "./players/playerFactory.h"
+#include "./players/troll.h"
+#include "./enemies/merchant.h"
 
 using namespace std;
- 
+
 class ChamberCrawler {
 	private:
 		string floorLayoutFile;
 		ifstream *floorStream;
-		Player* player;
 		Floor* floor;
-		static string race;
-		bool play();
+		void play();
+		string playerTakeTurn();
+		string enemiesTakeTurn();
+		string processPlayerAttackCmd(string direction);
+		string processPlayerMoveCmd(string direction);
+		string processPlayerUsePotionCmd(string direction);
+		bool isValidCmd(string cmd);
 
 	public:
 		ChamberCrawler();
 		~ChamberCrawler();
 		static void setGameRace();
-		static string getRace();
 		void start(string floorFile, int level);
-		void loadFloor(Player* player, int level);
+		void loadFloor(int level);
+		void playGame();
 		
 };
 #endif
