@@ -15,6 +15,7 @@
 #include "../enemies/dragon.h"
 #include "../enemies/merchant.h"
 #include "../enemies/human.h"
+#include "../players/goblin.h"
 #include "../items/treasure.h"
 #include "../items/merchantHoard.h"
 

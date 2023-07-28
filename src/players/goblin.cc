@@ -12,7 +12,3 @@ void Goblin::addReward(Enemy* enemy){
     // no reward to add
 }
 
-void Goblin::attackEnemy(Enemy* en) {
-  Player::attackEnemy(en);
-  this->setGold(this->getGold() + 5);
-}

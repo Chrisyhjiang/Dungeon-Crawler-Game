@@ -8,7 +8,6 @@ class Goblin : public Player {
         Goblin();
        // int calculateDmgToEnemy() override;
         void addReward(Enemy* enemy) override;
-        void attackEnemy(Enemy* en) override;
 };
 
 #endif

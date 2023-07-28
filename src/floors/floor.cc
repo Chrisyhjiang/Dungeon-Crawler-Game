@@ -219,6 +219,10 @@ string Floor::enemyTurn(){
                   Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
                   if(enemy && !enemy->hasMoved()){
                     if (enemy->isDead()) {
+                        Goblin* g = dynamic_cast<Goblin*>(p);
+                        if (g) {
+                            p->setGold(p->getGold() + 5);
+                        }
                         msg += string(1, enemy->getSymbol()) + " was slain!\n";
                         Human* h = dynamic_cast<Human*>(enemy);
                         Merchant* m = dynamic_cast<Merchant*>(enemy);
