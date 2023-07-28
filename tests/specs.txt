@@ -23,7 +23,6 @@ Enemies:
 Potions (P):
 - potion cannot be used unless player standing within 1 block radius
 - effects of potion is not known until used for the first time, only learns about effect of that one potion
-- potions purchased from Merchants should have abilities displayed
 - Restore HP: restores up to 10 HP      (permanent effect)
     - test when player is missing > 10 HP
     - test when player is missing 10 HP
