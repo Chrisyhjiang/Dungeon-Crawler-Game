@@ -19,47 +19,38 @@ void ChamberCrawler::start(string floorFile, int level){
 void  ChamberCrawler::setGameRace(){
     cout << "please choose a game race from the following options: \n";
     for(int i = 0; i < 5; i++){
-        cout << "enter " << i+1 << " for choosing " << PLAYERS[i] << endl;
+        cout << "enter " << PLAYER_SYM[i] << " for choosing " << PLAYERS[i] << endl;
     }
-    std::cout << "Enter an integer between 1 and 5: ";
-    string number;
-    string input;
-    int n = -1;
-    while (getline(cin, input)) {
-        stringstream ss(input);
-        if (ss >> number) {
-            try {
-                n = stoi(number);
-            } catch(...) {
-                
-            }
-            if(n >= 1 && n <= 5) {
-                break;
-            }
-        }  
-        std::cout << "Invalid input. Please enter an integer between 1 and 5" << endl;
+    char input;
+    
+    while (true) {
+        cin >> input;
+        if(input == SHADE_SYM || input == DROW_SYM || input == VAMP_SYM || input == TROLL_SYM || input == GOBLIN_SYM) {
+            break;
+        } else {
+            std::cout << "Invalid input. Please enter a valid game race" << endl;
+        }   
     }
     
-    switch (n){
-        case 1 :
+    switch (input){
+        case SHADE_SYM :
             Player::setRace(SHADE);
             break;
-        case 2 :
+        case DROW_SYM :
             Player::setRace(DROW);
             break;
-        case 3 :
+        case VAMP_SYM :
             Player::setRace(VAMPIRE);
             break;
-        case 4 :
+        case TROLL_SYM :
             Player::setRace(TROLL);
             break;
-        case 5 :
+        case GOBLIN_SYM :
             Player::setRace(GOBLIN);
             break;
         default:
             break;
     }
-
 }
 
 void ChamberCrawler::loadFloor(int n){
@@ -67,7 +58,7 @@ void ChamberCrawler::loadFloor(int n){
     floor->loadFromFile(floorStream);
     floor->spawnPlayers();
     floor->spawnFloor();
-    floor->displayFloor("");
+    floor->displayFloor("Player character has spawned.");
 }
 
 void ChamberCrawler::play(){
@@ -96,9 +87,15 @@ void ChamberCrawler::play(){
             if(player->getCellSymbol() == SYM_STAIRS){
                 if (floor->getLevel() == 5) {
                     cout << "you beat the game!!!" << endl;
+                    int g = player->getGold();
+                    if (player->getRace() == "shade") {
+                        g *= 1.5;
+                    }
+                    cout << "your score for this round is " << g << endl;
                     exit(0);
                 }
                 start("", floor->getLevel()+1);
+                // player->setCellSymbol(SYM_TILE);
                 player->setAtk(player->getDefaultAtk());
                 player->setDef(player->getDefaultDef());
             }else{
@@ -147,8 +144,11 @@ string ChamberCrawler::playerTakeTurn(){
                 break;
             } else if ( cmd == CMD_EXIT){
                 exit(0);
-            }
-            else {
+            }else if ( cmd == CMD_RESTART) {
+                string x; 
+                Player::setInstance();
+                this->start("", 1);
+            }else {
                 msg = floor->movePlayer(cmd);
                 if(msg.size() > 0){
                     break;
@@ -180,7 +180,7 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
             actionMsg += "Player gain HP | ";
         }
         
-        actionMsg += "Player attcked Enemy " + string(1, enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP());
+        actionMsg += "Player attacked Enemy " + string(1, enemy->getSymbol()) + " (HP) " + to_string(enemy->getHP());
         
         if(enemy->getSymbol() == ENEMY_HALFING && HP == enemy->getHP()){
             actionMsg += " player missed attack (HALFING)...\n";
@@ -206,7 +206,7 @@ string ChamberCrawler::processPlayerUsePotionCmd(string dir){
 }
 
 bool ChamberCrawler::isValidCmd(string cmd){
-    if ( cmd == CMD_ATTACK || cmd == CMD_POTION || cmd == CMD_EXIT){
+    if ( cmd == CMD_ATTACK || cmd == CMD_POTION || cmd == CMD_EXIT || cmd == CMD_RESTART){
         return true;
     }
     auto it = find(std::begin(DIRECTIONS), end(DIRECTIONS), cmd);
@@ -217,7 +217,7 @@ string ChamberCrawler::enemiesTakeTurn(){
     vector<string> msg = floor->enemyTurn();
     string result = "Action: Enemy ";
     if(msg.size() == 0){
-        result += " take move randomly...";
+        result += "take move randomly...";
 
     }else {
         for(string s : msg){

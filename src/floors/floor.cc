@@ -155,6 +155,7 @@ void Floor::spawnPlayers(){
     Player* player = Player::getInstance();
     player->setX(cell->getRow());
     player->setY(cell->getCol());
+    player->setCellSymbol(SYM_TILE);
     cell->setSymbol(SYM_PLAYER);
     cell->setEntity(player);
 }
@@ -252,7 +253,7 @@ vector<string> Floor::enemyTurn(){
 
                                 s += " dealt " + std::to_string(x) + " damage to player";
                             } else {
-                                s += " missed ";
+                                s += " missed";
                             }
                             msg.push_back(s);
                         }

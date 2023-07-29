@@ -17,18 +17,18 @@ const int NUM_TREASURES = 10;
 const int TOTAL_PROBABILITY_DISTRIBUTION = 18;
 const int NORMAL_GOLD_DISTRIBUTION = 5;
 const int DRAGON_GOLD_DISTRIBUTION = 6;
-const int ENEMY_HUMAN_DISTRIBUTION = 4;
-const int ENEMY_DWARF_DISTRIBUTION = 7;
-const int ENEMY_HALFLING_DISTRIBUTION = 12;
-const int ENEMY_ELF_DISTRIBUTION = 14;
-const int ENEMY_ORC_DISTRIBUTION = 16;
+// const int ENEMY_HUMAN_DISTRIBUTION = 4;
+// const int ENEMY_DWARF_DISTRIBUTION = 7;
+// const int ENEMY_HALFLING_DISTRIBUTION = 12;
+// const int ENEMY_ELF_DISTRIBUTION = 14;
+// const int ENEMY_ORC_DISTRIBUTION = 16;
 const double POTION_MAGNIFY = 1.5;
 
-// const int ENEMY_HUMAN_DISTRIBUTION = 1;
-// const int ENEMY_DWARF_DISTRIBUTION = 2;
-// const int ENEMY_HALFLING_DISTRIBUTION = 3;
-// const int ENEMY_ELF_DISTRIBUTION = 4;
-// const int ENEMY_ORC_DISTRIBUTION = 5;
+const int ENEMY_HUMAN_DISTRIBUTION = 1;
+const int ENEMY_DWARF_DISTRIBUTION = 13;
+const int ENEMY_HALFLING_DISTRIBUTION = 15;
+const int ENEMY_ELF_DISTRIBUTION = 15;
+const int ENEMY_ORC_DISTRIBUTION = 16;
 
 
 // constants for players
@@ -39,6 +39,13 @@ const string TROLL = "Troll";
 const string GOBLIN = "Goblin";
 const string PLAYERS[] = {SHADE, DROW, VAMPIRE, TROLL, GOBLIN};
 const char SYM_PLAYER = '@';
+const char SHADE_SYM = 's';
+const char DROW_SYM = 'd';
+const char VAMP_SYM = 'v';
+const char TROLL_SYM = 't';
+const char GOBLIN_SYM = 'g';
+
+const char PLAYER_SYM[] = {SHADE_SYM, DROW_SYM, VAMP_SYM, TROLL_SYM, GOBLIN_SYM};
 
 // constants for floor elements
 const char SYM_WALL_VER = '|';
@@ -94,6 +101,7 @@ const string SOUTH_WEST = "sw";
 const string CMD_ATTACK = "a";
 const string CMD_POTION = "u";
 const string CMD_EXIT = "q";
+const string CMD_RESTART = "r";
 
 
 const string DIRECTIONS[] = { NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST};
