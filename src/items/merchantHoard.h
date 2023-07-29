@@ -1,9 +1,9 @@
 #ifndef MERCHANTTREASURE_H
 #define MERCHANTTREASURE_H
 
-#include "itemDecorator.h"
+#include "treasure.h"
 
-class MerchantTreasure : public ItemDecorator {
+class MerchantTreasure : public Treasure {
     public:
         MerchantTreasure(Player* player);
         ~MerchantTreasure();

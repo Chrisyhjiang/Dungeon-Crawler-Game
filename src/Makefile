@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++20 -Wall -Werror=vla -MMD
+CXXFLAGS = -std=c++20 -g -Wall -Werror=vla -MMD
 EXEC = main
 
 SRC_DIRS := ./ ./enemies/ ./floors/  ./items/ ./players/  # Add your source folders here
@@ -26,5 +26,3 @@ $(OBJ_DIR)/%.o: %.cc
 clean:
 	rm -rf $(OBJ_DIR) $(EXEC)
 
-# Include dependency files
--include $(OBJECTS:.o=.d)

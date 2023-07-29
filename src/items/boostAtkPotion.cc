@@ -1,13 +1,10 @@
 #include "boostAtkPotion.h"
 
-BoostAtkPotion::BoostAtkPotion(Player* p) : ItemDecorator(p) {
+BoostAtkPotion::BoostAtkPotion(Player* p, double magnify) : Potion(p, POTION_BA, magnify) {}
 
-}
-
-BoostAtkPotion::~BoostAtkPotion(){
-
-}
+BoostAtkPotion::~BoostAtkPotion(){}
 
 void BoostAtkPotion::update() {
-    target->setAtk(target->getAtk() + 5);
+    Player* player = this->getTarget();
+    player->setAtk(player->getAtk() + 5 * this->getMagnify());
 }

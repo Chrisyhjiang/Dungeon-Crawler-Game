@@ -1,15 +1,20 @@
 #include "player.h"
 #include <algorithm>
+#include "../items/treasure.h"
 
 using namespace std;
 
-Player::Player(string race) {
-    this->setRace(race);
-}
+Player* Player::instance = nullptr;
+
+string Player::race = SHADE;
+
+ 
 
 Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Character(hp, atk, def, race){
-    this->setMaxHp(maxHp);
+    this->setMaxHp(maxHP);
     this->setGold(gold);
+    this->setSymbol(SYM_PLAYER);
+    this->setCellSymbol(SYM_TILE);
 }
 
 
@@ -17,9 +22,20 @@ Player::~Player() {
     // todo:
 }
 
-// Player* Player::getInstance() {
-//     return instance;
-// }
+void Player::setRace(string s){
+    race = s;
+}
+
+Player* Player::getInstance() {
+    if(instance == nullptr){
+        instance = PlayerFactory::createPlayer(race);
+    }
+    return instance;
+}
+
+void Player::setInstance() {
+    instance = nullptr;
+}
 
 int Player::getGold() {
     return gold;
@@ -38,13 +54,7 @@ void Player::setMaxHp(int mh) {
 }
 
 void Player::takeDamage(int dmg) {
-    int diff = dmg - this->getDef();
-    if (diff > 0) {
-        this->setDef(0);
-        this->setHP(max(this->getHP() - diff, 0));
-    } else {
-        this->setDef(-1 * diff);
-    }
+    setHP(std::max(getHP() - dmg, 0));
 }
 
 bool Player::isDead() {
@@ -52,21 +62,65 @@ bool Player::isDead() {
 }
 
 void Player::attackEnemy(Enemy* enemy){
-    int dmg = this->calculateDmgToEnemy(enemy);
-    enemy->takeDamage(dmg);
-    this->addReward(enemy);
+    Halfling* h = dynamic_cast<Halfling*>(enemy);
+    if (h) {
+        bool b = h->chanceToMiss();
+        if (!b) {
+            int dmg = this->calculateDmgToEnemy(enemy->getDef());
+            enemy->takeDamage(dmg);
+            this->addReward(enemy);
+        }
+    }else {
+        int dmg = this->calculateDmgToEnemy(enemy->getDef());
+        enemy->takeDamage(dmg);
+        this->addReward(enemy);
+    }
 }
 
-int Player::calculateDmgToEnemy(Enemy *en){
-    return this->getAtk();
+int Player::calculateDmgToEnemy(int enemyDef){
+     return std::ceil((100.0/(100.0 + enemyDef)) * this->getAtk());
 }
 
-void Player::setRace(string race){
-    this->setRace(race);
+string Player::getRace(){
+    return race;
 }
+
 
 void Player::addReward(Enemy* en){
     
+}
+
+// char Player::getSymbol(){
+//     return SYM_PLAYER;
+// }
+
+char Player::getCellSymbol(){
+    return cellSymbol;
+}
+
+void Player::setCellSymbol(char symbol){
+    cellSymbol = symbol;
+}
+
+
+void Player::move (Cell* nextCell, bool canPickupGold) {
+    if(canPickupGold){
+        Entity* entity = nextCell->getEntity();
+       
+            Treasure* treasure = dynamic_cast<Treasure*>(entity);
+            if(treasure){
+                this->setGold(this->getGold() + treasure->getGold());
+                cellSymbol = SYM_TILE;
+            }
+    }else{
+         cellSymbol = nextCell->getSymbol();
+
+    }
+    this->setX(nextCell->getRow());
+    this->setY(nextCell->getCol());
+   
+    nextCell->setSymbol(SYM_PLAYER);
+    nextCell->setEntity(this);
 }
 
 

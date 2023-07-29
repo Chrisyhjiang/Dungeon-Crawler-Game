@@ -9,19 +9,6 @@ Human::~Human(){
     //Todo
 }
 
-
-int Human::getGoldToDrop(){
-    return goldToDrop;
-}
-
-void Human::setGoldToDrop(int gold){
-    this->goldToDrop = gold;
-}
-
 bool Human::isMovable(){
     return true;
-}
-
-int Human::calculateDamageToPlayer(){
-    return this->getAtk();
 }

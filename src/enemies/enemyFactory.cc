@@ -1,13 +1,5 @@
-#include "enemy.h"
 #include "enemyFactory.h"
-#include "human.h"
-#include "dwarf.h"
-#include "elf.h"
-#include "halfling.h"
-#include "merchant.h"
-#include "orc.h"
-#include "dragon.h"
-#include "../constants.h"
+
 Enemy* EnemyFactory::createEnemy(char en, string race){
     Enemy* enemy;
     switch(en){

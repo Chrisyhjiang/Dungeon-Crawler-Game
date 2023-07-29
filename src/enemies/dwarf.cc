@@ -6,10 +6,6 @@ Dwarf::~Dwarf(){
     //Todo:
 }
 
-int Dwarf::calculateDamageToPlayer(){
-    return this->getAtk();
-}
-
 bool Dwarf::isMovable(){
     return true;
 }

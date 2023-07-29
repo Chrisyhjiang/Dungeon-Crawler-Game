@@ -1,118 +1,127 @@
 #include "chamber.h"
-// #include "../items/normalTreasure.h"
-// #include "../items/smallTreasure.h"
-// #include "../items/dragonTreasure.h"
-// #include "../items/boostAtk.h"
-// #include "../items/boostDef.h"
 
 Chamber::Chamber(int id) : id{id}{}
 
 Chamber::~Chamber() {
-    while (!cells.empty()) {
-        Cell *c = cells.back();
+    while (!chamberCells.empty()) {
+        Cell *c = chamberCells.back();
         delete c;
-        cells.pop_back();
+        chamberCells.pop_back();
     }
+}
+
+vector<Cell*> Chamber::getCells(){
+    return chamberCells;
 }
 
 void Chamber::renderEnemy() {
-    Cell *c = cells.at(rand() % cells.size());
-    while (c->isOccupied()) {
-        c = cells.at(rand() % cells.size());
-    }
-
-    int m = rand() % 18;
-    char e;
-    if (0 <= m && m < 4) {
-        e = ENEMY_HUMAN;
-    } else if (4 <= m && m < 6) {
-        e = ENEMY_DWARF;
-    } else if (6 <= m && m < 11) {
-        e = ENEMY_HALFING; 
-    } else if (11 <= m && m < 13) {
-        e = ENEMY_ELF;
-    } else if (13 <= m && m < 15) {
-        e = ENEMY_ORC;
+    int m = rand() % TOTAL_PROBABILITY_DISTRIBUTION;
+    char enemyType;
+    if (0 <= m && m < ENEMY_HUMAN_DISTRIBUTION) {
+        enemyType = ENEMY_HUMAN;
+    } else if (ENEMY_HUMAN_DISTRIBUTION <= m && m < ENEMY_DWARF_DISTRIBUTION) {
+        enemyType = ENEMY_DWARF;
+    } else if (ENEMY_DWARF_DISTRIBUTION <= m && m < ENEMY_HALFLING_DISTRIBUTION) {
+        enemyType= ENEMY_HALFING; 
+    } else if (ENEMY_HALFLING_DISTRIBUTION <= m && m < ENEMY_ELF_DISTRIBUTION) {
+        enemyType = ENEMY_ELF;
+    } else if (ENEMY_ELF_DISTRIBUTION <= m && m < ENEMY_ORC_DISTRIBUTION) {
+        enemyType = ENEMY_ORC;
     } else {
-        e = ENEMY_MERCHANT;
+        enemyType = ENEMY_MERCHANT;
     }
 
-    Enemy* en = EnemyFactory::createEnemy(e, SHADE);
-    c->setSymbol(e);
-    c->setCharacter(en);
-    en->setX(c->getRow());
-    en->setY(c->getCol());
+    Enemy* enemy = EnemyFactory::createEnemy(enemyType, Player::getRace());
+    Cell* cell = getRandomCell();
+    cell->setSymbol(enemyType);
+    cell->setEntity(enemy);
+    enemy->setX(cell->getRow());
+    enemy->setY(cell->getCol());
 }
 
-void Chamber::renderTreasure() {
-    Cell *c = cells.at(rand() % cells.size());
-    while (c->isOccupied()) {
-        Cell *c = cells.at(rand() % cells.size());
-    }
+ItemDecorator* Chamber::renderTreasure() {
+    Cell* cell = getRandomCell();
     int m = rand() % 8;
     char e;
     ItemDecorator* gold;
-    if (0 <= m && m < 5) {
+    if (0 <= m && m < NORMAL_GOLD_DISTRIBUTION) {
         e = NORMAL_GOLD;
-    } else if (5 <= m && m < 6) {
+    } else if (NORMAL_GOLD_DISTRIBUTION <= m && m < DRAGON_GOLD_DISTRIBUTION) {
         e = DRAGON_GOLD;
     } else {
         e = SMALL_GOLD;
     }
+    Player* player = Player::getInstance();
     switch(e){
         case NORMAL_GOLD:
-            gold = new NormalTreasure(nullptr);
+            gold = new NormalTreasure(player);
             break;
         case SMALL_GOLD:
-            gold = new SmallTreasure(nullptr);
+            gold = new SmallTreasure(player);
             break;
         case DRAGON_GOLD:   
-            gold = new DragonTreasure(nullptr);
+            gold = new DragonTreasure(player);
             break;
         default:
             gold = nullptr;
             break;
     }
-    c->setSymbol(GOLD);
-    c->setCharacter(gold);
-    gold->setX(c->getRow());
-    gold->setY(c->getCol());
-}
+    cell->setSymbol(SYM_GOLD);
+    cell->setEntity(gold);
+    gold->setX(cell->getRow());
+    gold->setY(cell->getCol());
+    gold->setSymbol(SYM_GOLD);
+    return gold;
+ }
 
 void Chamber::addCell(Cell* c) {
-    cells.push_back(c);
+    chamberCells.push_back(c);
 }
 
 void Chamber::renderPotion() {
-    Cell *c = cells.at(rand() % cells.size());
-    while (c->isOccupied()) {
-        Cell *c = cells.at(rand() % cells.size());
-    }
+    Cell* cell = getRandomCell();
     int m = rand() % 6;
-    ItemDecorator* potion;
-    if (m == 0) {
-        potion = new BoostAtkPotion(nullptr);
-    } else if (m == 1) {
-        potion = new WoundAtkPotion(nullptr);
-    } else if (m == 2) {
-        potion = new BoostDefPotion(nullptr);
-    } else if (m == 3) {
-        potion = new WoundDefPotion(nullptr);
-    } else if (m == 4) {
-        potion = new RestoreHealthPotion(nullptr);
-    } else {
-        potion = new PoisonHealthPotion(nullptr);
+    Potion* potion;
+    Player* player = Player::getInstance();
+    double mag = 1;
+    if(Player::getRace() == DROW){
+        mag = POTION_MAGNIFY;
     }
-    c->setSymbol(POTION);
-    c->setCharacter(potion);
-    potion->setX(c->getRow());
-    potion->setY(c->getCol());
+    if (m == 0) {
+       potion = new BoostAtkPotion(player, mag);  
+    } else if (m == 1) {
+        potion = new WoundAtkPotion(player, mag);
+    } else if (m == 2) {
+        potion = new BoostDefPotion(player, mag);
+    } else if (m == 3) {
+        potion = new WoundDefPotion(player, mag);
+    } else if (m == 4) {
+        potion = new RestoreHealthPotion(player, mag);
+    } else {
+        potion = new PoisonHealthPotion(player, mag);
+    }
+    cell->setSymbol(SYM_POTION);
+    cell->setEntity(potion);
+    potion->setX(cell->getRow());
+    potion->setY(cell->getCol());
+    potion->setSymbol(SYM_POTION);
 }
 
 void Chamber::renderStairs() {
-    Cell *c = cells.at(rand() % cells.size());
-    while (c->isOccupied()) {
-        Cell *c = cells.at(rand() % cells.size());
-    }
-    c->setSymbol(STAIRS);
+    Cell* cell = getRandomCell();
+
+    cell->setSymbol(SYM_STAIRS);
+}
+
+Cell* Chamber::getRandomCell(){
+    Cell* cell = nullptr;
+    do{
+        cell = chamberCells.at(rand() % chamberCells.size());
+    }while(cell->isOccupied());
+    return cell;
+}
+
+
+int Chamber::getChamberID(){
+    return id;
 }

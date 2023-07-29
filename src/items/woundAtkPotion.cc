@@ -1,15 +1,12 @@
 #include "woundAtkPotion.h"
 
 
-WoundAtkPotion::WoundAtkPotion(Player* p) : ItemDecorator(p) {
+WoundAtkPotion::WoundAtkPotion(Player* p, double magnify) : Potion (p, POTION_WA, magnify) {}
 
-}
-
-WoundAtkPotion::~WoundAtkPotion(){
-
-}
+WoundAtkPotion::~WoundAtkPotion(){}
 
 void WoundAtkPotion::update() {
-    target->setAtk(target->getAtk() - 5);
+    Player* target = this->getTarget();
+    target->setAtk(target->getAtk() - 5 * this->getMagnify());
 }
 

@@ -1,9 +1,9 @@
 #ifndef NORMALTREASURE_H
 #define NORMALTREASURE_H
 
-#include "itemDecorator.h"
+#include "treasure.h"
 
-class NormalTreasure : public ItemDecorator {
+class NormalTreasure : public Treasure {
     public:
         NormalTreasure(Player* p);
         ~NormalTreasure();

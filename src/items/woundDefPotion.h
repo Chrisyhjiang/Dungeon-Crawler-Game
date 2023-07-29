@@ -1,11 +1,11 @@
 #ifndef WOUNDDEF_H
 #define WOUNDDEF_H
 
-#include "itemDecorator.h"
+#include "potion.h"
 
-class WoundDefPotion : public ItemDecorator{
+class WoundDefPotion : public Potion {
     public:
-       WoundDefPotion(Player* p);
+       WoundDefPotion(Player* p, double magnify);
        ~WoundDefPotion();
        void update(); 
 };
