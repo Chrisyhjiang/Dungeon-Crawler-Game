@@ -3,27 +3,13 @@
 #include <algorithm>
 #include "chamberCrawler.h"
 
-ChamberCrawler::ChamberCrawler() : canEnemyTakeTurn(true){}
+ChamberCrawler::ChamberCrawler() : canEnemyTakeTurn(true), level(1){}
 
 ChamberCrawler::~ChamberCrawler(){
     delete floor;
     floorStream->close();
     delete floorStream;  
 }
-
-// void ChamberCrawler::start(string floorFile){
- 
-//     if( floorFile == ""){
-//         floorLayoutFile = EMPTY_FLOOR_FILE;
-//         isDefaultFloor = true;
-//     }else{
-//         floorLayoutFile = floorFile;
-//     }
-//     floorStream = new ifstream(floorLayoutFile);
-//     setGameRace();
-//     loadFloor();
-//     play();
-// }
 
 void ChamberCrawler::start(string floorFile, bool ignore){
  
@@ -88,7 +74,7 @@ void ChamberCrawler::loadFloor(){
         floor->spawnPlayers();
         floor->spawnFloor();
     }
-    floor->displayFloor("Player character has spawned.");
+    floor->displayFloor("Player character has spawned.", level);
 }
 
 void ChamberCrawler::goToNextFloor() {
@@ -128,6 +114,12 @@ void ChamberCrawler::restartOrQuit() {
 			break;
 		}
 	}
+      if (restart) {
+                restartGame();
+            } else {
+                cout << "Thanks for playing!!!" << endl;
+                exit(0);
+     }
 }
 
 
@@ -163,34 +155,17 @@ void ChamberCrawler::play(){
        
         Player* player = Player::getInstance();
         if (player->isDead()) {
-            floor->displayFloor(actionMsg);
+            floor->displayFloor(actionMsg, level);
             cout << "You Died!" << endl; // Do you want to restart the game? [y/n]" << endl;
             restartOrQuit();
-            // string x; 
-            // while (true) {
-            //     cin >> x;
-            //     if (x == "y") {
-            //         restartGame();
-            //     } else if (x == "n") {
-            //          cout << "Thank You for playing..." << endl;
-            //          exit(0);
-            //     } else {
-            //         cout << "Please input [y/n]" << endl;
-            //     }
-            // }
-            if (restart) {
-                restartGame();
-            } else {
-                cout << "Thanks for playing!!!" << endl;
-                exit(0);
-            }
         } else {
             if(player->getCellSymbol() == SYM_STAIRS){
                // goToNextFloor();
                if(!isDefaultFloor){
                     goToNextFloor();
                }else {
-                    if (floor->getLevel() == 5) {
+                    level++;
+                    if (level == 6) {
                     cout << "you beat the game!!!" << endl;
                     int g = player->getGold();
                     if (player->getRace() == "shade") {
@@ -200,14 +175,13 @@ void ChamberCrawler::play(){
                     exit(0);
                     }
                 start("", false);
-                floor->setLevel(floor->getLevel() + 1);
                 player->setCellSymbol(SYM_TILE);
                 player->setAtk(player->getDefaultAtk());
                 player->setDef(player->getDefaultDef());
                }
                 
             }else{
-                floor->displayFloor(actionMsg);
+                floor->displayFloor(actionMsg, level);
             }
         }
     }

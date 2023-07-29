@@ -33,13 +33,7 @@ Floor::~Floor() {
     }
 }
 
-int Floor::getLevel(){
-    return level;
-}
 
-void Floor::setLevel(int n){
-    level = n;
-}
 
 bool Floor::isValidSymbol(char symbol){
     return symbol == SYM_TILE || symbol == SYM_PLAYER || Enemy::isEnemy(symbol) || symbol == SYM_STAIRS ||
@@ -112,7 +106,7 @@ int Floor::locateChamber(int i, int j) {
     }
 }
 
-void Floor::displayFloor(string actionMsg) {
+void Floor::displayFloor(string actionMsg, int level) {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
             if (cells[i][j]) {
@@ -130,7 +124,7 @@ void Floor::displayFloor(string actionMsg) {
         cout << endl;
     }
     Player* player = Player::getInstance();
-    cout << "Race: " << Player::getRace() << " Gold: " << player->getGold() << "\t\t\t\t\t\t\tFloor " << getLevel() << endl; 
+    cout << "Race: " << Player::getRace() << " Gold: " << player->getGold() << "\t\t\t\t\t\t\tFloor " << level << endl; 
     cout << "HP: " << player->getHP() << endl;
     cout << "Atk: " << player->getAtk() << endl;
     cout << "Def: " << player->getDef() << endl;

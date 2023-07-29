@@ -27,14 +27,14 @@ class Floor {
 		Floor();
 		~Floor();
 		void loadFromFile(std::ifstream *floorStream);
-		void displayFloor(string actionMsg);
+		void displayFloor(string actionMsg, int level);
         Cell *getCell(int i, int j);
 		void spawnFloor();
 		void spawnPlayers();
 		string movePlayer(string direction);
 		vector<string> enemyTurn();
-		int getLevel();
-		void setLevel(int n);
+		// int getLevel();
+		// void setLevel(int n);
 		Enemy* canPlayerAttack(string direction);
 		ItemDecorator* canPlayerTakePotion(string direction);
 		ItemDecorator* canPlayerFetchGold(string direction);
@@ -49,7 +49,7 @@ class Floor {
 										{ENEMY_DWARF, ANSI_RED}, {ENEMY_ELF, ANSI_RED}, {ENEMY_HUMAN, ANSI_RED}, 
 										{ENEMY_ORC, ANSI_RED}, {ENEMY_HALFING, ANSI_RED}};
 
-		int level;
+		//int level;
 		void spawnEnemies();
 		void spawnPotions();
 		void spawnTreasures();
