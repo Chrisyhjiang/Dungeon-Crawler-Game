@@ -13,5 +13,6 @@ int main(int argc, char* argv[]) {
     }else{
          game->start("");
     }
+    delete game;
    
 }

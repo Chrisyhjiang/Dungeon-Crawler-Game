@@ -6,7 +6,9 @@
 ChamberCrawler::ChamberCrawler() : canEnemyTakeTurn(true){}
 
 ChamberCrawler::~ChamberCrawler(){
-    //Todo:    
+    delete floor;
+    floorStream->close();
+    delete floorStream;  
 }
 
 void ChamberCrawler::start(string floorFile){

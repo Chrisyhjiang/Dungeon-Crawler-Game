@@ -19,7 +19,8 @@ Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Cha
 
 
 Player::~Player() {
-    // todo:
+    delete instance;
+    setInstance();
 }
 
 void Player::setRace(string s){
