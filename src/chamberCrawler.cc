@@ -11,7 +11,21 @@ ChamberCrawler::~ChamberCrawler(){
     delete floorStream;  
 }
 
-void ChamberCrawler::start(string floorFile){
+// void ChamberCrawler::start(string floorFile){
+ 
+//     if( floorFile == ""){
+//         floorLayoutFile = EMPTY_FLOOR_FILE;
+//         isDefaultFloor = true;
+//     }else{
+//         floorLayoutFile = floorFile;
+//     }
+//     floorStream = new ifstream(floorLayoutFile);
+//     setGameRace();
+//     loadFloor();
+//     play();
+// }
+
+void ChamberCrawler::start(string floorFile, bool ignore){
  
     if( floorFile == ""){
         floorLayoutFile = EMPTY_FLOOR_FILE;
@@ -20,7 +34,10 @@ void ChamberCrawler::start(string floorFile){
         floorLayoutFile = floorFile;
     }
     floorStream = new ifstream(floorLayoutFile);
-    setGameRace();
+    if(ignore){
+        setGameRace();
+    }
+   
     loadFloor();
     play();
 }
@@ -121,7 +138,7 @@ void ChamberCrawler::restartGame() {
 	level = 1;
     Player::setInstance();
 	Player::getInstance()->setCellSymbol(SYM_TILE);
-	start(floorLayoutFile);
+	start(floorLayoutFile, true);
 }
 
 
@@ -182,7 +199,7 @@ void ChamberCrawler::play(){
                     cout << "your score for this round is " << g << endl;
                     exit(0);
                     }
-                start("");
+                start("", false);
                 floor->setLevel(floor->getLevel() + 1);
                 player->setCellSymbol(SYM_TILE);
                 player->setAtk(player->getDefaultAtk());
