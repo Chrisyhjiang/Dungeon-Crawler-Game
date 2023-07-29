@@ -161,6 +161,12 @@ void ChamberCrawler::play(){
             //         cout << "Please input [y/n]" << endl;
             //     }
             // }
+            if (restart) {
+                restartGame();
+            } else {
+                cout << "Thanks for playing!!!" << endl;
+                exit(0);
+            }
         } else {
             if(player->getCellSymbol() == SYM_STAIRS){
                // goToNextFloor();
