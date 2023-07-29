@@ -1,11 +1,13 @@
 #include "floor.h"
-//#include "../items/potion.h"
+#include <map>
 
 using namespace std;
 
 class Chamber;
 class Cell;
 
+std::map<std::string, std::string> directionMap = {{NORTH, "North"}, {SOUTH, "South"}, {WEST, "West"}, {EAST, "East"},
+{NORTH_WEST, "North West"}, {NORTH_EAST, "North East"}, {SOUTH_WEST, "South West"}, {SOUTH_EAST, "South East"}};
 Floor::Floor() {
 
     for (int i = 0; i < MAX_ROW; i++) {
@@ -335,24 +337,41 @@ string Floor::movePlayer(string dir){
     string msg = "";
     Player* player = Player::getInstance();
     Cell* nextCell = getNeighbourCell(dir, player);
+
     if(canMovePlayer(nextCell)){
         if(nextCell->getSymbol() == SYM_GOLD){
             bool pickUpGold = canPlayerPickUpGold(nextCell);
             if(pickUpGold){
                 resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
                 player->move(nextCell, canPlayerPickUpGold(nextCell));
-                msg = "Player move to : " + dir + " | player pick up gold\n";
+                msg = "PC move to : " + directionMap[dir] + " | player pick up gold\n";
             }
         }else{
             resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
             player->move(nextCell, false);
-            msg = "Player move to: " + dir + "\n";
-            
+            msg = "PC move to: " + directionMap[dir];
+            if(hasUnknownPotion(nextCell)) {
+                msg += " and see an unknown potion";
+            }
+            msg += "\n";
         }
     }
     return msg;
 }
 
+bool Floor::hasUnknownPotion(Cell* cell){
+    for( string s : DIRECTIONS){
+        Cell* next = getNextCellWithDirection(s, cell->getRow(), cell->getCol());
+        if(next){
+            Entity* e = next->getEntity();
+            Potion* potion = dynamic_cast<Potion*>(e);
+            if(potion){
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 bool Floor::canPlayerPickUpGold(Cell* cell) {
     bool result = false;
@@ -367,6 +386,32 @@ bool Floor::canPlayerPickUpGold(Cell* cell) {
 Cell* Floor::getNeighbourCell(string dir, Entity* entity){
     int nextRow = entity->getX();
     int nextCol = entity->getY();
+    return getNextCellWithDirection(dir, nextRow, nextCol);
+    // if ( dir == NORTH){
+    //     nextRow--;
+    // } else if ( dir == SOUTH){
+    //     nextRow++;
+    // } else if ( dir == EAST) {
+    //     nextCol++;
+    // } else if ( dir == WEST) {
+    //     nextCol--;
+    // } else if ( dir == NORTH_EAST) {
+    //     nextRow--;
+    //     nextCol++;
+    // } else if ( dir == NORTH_WEST ) {
+    //     nextRow--;
+    //     nextCol--;
+    // } else if ( dir == SOUTH_EAST ) {
+    //     nextRow++;
+    //     nextCol++;
+    // } else if ( dir == SOUTH_WEST ) {
+    //     nextRow++;
+    //     nextCol--;
+    // }
+    // return cells[nextRow][nextCol];
+}
+
+Cell* Floor::getNextCellWithDirection(string dir, int nextRow, int nextCol){
     if ( dir == NORTH){
         nextRow--;
     } else if ( dir == SOUTH){
@@ -390,4 +435,6 @@ Cell* Floor::getNeighbourCell(string dir, Entity* entity){
     }
     return cells[nextRow][nextCol];
 }
+
+
 

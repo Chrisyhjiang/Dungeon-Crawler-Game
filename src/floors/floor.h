@@ -36,6 +36,7 @@ class Floor {
 		Enemy* canPlayerAttack(string direction);
 		ItemDecorator* canPlayerTakePotion(string direction);
 		ItemDecorator* canPlayerFetchGold(string direction);
+		
 
 
 	private:
@@ -59,6 +60,8 @@ class Floor {
 		bool hasDragonGuardTreasure(DragonTreasure* gold);
 		bool canPlayerPickUpGold(Cell* cell);
 		bool isValidSymbol(char s);
+		bool hasUnknownPotion(Cell* cell);
+		Cell* getNextCellWithDirection(string dir, int nextRow, int nextCol);
 
 };
 #endif
