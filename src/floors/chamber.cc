@@ -2,13 +2,7 @@
 
 Chamber::Chamber(int id) : id{id}{}
 
-Chamber::~Chamber() {
-    while (!chamberCells.empty()) {
-        Cell *c = chamberCells.back();
-        delete c;
-        chamberCells.pop_back();
-    }
-}
+Chamber::~Chamber() {}
 
 vector<Cell*> Chamber::getCells(){
     return chamberCells;
@@ -38,6 +32,8 @@ void Chamber::renderEnemy() {
     enemy->setX(cell->getRow());
     enemy->setY(cell->getCol());
 }
+
+
 
 ItemDecorator* Chamber::renderTreasure() {
     Cell* cell = getRandomCell();

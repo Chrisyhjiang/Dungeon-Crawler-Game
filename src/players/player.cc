@@ -53,6 +53,14 @@ void Player::setMaxHp(int mh) {
     maxHp = mh;
 }
 
+int Player::getScore(){
+    int score = gold;
+    if (Player::race == SHADE ){
+        score *= 1.5;
+    }
+    return score;
+
+}
 void Player::takeDamage(int dmg) {
     setHP(std::max(getHP() - dmg, 0));
 }

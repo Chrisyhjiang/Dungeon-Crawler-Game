@@ -16,20 +16,30 @@ class ChamberCrawler {
 	private:
 		string floorLayoutFile;
 		ifstream *floorStream;
-		Floor* floor;
 		void play();
 		string playerTakeTurn();
 		string enemiesTakeTurn();
 		string processPlayerAttackCmd(string direction);
 		string processPlayerUsePotionCmd(string direction);
+		void restartOrQuit();
+		void goToNextFloor();
+		void restartGame();
 		bool isValidCmd(string cmd);
+		bool isDefaultFloor;
+		bool nextFloor;
+		bool quit;
+		bool restart;
+		bool canEnemyTakeTurn;
+		int level;
+		Floor* floor;
 
 	public:
 		ChamberCrawler();
 		~ChamberCrawler();
 		static void setGameRace();
-		void start(string floorFile, int level);
-		void loadFloor(int level);
+		void start(string floorFile);
+		void loadFloor();
+		void loadAllFloors();
 		void playGame();
 		
 };

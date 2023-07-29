@@ -41,6 +41,7 @@ class Player : public Character{
         static Player* getInstance();
         static void setInstance();
         char getCellSymbol();
+        int getScore();
         void setCellSymbol (char symbol);
         static void setRace(string race);
         static string getRace();

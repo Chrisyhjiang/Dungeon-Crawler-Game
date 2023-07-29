@@ -1,11 +1,12 @@
 #include "floor.h"
+//#include "../items/potion.h"
 
 using namespace std;
 
 class Chamber;
 class Cell;
 
-Floor::Floor(int level) : level(level) {
+Floor::Floor() {
 
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
@@ -27,6 +28,7 @@ Floor::~Floor() {
 
     for (int i = 0; i < MAX_CHAMBERS; i++) {
        delete chambers[i];
+       chambers[i] = nullptr;
     }
 }
 
@@ -37,17 +39,57 @@ int Floor::getLevel(){
 void Floor::setLevel(int n){
     level = n;
 }
+
+bool Floor::isValidSymbol(char symbol){
+    return symbol == SYM_TILE || symbol == SYM_PLAYER || Enemy::isEnemy(symbol) || symbol == SYM_STAIRS ||
+                 Potion::isPotion(symbol) || Treasure::isTreasure(symbol);
+}
 void Floor::loadFromFile(ifstream *floorStream) {
     string line;
     for (int i = 0; i < MAX_ROW; i++) {
         getline(*floorStream, line);
         for (int j = 0; j < MAX_COLUMN; j++) {
-            cells[i][j] = new Cell(i, j, line[j]);
-            if ( cells[i][j]->getSymbol() == SYM_TILE) {
+            cells[i][j]->setSymbol(line[j]);
+            char symbol = line[j];
+            if (isValidSymbol(symbol)) {
                 int chamberID = locateChamber(i, j);
                 cells[i][j]->setChamberID(chamberID);
                 chambers[chamberID]->addCell(cells[i][j]);
-            } else {
+                if( symbol == SYM_TILE){
+                    cells[i][j]->setEntity(nullptr);
+                } else if( symbol == SYM_PLAYER ){
+                    Player* player = Player::getInstance();
+                    player->setX(i);
+                    player->setY(j);
+                    player->setCellSymbol(SYM_TILE);
+                    cells[i][j]->setEntity(player);
+                } else if ( Enemy::isEnemy(symbol)){
+                    Enemy* enemy = EnemyFactory::createEnemy(symbol, Player::getRace());
+                    cells[i][j]->setEntity(enemy);
+                    enemy->setX(i);
+                    enemy->setY(j);
+                } else if ( Potion::isPotion(symbol)){
+                    double mag = 1;
+                    if(Player::getRace() == DROW){
+                        mag = POTION_MAGNIFY;
+                    }
+                    
+                        Potion* p = Potion::createPotion(Player::getInstance(), symbol, mag);
+                        cells[i][j]->setEntity(p);
+                        cells[i][j]->setSymbol(SYM_POTION);
+                        p->setX(i);
+                        p->setY(j);
+               
+                } else if ( Treasure::isTreasure(symbol)){
+                    Treasure* treasure = Treasure::createTreasure(Player::getInstance(), symbol);
+                    cells[i][j]->setEntity(treasure);
+                    treasure->setX(cells[i][j]->getRow());
+                    treasure->setY(cells[i][j]->getCol());
+                    treasure->setSymbol(SYM_GOLD);
+                    cells[i][j]->setSymbol(SYM_GOLD);
+                }
+            }
+            else {
                  cells[i][j]->setChamberID(-1);
             }
         }
@@ -141,7 +183,7 @@ void Floor::spawnTreasures() {
 }
 
 void Floor::spawnStairs() {
-    Chamber* chamber = getRandomChamber();
+    Chamber* chamber = chambers[0]; // getRandomChamber();
     chamber->renderStairs();   
 }
 
@@ -150,7 +192,7 @@ Cell* Floor::getCell(int i, int j) {
 }
 
 void Floor::spawnPlayers(){
-    Chamber* chosenChamber = getRandomChamber();
+    Chamber* chosenChamber = chambers[0];    //chagetRandomChamber();
     Cell * cell = chosenChamber->getRandomCell();
     Player* player = Player::getInstance();
     player->setX(cell->getRow());

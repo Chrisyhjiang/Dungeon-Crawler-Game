@@ -24,7 +24,7 @@ class Chamber;
 class Floor {
 
 	public:
-		Floor(int level);
+		Floor();
 		~Floor();
 		void loadFromFile(std::ifstream *floorStream);
 		void displayFloor(string actionMsg);
@@ -38,6 +38,8 @@ class Floor {
 		Enemy* canPlayerAttack(string direction);
 		ItemDecorator* canPlayerTakePotion(string direction);
 		ItemDecorator* canPlayerFetchGold(string direction);
+
+
 	private:
 		int locateChamber(int i, int j);
 		Cell* cells[MAX_ROW][MAX_COLUMN];
@@ -58,6 +60,7 @@ class Floor {
 		Cell* getNeighbourCell(string direction, Entity* entity);
 		bool hasDragonGuardTreasure(DragonTreasure* gold);
 		bool canPlayerPickUpGold(Cell* cell);
+		bool isValidSymbol(char s);
 
 };
 #endif

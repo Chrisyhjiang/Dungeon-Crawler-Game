@@ -13,6 +13,8 @@ class Treasure : public ItemDecorator {
         ~Treasure();
         int getGold();
         void setGold(int g);
+        static bool isTreasure(char sym);
+        static Treasure* createTreasure(Player* player, char symbol);
 };
 
 
