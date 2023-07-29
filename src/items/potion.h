@@ -2,6 +2,7 @@
 #define POTION_H
 
 #include "itemDecorator.h"
+#include <algorithm>
 
 class Potion : public ItemDecorator {
     private:
