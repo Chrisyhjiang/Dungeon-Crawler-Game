@@ -21,9 +21,7 @@ void ChamberCrawler::start(string floorFile){
     }
     floorStream = new ifstream(floorLayoutFile);
     setGameRace();
-    
     loadFloor();
-   
     play();
 }
 
@@ -38,7 +36,9 @@ void  ChamberCrawler::setGameRace(){
         cin >> input;
         if(input == SHADE_SYM || input == DROW_SYM || input == VAMP_SYM || input == TROLL_SYM || input == GOBLIN_SYM) {
             break;
-        } else {
+        } else if (std::string(1, input) == CMD_RESTART) {
+            restartGame();
+        }else {
             std::cout << "Invalid input. Please enter a valid game race: " << endl;
         }   
     }
@@ -116,8 +116,8 @@ void ChamberCrawler::restartOrQuit() {
 
 void ChamberCrawler::restartGame() {
     restart = false;
-	delete floor;
-	delete floorStream;
+	// delete floor;
+	// delete floorStream;
 	level = 1;
     Player::setInstance();
 	Player::getInstance()->setCellSymbol(SYM_TILE);

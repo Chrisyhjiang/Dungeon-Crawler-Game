@@ -36,7 +36,7 @@ class ChamberCrawler {
 	public:
 		ChamberCrawler();
 		~ChamberCrawler();
-		static void setGameRace();
+		void setGameRace();
 		void start(string floorFile);
 		void loadFloor();
 		void loadAllFloors();
