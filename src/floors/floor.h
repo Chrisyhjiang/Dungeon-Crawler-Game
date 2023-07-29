@@ -33,8 +33,6 @@ class Floor {
 		void spawnPlayers();
 		string movePlayer(string direction);
 		vector<string> enemyTurn();
-		// int getLevel();
-		// void setLevel(int n);
 		Enemy* canPlayerAttack(string direction);
 		ItemDecorator* canPlayerTakePotion(string direction);
 		ItemDecorator* canPlayerFetchGold(string direction);

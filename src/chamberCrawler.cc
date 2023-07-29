@@ -280,9 +280,9 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
 string ChamberCrawler::processPlayerUsePotionCmd(string dir){
     string actionMsg = "";
     ItemDecorator* potion = floor->canPlayerTakePotion(dir);
-    if(potion){
+    if(potion){  
         potion->update();
-        actionMsg = "Player take potion: " + potion->getName() + "\n";
+        actionMsg = "PC uses: " + potion->getName() + ".\n";
     }
     return actionMsg;
 }
@@ -297,11 +297,9 @@ bool ChamberCrawler::isValidCmd(string cmd){
 
 string ChamberCrawler::enemiesTakeTurn(){
     vector<string> msg = floor->enemyTurn();
-    string result = "Action: Enemy ";
-    if(msg.size() == 0){
-        result += "take move randomly...";
-
-    }else {
+    string result = "";
+    if(msg.size() != 0){
+        result = "Action: Enemy ";
         for(string s : msg){
             result += s;
             result += " | ";
