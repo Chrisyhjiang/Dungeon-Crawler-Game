@@ -6,7 +6,9 @@
 ChamberCrawler::ChamberCrawler(){}
 
 ChamberCrawler::~ChamberCrawler(){
-    //Todo:    
+    delete floor;
+    floorStream->close();
+    delete floorStream;
 }
 
 void ChamberCrawler::start(string floorFile, int level){
@@ -129,7 +131,6 @@ string ChamberCrawler::playerTakeTurn(){
                 }else{
                     cout << "invalid command: direction is invalid" << endl;
                 } 
-               
             } else if (cmd == CMD_POTION){
                 string dir;
                 cin >> dir;
@@ -143,6 +144,7 @@ string ChamberCrawler::playerTakeTurn(){
                 }
                 break;
             } else if ( cmd == CMD_EXIT){
+                // delete floor;
                 exit(0);
             }else if ( cmd == CMD_RESTART) {
                 string x; 

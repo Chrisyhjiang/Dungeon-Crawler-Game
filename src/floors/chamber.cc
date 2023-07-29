@@ -3,11 +3,11 @@
 Chamber::Chamber(int id) : id{id}{}
 
 Chamber::~Chamber() {
-    while (!chamberCells.empty()) {
-        Cell *c = chamberCells.back();
-        delete c;
-        chamberCells.pop_back();
-    }
+    // while (!chamberCells.empty()) {
+    //     Cell *c = chamberCells.back();
+    //     delete c;
+    //     chamberCells.pop_back();
+    // }
 }
 
 vector<Cell*> Chamber::getCells(){

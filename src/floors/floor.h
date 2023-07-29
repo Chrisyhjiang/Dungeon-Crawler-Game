@@ -58,6 +58,7 @@ class Floor {
 		Cell* getNeighbourCell(string direction, Entity* entity);
 		bool hasDragonGuardTreasure(DragonTreasure* gold);
 		bool canPlayerPickUpGold(Cell* cell);
+		
 
 };
 #endif

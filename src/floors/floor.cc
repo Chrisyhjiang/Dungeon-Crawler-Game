@@ -6,13 +6,11 @@ class Chamber;
 class Cell;
 
 Floor::Floor(int level) : level(level) {
-
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
             cells[i][j] = new Cell(i, j, ' ');
         }
     }
-
     for (int i = 0; i < MAX_CHAMBERS; i++) {
         chambers[i] = new Chamber(i);
     }
@@ -22,11 +20,12 @@ Floor::~Floor() {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
             delete cells[i][j];
+            cells[i][j] = nullptr;
         }
     }
-
     for (int i = 0; i < MAX_CHAMBERS; i++) {
        delete chambers[i];
+       chambers[i] = nullptr;
     }
 }
 
@@ -42,7 +41,7 @@ void Floor::loadFromFile(ifstream *floorStream) {
     for (int i = 0; i < MAX_ROW; i++) {
         getline(*floorStream, line);
         for (int j = 0; j < MAX_COLUMN; j++) {
-            cells[i][j] = new Cell(i, j, line[j]);
+            cells[i][j]->setSymbol(line[j]);
             if ( cells[i][j]->getSymbol() == SYM_TILE) {
                 int chamberID = locateChamber(i, j);
                 cells[i][j]->setChamberID(chamberID);

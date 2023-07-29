@@ -1,7 +1,9 @@
 #include "cell.h"
 
 Cell::Cell(int i, int j, char s) : row(i), col(j), symbol(s){}
-Cell::~Cell(){}
+Cell::~Cell(){
+    delete entity;
+}
 
 char Cell::getSymbol(){
     return symbol;

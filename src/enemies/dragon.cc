@@ -5,7 +5,7 @@ Dragon::Dragon(string race) : Enemy(100, 20, 20, race, ENEMY_DRAGON){};
 Dragon::Dragon(int hp, int atk, int def, string race, char symbol): Enemy(hp, atk, def, race, symbol){};
 
 Dragon::~Dragon(){
-
+    delete hoard;
 }
 
 DragonTreasure* Dragon::getHoard(){

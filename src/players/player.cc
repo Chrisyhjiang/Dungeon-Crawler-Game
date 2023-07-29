@@ -8,8 +8,6 @@ Player* Player::instance = nullptr;
 
 string Player::race = SHADE;
 
- 
-
 Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Character(hp, atk, def, race){
     this->setMaxHp(maxHP);
     this->setGold(gold);
@@ -19,7 +17,8 @@ Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Cha
 
 
 Player::~Player() {
-    // todo:
+    delete instance;
+    setInstance();
 }
 
 void Player::setRace(string s){
@@ -89,10 +88,6 @@ string Player::getRace(){
 void Player::addReward(Enemy* en){
     
 }
-
-// char Player::getSymbol(){
-//     return SYM_PLAYER;
-// }
 
 char Player::getCellSymbol(){
     return cellSymbol;

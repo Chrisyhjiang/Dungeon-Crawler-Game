@@ -8,7 +8,8 @@ int main(int argc, char* argv[]) {
     ChamberCrawler::setGameRace();
     srand(static_cast<unsigned int>(time(0)));
     ChamberCrawler *game = new ChamberCrawler();
-    // game->setCanAdvanceToNextLevel(false);
-    // Todo: pass default file for now
+    // // game->setCanAdvanceToNextLevel(false);
+    // // Todo: pass default file for now
     game->start("", 1);
+    delete game;
 }
