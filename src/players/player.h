@@ -26,12 +26,12 @@ class Player : public Character{
         Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player() override;
         void move(Cell* nextCell, bool canPickupGold);
-        void useItem(string dir);
+        //void useItem(string dir);
         int getGold();
         void setGold(int g);
         virtual void attackEnemy(Enemy *en);
-        bool isEnemyInRange();
-        void magnifyPotion(double m);
+        // bool isEnemyInRange();
+        // void magnifyPotion(double m);
         int getMaxHp();
         void setMaxHp(int maxHp);
         void takeDamage(int dmg);
