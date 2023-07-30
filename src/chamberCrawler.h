@@ -23,13 +23,13 @@ class ChamberCrawler {
 		string processPlayerUsePotionCmd(string direction);
 		void restartOrQuit();
 		void goToNextFloor();
-		void restartGame();
+		
 		bool isValidCmd(string cmd);
 		bool isDefaultFloor;
 		bool nextFloor;
 		bool quit;
 		bool restart;
-		bool canEnemyTakeTurn;
+		bool freezeEnenmy;
 		int level;
 		Floor* floor;
 
@@ -37,7 +37,11 @@ class ChamberCrawler {
 		ChamberCrawler();
 		~ChamberCrawler();
 		void setGameRace();
+		void restartGame();
+		bool getFreezeEnemy();
+		void setFreezeEnemy(bool freeze);
 		void start(string floorFile, bool ignoreSetRace);
 		void loadFloor();
+		Floor* getFloor();
 };
 #endif

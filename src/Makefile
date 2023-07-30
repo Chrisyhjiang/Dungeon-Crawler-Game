@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++20 -g -Wall -Werror=vla -MMD
 EXEC = main
 
-SRC_DIRS := ./ ./enemies/ ./floors/  ./items/ ./players/  # Add your source folders here
+SRC_DIRS := ./ ./enemies/ ./floors/  ./items/ ./players/ ./commands/  # Add your source folders here
 OBJ_DIR := ./build
 
 # Find all source files in the specified directories
