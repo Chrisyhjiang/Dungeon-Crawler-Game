@@ -180,7 +180,7 @@ void Floor::spawnTreasures() {
 }
 
 void Floor::spawnStairs() {
-    Chamber* chamber = chambers[0]; // getRandomChamber();
+    Chamber* chamber =  getRandomChamber();
     chamber->renderStairs();   
 }
 
@@ -189,7 +189,7 @@ Cell* Floor::getCell(int i, int j) {
 }
 
 void Floor::spawnPlayers(){
-    Chamber* chosenChamber = chambers[0];    //chagetRandomChamber();
+    Chamber* chosenChamber = getRandomChamber();
     Cell * cell = chosenChamber->getRandomCell();
     Player* player = Player::getInstance();
     player->setX(cell->getRow());

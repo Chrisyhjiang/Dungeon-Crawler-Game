@@ -35,10 +35,7 @@ class Floor {
 		vector<string> enemyTurn();
 		Enemy* canPlayerAttack(string direction);
 		ItemDecorator* canPlayerTakePotion(string direction);
-		ItemDecorator* canPlayerFetchGold(string direction);
 		
-
-
 	private:
 		int locateChamber(int i, int j);
 		Cell* cells[MAX_ROW][MAX_COLUMN];
