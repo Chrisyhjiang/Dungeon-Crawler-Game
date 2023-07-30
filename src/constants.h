@@ -24,12 +24,6 @@ const int ENEMY_ELF_DISTRIBUTION = 14;
 const int ENEMY_ORC_DISTRIBUTION = 16;
 const double POTION_MAGNIFY = 1.5;
 
-// const int ENEMY_HUMAN_DISTRIBUTION = 1;
-// const int ENEMY_DWARF_DISTRIBUTION = 13;
-// const int ENEMY_HALFLING_DISTRIBUTION = 15;
-// const int ENEMY_ELF_DISTRIBUTION = 15;
-// const int ENEMY_ORC_DISTRIBUTION = 16;
-
 
 // constants for players
 const string SHADE = "Shade";

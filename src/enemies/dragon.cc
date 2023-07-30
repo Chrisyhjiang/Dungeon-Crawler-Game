@@ -16,15 +16,10 @@ void Dragon::setTreasureHoard(DragonTreasure* hoard){
     this->hoard = hoard;
 }
 
-void Dragon::guard(){
-    
-}
-
  bool Dragon::isMovable(){
     return false;
  }
 
-bool Dragon::isPlayerInRange(int px, int py) {
-    // TODO INCLUDE DRAGON HOARD ENTITY LOCATION. 
+bool Dragon::isPlayerInRange(int px, int py) { 
     return Enemy::isPlayerInRange(px, py);
 }

@@ -86,14 +86,11 @@ void ChamberCrawler::goToNextFloor() {
 		cout << "Your score is: " << Player::getInstance()->getScore() << endl;
 		restartOrQuit();
 	} else {
-		// Carry over stats for next floor.
-		// Player *player = Player::getInstance()->getBarePlayer();
-		// Player::setInstance(player);
+	
         Player* player = Player::getInstance();
         player->setCellSymbol(SYM_TILE);
         player->setAtk(player->getDefaultAtk());
         player->setDef(player->getDefaultDef());
-        //delete floor;
         loadFloor();
 	}
    
@@ -125,8 +122,6 @@ void ChamberCrawler::restartOrQuit() {
 
 void ChamberCrawler::restartGame() {
     restart = false;
-	// delete floor;
-	// delete floorStream;
 	level = 1;
     Player::setInstance();
 	Player::getInstance()->setCellSymbol(SYM_TILE);
@@ -136,17 +131,6 @@ void ChamberCrawler::restartGame() {
 
 void ChamberCrawler::play(){
    while(true){
-        // if(nextFloor){
-        //     goToNextFloor();
-        // }
-        // if (restart){
-        //     restart = false;
-        //     restartGame();
-        // }
-        // if(quit){
-        //     cout << "Thank You for playing..." << endl;
-        // }
-
         string actionMsg = "";
         actionMsg += playerTakeTurn();
         if(canEnemyTakeTurn){
@@ -256,7 +240,6 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
         Player* player = Player::getInstance();
         int HP = enemy->getHP();
         int damage = player->calculateDmgToEnemy(enemy->getDef());
-        // enemy->takeDamage(damage);
         player->attackEnemy(enemy);
         if(Player::getRace() == TROLL && player->getHP() < player->getDefaultHP()){
             actionMsg += "Player gain HP | ";

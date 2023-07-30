@@ -35,8 +35,6 @@ Floor::~Floor() {
     }
 }
 
-
-
 bool Floor::isValidSymbol(char symbol){
     return symbol == SYM_TILE || symbol == SYM_PLAYER || Enemy::isEnemy(symbol) || symbol == SYM_STAIRS ||
                  Potion::isPotion(symbol) || Treasure::isTreasure(symbol);

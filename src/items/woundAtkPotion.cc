@@ -1,6 +1,5 @@
 #include "woundAtkPotion.h"
 
-
 WoundAtkPotion::WoundAtkPotion(Player* p, double magnify) : Potion (p, POTION_WA, magnify) {}
 
 WoundAtkPotion::~WoundAtkPotion(){}

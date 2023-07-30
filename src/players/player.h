@@ -21,9 +21,10 @@ class Player : public Character{
         char cellSymbol;
         static Player *instance;
         static string race;
+    protected:
+        Player(int hp, int atk, int def, string race, int maxHP, int gold);
         
     public:
-        Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player() override;
         void move(Cell* nextCell, bool canPickupGold);
         int getGold();

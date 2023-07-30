@@ -10,6 +10,4 @@ class RestoreHealthPotion : public Potion {
         void update();
 };
 
-
-
 #endif

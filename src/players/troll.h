@@ -2,7 +2,6 @@
 #define ___TROLL_H___
 
 #include "player.h"
-#include <algorithm>
 
 class Troll : public Player {
     public:

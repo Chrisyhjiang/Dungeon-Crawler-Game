@@ -14,7 +14,6 @@ class Dragon : public Enemy {
         ~Dragon();
         DragonTreasure* getHoard();
         void setTreasureHoard(DragonTreasure* hoard);
-        void guard();
         bool isMovable() override;
         bool isPlayerInRange(int px, int py) override;
 };

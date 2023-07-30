@@ -17,6 +17,4 @@ class Potion : public ItemDecorator {
         static Potion* createPotion(Player* player, char symbol, double magnify);
 };
 
-
-
 #endif

@@ -10,6 +10,4 @@ class BoostAtkPotion : public Potion {
         void update();
 };
 
-
-
 #endif

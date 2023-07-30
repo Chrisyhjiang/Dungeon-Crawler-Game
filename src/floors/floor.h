@@ -45,7 +45,6 @@ class Floor {
 										{ENEMY_DWARF, ANSI_RED}, {ENEMY_ELF, ANSI_RED}, {ENEMY_HUMAN, ANSI_RED}, 
 										{ENEMY_ORC, ANSI_RED}, {ENEMY_HALFING, ANSI_RED}};
 
-		//int level;
 		void spawnEnemies();
 		void spawnPotions();
 		void spawnTreasures();

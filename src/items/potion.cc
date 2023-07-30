@@ -51,22 +51,3 @@ Potion* Potion::createPotion(Player* player, char symbol, double magnify ){
     p->setSymbol(SYM_POTION);
     return p;
 }
-
-    // if (m == 0) {
-    //    potion = new BoostAtkPotion(player, mag);  
-    // } else if (m == 1) {
-    //     potion = new WoundAtkPotion(player, mag);
-    // } else if (m == 2) {
-    //     potion = new BoostDefPotion(player, mag);
-    // } else if (m == 3) {
-    //     potion = new WoundDefPotion(player, mag);
-    // } else if (m == 4) {
-    //     potion = new RestoreHealthPotion(player, mag);
-    // } else {
-    //     potion = new PoisonHealthPotion(player, mag);
-    // }
-    // cell->setSymbol(SYM_POTION);
-    // cell->setEntity(potion);
-    // potion->setX(cell->getRow());
-    // potion->setY(cell->getCol());
-    // potion->setSymbol(SYM_POTION);

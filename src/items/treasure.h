@@ -3,7 +3,6 @@
 
 #include "itemDecorator.h"
 
-
 class Treasure : public ItemDecorator {
     private:
         int gold;
@@ -16,7 +15,5 @@ class Treasure : public ItemDecorator {
         static bool isTreasure(char sym);
         static Treasure* createTreasure(Player* player, char symbol);
 };
-
-
 
 #endif

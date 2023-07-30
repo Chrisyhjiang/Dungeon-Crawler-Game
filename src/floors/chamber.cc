@@ -29,8 +29,6 @@ void Chamber::renderEnemy() {
     enemy->setY(cell->getCol());
 }
 
-
-
 ItemDecorator* Chamber::renderTreasure() {
     Cell* cell = getRandomCell();
     int m = rand() % 8;
@@ -112,7 +110,6 @@ Cell* Chamber::getRandomCell(){
     }while(cell->isOccupied());
     return cell;
 }
-
 
 int Chamber::getChamberID(){
     return id;

@@ -1,13 +1,9 @@
 #include "enemy.h"
 #include "algorithm"
 
-
-//Enemy::Enemy(int hp, int atk, int def, string race) : Character(hp, atk, def, race){};
 Enemy::Enemy(int hp, int atk, int def, string race, char symbol) : Character(hp, atk, def, race), symbol(symbol){}
 
-Enemy::~Enemy(){
-    //Todo:
-}
+Enemy::~Enemy(){}
 
 char Enemy::getSymbol(){
     return symbol;
