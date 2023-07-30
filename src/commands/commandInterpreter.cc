@@ -13,9 +13,10 @@ CommandInput* CommandInterpreter::parseCommand(string line){
     vector<string> tokens;
     istringstream iss(line);
     string token;
-    while (getline(iss, token, ' ')) {
+    while (iss >> token) {
         tokens.push_back(token);
     }
+
     CommandInput* cmd = new  CommandInput("", "", false); 
     if(tokens.size() == 1){
         string first = tokens.at(0);
@@ -64,8 +65,11 @@ string CommandInterpreter::executeCommand(string line){
 
         if(cmd){
             result = cmd->execute();
+            delete cmd;
+            
         }
     }
+    delete cmdInput;
     return result;
     
 }

@@ -115,19 +115,17 @@ void Player::setCellSymbol(char symbol){
 void Player::move (Cell* nextCell, bool canPickupGold) {
     if(canPickupGold){
         Entity* entity = nextCell->getEntity();
-       
-            Treasure* treasure = dynamic_cast<Treasure*>(entity);
-            if(treasure){
-                this->setGold(this->getGold() + treasure->getGold());
-                cellSymbol = SYM_TILE;
-            }
+        Treasure* treasure = dynamic_cast<Treasure*>(entity);
+        if(treasure){
+            this->setGold(this->getGold() + treasure->getGold());
+            cellSymbol = SYM_TILE;
+            delete treasure;
+        }
     }else{
-         cellSymbol = nextCell->getSymbol();
-
+        cellSymbol = nextCell->getSymbol();
     }
     this->setX(nextCell->getRow());
     this->setY(nextCell->getCol());
-   
     nextCell->setSymbol(SYM_PLAYER);
     nextCell->setEntity(this);
 }

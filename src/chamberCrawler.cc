@@ -37,7 +37,8 @@ void  ChamberCrawler::setGameRace(){
     string input;
     
     while (true) {
-        std::getline(std::cin, input);
+        // remove the leading space
+        std::getline(std::cin >> std::ws, input);
         if(input == string(1, SHADE_SYM) || input == string(1, DROW_SYM) || input == string(1, VAMP_SYM) || 
           input == string(1, TROLL_SYM) || input == string(1, GOBLIN_SYM)) {
             break;
@@ -176,8 +177,9 @@ string ChamberCrawler::playerTakeTurn(){
         cout << "enter a valid command: " ;
         string line;
         std::getline(std::cin, line);
-        CommandInterpreter* ci = new CommandInterpreter(this);
-        msg = ci->executeCommand(line);
+        // CommandInterpreter* ci = new CommandInterpreter(this);
+        CommandInterpreter ci(this);
+        msg = ci.executeCommand(line);
         if(msg != ""){
             if(msg == CMD_EXIT){
                 exit(0);
@@ -187,6 +189,7 @@ string ChamberCrawler::playerTakeTurn(){
         }else {
             cout << "invalid command ...." << endl;
         }
+        //delete ci;
     }
     return msg;
 }

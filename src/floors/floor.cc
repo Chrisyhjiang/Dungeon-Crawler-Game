@@ -257,6 +257,7 @@ vector<string> Floor::enemyTurn(){
                   Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
                   if(enemy && !enemy->hasMoved()){
                     if (enemy->isDead()) {
+                        // enemy dead
                         Goblin* g = dynamic_cast<Goblin*>(p);
                         if (g) {
                             p->setGold(p->getGold() + 5);
@@ -275,10 +276,12 @@ vector<string> Floor::enemyTurn(){
                         } else {
                             current->setSymbol(SYM_TILE);
                             current->setEntity(nullptr);
-                            continue;
                         }
+                        delete enemy;
+                        continue;
                     }
                     if (enemy->isPlayerInRange(p->getX(), p->getY())) {
+                        // enemy attack
                         Merchant* m = dynamic_cast<Merchant*>(current->getEntity());
                         if (!m || Merchant::isHostile()) {
                             int x = enemy->attackPlayer(p->getRace(), p->getDef());
@@ -292,6 +295,7 @@ vector<string> Floor::enemyTurn(){
                             msg.push_back(s);
                         }
                     } else {
+                        // enemy move
                         Dragon* dragon = dynamic_cast<Dragon*>(enemy);
                         if(!dragon){
                             bool done = false;

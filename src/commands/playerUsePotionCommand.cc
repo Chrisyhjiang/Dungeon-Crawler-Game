@@ -10,6 +10,7 @@ string PlayerUsePotionCommand::execute(){
         if(potion){  
             potion->update();
             actionMsg = "PC uses: " + potion->getName() + ".\n";
+            delete potion;
         }
     }
     return actionMsg;
