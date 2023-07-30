@@ -1,8 +1,8 @@
 For the demo, make sure to show:
 - Whenever the game restarts or starts (not when the user quits (q)), the program prompts the user to select one of 5 races.
-- If the player character tries to move toward a wall or invalid part of the floor map, enters an invalid command, or
-  attempts to attack/use an enemy/potion that does not exist in the specified direction, the program will not count it as an action
-  (everything on the floor doesn't move) and will prompt the user for another command.
+- If the player character tries to move toward a tile that a wall/enemy/potion occupies or invalid part of the floor map,
+  enters an invalid command, or attempts to attack/use an enemy/potion that does not exist in the specified direction,
+  the program will not count it as an action (everything on the floor doesn't move) and will prompt the user for another command.
 - If the command 'f' is entered by the user, all enemies will freeze and be unable to attack the PC even within a 1 block radius of any enemy.
   The player character is able to attack and slay any enemy, once 'f' is entered again, enemy attack and random movement resumes.
 - 
