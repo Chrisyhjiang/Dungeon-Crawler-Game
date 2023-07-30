@@ -2,8 +2,6 @@
 #define ___ORC_H___
 
 #include "enemy.h"
-#include "../constants.h"
-#include "../players/player.h"
 
 class Orc : public Enemy {
     public:

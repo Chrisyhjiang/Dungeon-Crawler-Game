@@ -2,17 +2,7 @@
 
 Chamber::Chamber(int id) : id{id}{}
 
-Chamber::~Chamber() {
-    while (!chamberCells.empty()) {
-        Cell *c = chamberCells.back();
-        delete c;
-        chamberCells.pop_back();
-    }
-}
-
-vector<Cell*> Chamber::getCells(){
-    return chamberCells;
-}
+Chamber::~Chamber() {}
 
 void Chamber::renderEnemy() {
     int m = rand() % TOTAL_PROBABILITY_DISTRIBUTION;
@@ -120,7 +110,6 @@ Cell* Chamber::getRandomCell(){
     }while(cell->isOccupied());
     return cell;
 }
-
 
 int Chamber::getChamberID(){
     return id;

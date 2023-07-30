@@ -4,9 +4,7 @@ Orc::Orc(string race) : Enemy(180, 30, 25, race, ENEMY_ORC){};
 
 Orc::Orc(int hp, int atk, int def, string race, char symbol, double extraDamage) : Enemy(hp, atk, def, race, symbol){};
 
-Orc::~Orc(){
-    //Todo:
-}
+Orc::~Orc(){}
 
 int Orc::calculateDamageToPlayer(string playerRace, int playerDef){
     int dmg = Enemy::calculateDamageToPlayer(playerRace, playerDef);

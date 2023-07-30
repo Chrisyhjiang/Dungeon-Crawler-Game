@@ -24,20 +24,18 @@ class Chamber;
 class Floor {
 
 	public:
-		Floor(int level);
+		Floor();
 		~Floor();
 		void loadFromFile(std::ifstream *floorStream);
-		void displayFloor(string actionMsg);
+		void displayFloor(string actionMsg, int level);
         Cell *getCell(int i, int j);
 		void spawnFloor();
 		void spawnPlayers();
-		bool movePlayer(string direction);
-		string enemyTurn();
-		int getLevel();
-		void setLevel(int n);
+		string movePlayer(string direction);
+		vector<string> enemyTurn();
 		Enemy* canPlayerAttack(string direction);
 		ItemDecorator* canPlayerTakePotion(string direction);
-		ItemDecorator* canPlayerFetchGold(string direction);
+		
 	private:
 		int locateChamber(int i, int j);
 		Cell* cells[MAX_ROW][MAX_COLUMN];
@@ -47,7 +45,6 @@ class Floor {
 										{ENEMY_DWARF, ANSI_RED}, {ENEMY_ELF, ANSI_RED}, {ENEMY_HUMAN, ANSI_RED}, 
 										{ENEMY_ORC, ANSI_RED}, {ENEMY_HALFING, ANSI_RED}};
 
-		int level;
 		void spawnEnemies();
 		void spawnPotions();
 		void spawnTreasures();
@@ -58,6 +55,9 @@ class Floor {
 		Cell* getNeighbourCell(string direction, Entity* entity);
 		bool hasDragonGuardTreasure(DragonTreasure* gold);
 		bool canPlayerPickUpGold(Cell* cell);
+		bool isValidSymbol(char s);
+		bool hasUnknownPotion(Cell* cell);
+		Cell* getNextCellWithDirection(string dir, int nextRow, int nextCol);
 
 };
 #endif

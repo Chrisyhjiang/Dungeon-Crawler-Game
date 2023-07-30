@@ -21,17 +21,15 @@ class Player : public Character{
         char cellSymbol;
         static Player *instance;
         static string race;
+    protected:
+        Player(int hp, int atk, int def, string race, int maxHP, int gold);
         
     public:
-        Player(int hp, int atk, int def, string race, int maxHP, int gold);
         ~Player() override;
         void move(Cell* nextCell, bool canPickupGold);
-        void useItem(string dir);
         int getGold();
         void setGold(int g);
         virtual void attackEnemy(Enemy *en);
-        bool isEnemyInRange();
-        void magnifyPotion(double m);
         int getMaxHp();
         void setMaxHp(int maxHp);
         void takeDamage(int dmg);
@@ -41,6 +39,7 @@ class Player : public Character{
         static Player* getInstance();
         static void setInstance();
         char getCellSymbol();
+        int getScore();
         void setCellSymbol (char symbol);
         static void setRace(string race);
         static string getRace();

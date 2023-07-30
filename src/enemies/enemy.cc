@@ -1,12 +1,9 @@
 #include "enemy.h"
+#include "algorithm"
 
-
-//Enemy::Enemy(int hp, int atk, int def, string race) : Character(hp, atk, def, race){};
 Enemy::Enemy(int hp, int atk, int def, string race, char symbol) : Character(hp, atk, def, race), symbol(symbol){}
 
-Enemy::~Enemy(){
-    //Todo:
-}
+Enemy::~Enemy(){}
 
 char Enemy::getSymbol(){
     return symbol;
@@ -14,6 +11,11 @@ char Enemy::getSymbol(){
 
 void Enemy::setSymbol(char symbol){
     this->symbol = symbol;
+}
+
+bool Enemy::isEnemy(char symbol){
+    auto it = std::find(begin(ENEMY_SYMS), std::end(ENEMY_SYMS), symbol);
+    return (it != std::end(ENEMY_SYMS));
 }
 
 int Enemy::attackPlayer(string playerRace, int playerDef){

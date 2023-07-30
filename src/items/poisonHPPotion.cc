@@ -6,5 +6,6 @@ PoisonHealthPotion::~PoisonHealthPotion(){}
 
 void PoisonHealthPotion::update() {
     Player* player = this->getTarget();
-    player->setHP(player->getHP() - 10 * this->getMagnify());
+    int hp = std::max(0, (int)(player->getHP() - 10 * this->getMagnify()));
+    player->setHP(hp);
 }

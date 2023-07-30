@@ -9,11 +9,8 @@
 #include "merchant.h"
 #include "orc.h"
 #include "dragon.h"
-#include "../constants.h"
 
 using namespace std;
-
- 
 
 class EnemyFactory{
     public:

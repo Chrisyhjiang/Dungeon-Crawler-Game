@@ -18,6 +18,10 @@
 22. Goblin steal gold                                   - done
 23. Troll gain HP every turn                            - done
 24. Vampire HP Buff                                     - done
+25. added endgame score display                         - done
+26. implementing the restart button (r)                  
+27. implementing the freeze button (f)
+28. change 1,2,3,4,5 to respective symbols                  
 
 Todo:
 1. Final UML
