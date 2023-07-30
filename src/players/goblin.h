@@ -6,6 +6,7 @@
 class Goblin : public Player {
     public:
         Goblin();
+        void stealGoldOnEnemySlain() override;
 };
 
 #endif

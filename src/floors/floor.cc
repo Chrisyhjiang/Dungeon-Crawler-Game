@@ -258,10 +258,7 @@ vector<string> Floor::enemyTurn(){
                   if(enemy && !enemy->hasMoved()){
                     if (enemy->isDead()) {
                         // enemy dead
-                        Goblin* g = dynamic_cast<Goblin*>(p);
-                        if (g) {
-                            p->setGold(p->getGold() + 5);
-                        }
+                        p->stealGoldOnEnemySlain();
                         string s = string(1, enemy->getSymbol()) + " was slain!";
                         msg.push_back(s);
                         Human* h = dynamic_cast<Human*>(enemy);

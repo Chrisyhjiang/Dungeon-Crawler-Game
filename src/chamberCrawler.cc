@@ -125,15 +125,15 @@ void ChamberCrawler::restartGame() {
     restart = false;
 	level = 1;
     Player::setInstance();
-	Player::getInstance()->setCellSymbol(SYM_TILE);
 	start(floorLayoutFile, true);
+	Player::getInstance()->setCellSymbol(SYM_TILE);
 }
 
 void ChamberCrawler::play(){
    while(true){
         string actionMsg = "";
         actionMsg += playerTakeTurn();
-        actionMsg +=enemiesTakeTurn();
+        actionMsg += enemiesTakeTurn();
         Player* player = Player::getInstance();
         if (player->isDead()) {
             floor->displayFloor(actionMsg, level);

@@ -70,6 +70,8 @@ bool Player::isDead() {
     return getHP() == 0;
 }
 
+void Player::stealGoldOnEnemySlain(){}
+
 void Player::attackEnemy(Enemy* enemy){
     Halfling* h = dynamic_cast<Halfling*>(enemy);
     if (h) {
