@@ -1,13 +1,24 @@
 Specifications:
 
 Player Character (@):
-- check starting stats of all races
-- shade   (125 HP 25 ATK 25 DEF)
-- drow    (150 HP 25 ATK 15 DEF) potion effects are multiplied by 1.5
-- vampire ( 50 HP 25 ATK 25 DEF) gains 5 HP after each successful attack, no cap on HP
-- troll   (120 HP 25 ATK 15 DEF) gains 5 HP each turn, HP cap at 120
-- goblin  (110 HP 15 ATK 20 DEF) steals 5 gold from each slain enemy
-- HP cap at starting HP for all except vampire
+x check starting stats of all races
+x shade   (125 HP 25 ATK 25 DEF)
+x drow    (150 HP 25 ATK 15 DEF) potion effects are multiplied by 1.5
+    x RH
+    x BA
+    x BD
+    x PH
+    x WA
+    x WD
+x vampire ( 50 HP 25 ATK 25 DEF) gains 5 HP after each successful attack, no cap on HP
+x troll   (120 HP 25 ATK 15 DEF) gains 5 HP each turn, HP cap at 120
+x goblin  (110 HP 15 ATK 20 DEF) steals 5 gold from each slain enemy
+x HP cap at starting HP for all except vampire
+    x shade
+    x drow
+    x vampire
+    x troll
+    x goblin
 
 Enemies:
 - check that all enemies except for dragons move one square randomly within the confines of the chamber they were spawned in
@@ -92,11 +103,11 @@ Command Interpreter:
     - test standing over enemy (should not be able to)
     - test standing over enemy after killed
 - s, d, v, g, t: specifies race when starting a game
-- f: stops enemies from moving until key is pressed again
-- r: restarts the game, make sure stats, inventory and gold are reset. New race should be selected
-- q or EOF causes termination, does not give option of playing again
-- game continues until player restarts, reaches end of floor 5, player dies, or player quits
-- game gives option to play again or quit if player reaches end of floor 5 or player dies
+x f: stops enemies from moving until key is pressed again
+x r: restarts the game, make sure stats, inventory and gold are reset. New race should be selected
+x q or EOF causes termination, does not give option of playing again
+x game continues until player restarts, reaches end of floor 5, player dies, or player quits
+x game gives option to play again or quit if player reaches end of floor 5 or player dies
 - supplying valid race selection will start game using that race, other values will be ignored
 
 Ending the Game and Scoring:
