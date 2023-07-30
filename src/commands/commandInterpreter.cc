@@ -80,8 +80,3 @@ bool CommandInterpreter::isValidDirection(string direction){
     return itr != end(DIRECTIONS);
 }
 
-// bool CommandInterpreter::isValidRaceCmd(string cmd){
-//     return (cmd == CMD_SHADE) || (cmd == CMD_DROW) || (cmd == CMD_VAMP) || (cmd == CMD_TROLL) || 
-//            (cmd == CMD_GOBLIN) || (cmd == CMD_EXIT || (cmd == CMD_RESTART));
-// }
-

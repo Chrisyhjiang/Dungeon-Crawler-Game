@@ -22,7 +22,6 @@ class CommandInterpreter {
         string executeCommand(string s);
         bool isValidCmd(string cmd);
         bool isValidDirection(string direction);
-        bool isValidRaceCmd(string cmd);
 };
 
 #endif
