@@ -41,6 +41,7 @@ bool Floor::isValidSymbol(char symbol){
 }
 void Floor::loadFromFile(ifstream *floorStream) {
     string line;
+    Player* player = Player::getInstance();
     for (int i = 0; i < MAX_ROW; i++) {
         getline(*floorStream, line);
         for (int j = 0; j < MAX_COLUMN; j++) {
@@ -53,7 +54,7 @@ void Floor::loadFromFile(ifstream *floorStream) {
                 if( symbol == SYM_TILE){
                     cells[i][j]->setEntity(nullptr);
                 } else if( symbol == SYM_PLAYER ){
-                    Player* player = Player::getInstance();
+                    // Player* player = Player::getInstance();
                     player->setX(i);
                     player->setY(j);
                     player->setCellSymbol(SYM_TILE);
@@ -68,15 +69,13 @@ void Floor::loadFromFile(ifstream *floorStream) {
                     if(Player::getRace() == DROW){
                         mag = POTION_MAGNIFY;
                     }
-                    
-                        Potion* p = Potion::createPotion(Player::getInstance(), symbol, mag);
-                        cells[i][j]->setEntity(p);
-                        cells[i][j]->setSymbol(SYM_POTION);
-                        p->setX(i);
-                        p->setY(j);
-               
+                    Potion* p = Potion::createPotion(player, symbol, mag);
+                    cells[i][j]->setEntity(p);
+                    cells[i][j]->setSymbol(SYM_POTION);
+                    p->setX(i);
+                    p->setY(j);
                 } else if ( Treasure::isTreasure(symbol)){
-                    Treasure* treasure = Treasure::createTreasure(Player::getInstance(), symbol);
+                    Treasure* treasure = Treasure::createTreasure(player, symbol);
                     cells[i][j]->setEntity(treasure);
                     treasure->setX(cells[i][j]->getRow());
                     treasure->setY(cells[i][j]->getCol());
