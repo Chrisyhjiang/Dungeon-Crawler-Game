@@ -33,20 +33,23 @@ void  ChamberCrawler::setGameRace(){
     for(int i = 0; i < 5; i++){
         cout << "enter " << PLAYER_SYM[i] << " for choosing " << PLAYERS[i] << endl;
     }
-    char input;
+    string input;
     
     while (true) {
         cin >> input;
-        if(input == SHADE_SYM || input == DROW_SYM || input == VAMP_SYM || input == TROLL_SYM || input == GOBLIN_SYM) {
+        if(input == string(1, SHADE_SYM) || input == string(1, DROW_SYM) || input == string(1, VAMP_SYM) || 
+          input == string(1, TROLL_SYM) || input == string(1, GOBLIN_SYM)) {
             break;
-        } else if (std::string(1, input) == CMD_RESTART) {
+        } else if (input == CMD_RESTART) {
             restartGame();
+        } else if (input == CMD_EXIT){
+            exit(0);
         }else {
             std::cout << "Invalid input. Please enter a valid game race: " << endl;
         }   
     }
     
-    switch (input){
+    switch (input[0]){
         case SHADE_SYM :
             Player::setRace(SHADE);
             break;
