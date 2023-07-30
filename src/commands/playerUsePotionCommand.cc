@@ -1,4 +1,4 @@
-#include "playerUsePotion.h"
+#include "playerUsePotionCommand.h"
 
 PlayerUsePotionCommand::PlayerUsePotionCommand(ChamberCrawler* game, string direction) : game(game), direction(direction) {};
 

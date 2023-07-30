@@ -2,7 +2,7 @@
 #include "commandInterpreter.h"
 #include "playerMoveCommand.h"
 #include "playerAttackCommand.h"
-#include "playerUsePotion.h"
+#include "playerUsePotionCommand.h"
 #include "restartCommand.h"
 #include "exitCommand.h"
 #include "freezeCommand.h"
