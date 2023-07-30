@@ -7,8 +7,6 @@
 class Troll : public Player {
     public:
         Troll();
-        //int calculateDmgToEnemy() override;
-        void addReward(Enemy* enemy) override;
 };
 
 #endif

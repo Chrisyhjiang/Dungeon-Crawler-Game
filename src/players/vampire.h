@@ -6,8 +6,6 @@
 class Vampire : public Player {
     public:
         Vampire();
-        //int calculateDmgToEnemy() override;
-        void addReward(Enemy* enemy) override;
         void attackEnemy(Enemy* enemy) override;
         
 };
