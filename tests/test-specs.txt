@@ -1,2 +1,5 @@
+For the demo, make sure to show:
+
 File arguments and the specifications that each focuses on:
-layout-5floors-test1.txt - 
+layout-5floors-test1.txt - the player character is able to beat the game through the different floors via stairs
+layout-5floors-test2.txt - 
