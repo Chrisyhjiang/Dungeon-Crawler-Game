@@ -285,9 +285,6 @@ vector<string> Floor::enemyTurn(){
                             string s = string(1, enemy->getSymbol());
                             if (x > 0) {
                                 p->takeDamage(x);
-                                // msg += " dealt " + std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
-                                //                     + " damage to player\n";
-
                                 s += " dealt " + std::to_string(x) + " damage to player";
                             } else {
                                 s += " missed";
@@ -385,28 +382,6 @@ Cell* Floor::getNeighbourCell(string dir, Entity* entity){
     int nextRow = entity->getX();
     int nextCol = entity->getY();
     return getNextCellWithDirection(dir, nextRow, nextCol);
-    // if ( dir == NORTH){
-    //     nextRow--;
-    // } else if ( dir == SOUTH){
-    //     nextRow++;
-    // } else if ( dir == EAST) {
-    //     nextCol++;
-    // } else if ( dir == WEST) {
-    //     nextCol--;
-    // } else if ( dir == NORTH_EAST) {
-    //     nextRow--;
-    //     nextCol++;
-    // } else if ( dir == NORTH_WEST ) {
-    //     nextRow--;
-    //     nextCol--;
-    // } else if ( dir == SOUTH_EAST ) {
-    //     nextRow++;
-    //     nextCol++;
-    // } else if ( dir == SOUTH_WEST ) {
-    //     nextRow++;
-    //     nextCol--;
-    // }
-    // return cells[nextRow][nextCol];
 }
 
 Cell* Floor::getNextCellWithDirection(string dir, int nextRow, int nextCol){
