@@ -39,8 +39,5 @@ class ChamberCrawler {
 		void setGameRace();
 		void start(string floorFile, bool ignoreSetRace);
 		void loadFloor();
-		void loadAllFloors();
-		void playGame();
-		
 };
 #endif

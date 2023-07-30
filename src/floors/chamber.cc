@@ -4,10 +4,6 @@ Chamber::Chamber(int id) : id{id}{}
 
 Chamber::~Chamber() {}
 
-vector<Cell*> Chamber::getCells(){
-    return chamberCells;
-}
-
 void Chamber::renderEnemy() {
     int m = rand() % TOTAL_PROBABILITY_DISTRIBUTION;
     char enemyType;
