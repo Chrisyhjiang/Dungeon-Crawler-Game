@@ -17,18 +17,12 @@ const int NUM_TREASURES = 10;
 const int TOTAL_PROBABILITY_DISTRIBUTION = 18;
 const int NORMAL_GOLD_DISTRIBUTION = 5;
 const int DRAGON_GOLD_DISTRIBUTION = 6;
-// const int ENEMY_HUMAN_DISTRIBUTION = 4;
-// const int ENEMY_DWARF_DISTRIBUTION = 7;
-// const int ENEMY_HALFLING_DISTRIBUTION = 12;
-// const int ENEMY_ELF_DISTRIBUTION = 14;
-// const int ENEMY_ORC_DISTRIBUTION = 16;
-const double POTION_MAGNIFY = 1.5;
-
-const int ENEMY_HUMAN_DISTRIBUTION = 1;
-const int ENEMY_DWARF_DISTRIBUTION = 13;
-const int ENEMY_HALFLING_DISTRIBUTION = 15;
-const int ENEMY_ELF_DISTRIBUTION = 15;
+const int ENEMY_HUMAN_DISTRIBUTION = 4;
+const int ENEMY_DWARF_DISTRIBUTION = 7;
+const int ENEMY_HALFLING_DISTRIBUTION = 12;
+const int ENEMY_ELF_DISTRIBUTION = 14;
 const int ENEMY_ORC_DISTRIBUTION = 16;
+const double POTION_MAGNIFY = 1.5;
 
 
 // constants for players
@@ -60,12 +54,12 @@ const char SYM_GOLD = 'G';
 const char SYM_POTION = 'P';
 
 // constants for potion and gold
-const string POTION_RH = "Restore health (RH): restore up to 10 HP (cannot exceed maximum prescribed by race)";
-const string POTION_BA = "Boost Atk (BA): increase ATK by 5";
-const string POTION_BD = "Boost Def (BD): increase Def by 5";
-const string POTION_PH = "Poison health (PH): lose up to 10 HP (cannot fall below 0 HP)";
-const string POTION_WA = "Wound Atk (WA): decrease Atk by 5";
-const string POTION_WD = "Wound Def (WD): decrease Def by 5";
+const string POTION_RH = "RH";
+const string POTION_BA = "BA";
+const string POTION_BD = "BD";
+const string POTION_PH = "PH";
+const string POTION_WA = "WA";
+const string POTION_WD = "WD";
 
 
 const string GOLD_SMALL = "GS";
@@ -81,6 +75,8 @@ const char ENEMY_ORC = 'O';
 const char ENEMY_MERCHANT = 'M';
 const char ENEMY_DRAGON = 'D';
 const char ENEMY_HALFING = 'L';
+const char ENEMY_SYMS[] = {ENEMY_HUMAN, ENEMY_DWARF, ENEMY_ELF, ENEMY_ORC, ENEMY_MERCHANT, ENEMY_DRAGON, ENEMY_HALFING };
+
 
 // constants for Gold
 const char SMALL_GOLD = 'S';
@@ -98,10 +94,13 @@ const string NORTH_EAST = "ne";
 const string NORTH_WEST = "nw";
 const string SOUTH_EAST = "se";
 const string SOUTH_WEST = "sw";
+
+
 const string CMD_ATTACK = "a";
 const string CMD_POTION = "u";
 const string CMD_EXIT = "q";
 const string CMD_RESTART = "r";
+const string CMD_FREEZE = "f";
 
 
 const string DIRECTIONS[] = { NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST};

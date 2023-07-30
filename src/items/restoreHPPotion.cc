@@ -7,5 +7,6 @@ RestoreHealthPotion::~RestoreHealthPotion(){}
 
 void RestoreHealthPotion::update() {
     Player* player = this->getTarget();
-    player->setHP(player->getHP() + 10 * this->getMagnify());
+    int hp = std::min(player->getMaxHp(), (int)(player->getHP() + 10 * this->getMagnify()));
+    player->setHP(hp);
 }

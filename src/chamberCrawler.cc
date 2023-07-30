@@ -3,16 +3,28 @@
 #include <algorithm>
 #include "chamberCrawler.h"
 
-ChamberCrawler::ChamberCrawler(){}
+ChamberCrawler::ChamberCrawler() : canEnemyTakeTurn(true), level(1){}
 
 ChamberCrawler::~ChamberCrawler(){
-    //Todo:    
+    delete floor;
+    floorStream->close();
+    delete floorStream;  
 }
 
-void ChamberCrawler::start(string floorFile, int level){
-    floorLayoutFile =  (floorFile == "") ? EMPTY_FLOOR_FILE : floorFile;
+void ChamberCrawler::start(string floorFile, bool ignore){
+ 
+    if( floorFile == ""){
+        floorLayoutFile = EMPTY_FLOOR_FILE;
+        isDefaultFloor = true;
+    }else{
+        floorLayoutFile = floorFile;
+    }
     floorStream = new ifstream(floorLayoutFile);
-    loadFloor(level);
+    if(ignore){
+        setGameRace();
+    }
+   
+    loadFloor();
     play();
 }
 
@@ -21,18 +33,23 @@ void  ChamberCrawler::setGameRace(){
     for(int i = 0; i < 5; i++){
         cout << "enter " << PLAYER_SYM[i] << " for choosing " << PLAYERS[i] << endl;
     }
-    char input;
+    string input;
     
     while (true) {
         cin >> input;
-        if(input == SHADE_SYM || input == DROW_SYM || input == VAMP_SYM || input == TROLL_SYM || input == GOBLIN_SYM) {
+        if(input == string(1, SHADE_SYM) || input == string(1, DROW_SYM) || input == string(1, VAMP_SYM) || 
+          input == string(1, TROLL_SYM) || input == string(1, GOBLIN_SYM)) {
             break;
-        } else {
-            std::cout << "Invalid input. Please enter a valid game race" << endl;
+        } else if (input == CMD_RESTART) {
+            restartGame();
+        } else if (input == CMD_EXIT){
+            exit(0);
+        }else {
+            std::cout << "Invalid input. Please enter a valid game race: " << endl;
         }   
     }
     
-    switch (input){
+    switch (input[0]){
         case SHADE_SYM :
             Player::setRace(SHADE);
             break;
@@ -53,39 +70,89 @@ void  ChamberCrawler::setGameRace(){
     }
 }
 
-void ChamberCrawler::loadFloor(int n){
-    floor = new Floor(n);
+void ChamberCrawler::loadFloor(){
+    floor = new Floor();
     floor->loadFromFile(floorStream);
-    floor->spawnPlayers();
-    floor->spawnFloor();
-    floor->displayFloor("Player character has spawned.");
+    if (isDefaultFloor){
+        floor->spawnPlayers();
+        floor->spawnFloor();
+    }
+    floor->displayFloor("Player character has spawned.", level);
 }
+
+void ChamberCrawler::goToNextFloor() {
+    nextFloor = false;
+    level ++;
+	if (level > MAX_LEVEL) {
+		cout << endl;
+		cout << "you beat the game!!!." << endl;
+		cout << "Your score is: " << Player::getInstance()->getScore() << endl;
+		restartOrQuit();
+	} else {
+	
+        Player* player = Player::getInstance();
+        player->setCellSymbol(SYM_TILE);
+        player->setAtk(player->getDefaultAtk());
+        player->setDef(player->getDefaultDef());
+        loadFloor();
+	}
+   
+}
+
+void ChamberCrawler::restartOrQuit() {
+	string r;
+	getline(cin, r);
+	while (true) {
+		cout << "Restart (r) or Quit (q)?" << endl;
+		string choice;
+		getline(cin, choice);
+		if (tolower(choice[0]) == 'r') {
+			restart = true;
+			break;
+		} else if (tolower(choice[0]) == 'q') {
+			quit = true;
+			break;
+		}
+	}
+      if (restart) {
+                restartGame();
+            } else {
+                cout << "Thanks for playing!!!" << endl;
+                exit(0);
+     }
+}
+
+
+void ChamberCrawler::restartGame() {
+    restart = false;
+	level = 1;
+    Player::setInstance();
+	Player::getInstance()->setCellSymbol(SYM_TILE);
+	start(floorLayoutFile, true);
+}
+
 
 void ChamberCrawler::play(){
    while(true){
         string actionMsg = "";
         actionMsg += playerTakeTurn();
-        actionMsg +=enemiesTakeTurn();
-        //actionMsg.erase(actionMsg.size() - 1);
+        if(canEnemyTakeTurn){
+            actionMsg +=enemiesTakeTurn();
+        }
+       
         Player* player = Player::getInstance();
         if (player->isDead()) {
-            floor->displayFloor(actionMsg);
-            cout << "You Died! Do you want to restart the game? [y/n]" << endl;
-            string x; 
-            while (true) {
-                cin >> x;
-                if (x == "y") {
-                    Player::setInstance();
-                    this->start("", 1);
-                } else if (x == "n") {
-                    exit(0);
-                } else {
-                    cout << "Please input [y/n]" << endl;
-                }
-            }
+            floor->displayFloor(actionMsg, level);
+            cout << "You Died!" << endl; // Do you want to restart the game? [y/n]" << endl;
+            restartOrQuit();
         } else {
             if(player->getCellSymbol() == SYM_STAIRS){
-                if (floor->getLevel() == 5) {
+               // goToNextFloor();
+               if(!isDefaultFloor){
+                    goToNextFloor();
+               }else {
+                    level++;
+                    if (level == 6) {
                     cout << "you beat the game!!!" << endl;
                     int g = player->getGold();
                     if (player->getRace() == "shade") {
@@ -93,13 +160,15 @@ void ChamberCrawler::play(){
                     }
                     cout << "your score for this round is " << g << endl;
                     exit(0);
-                }
-                start("", floor->getLevel()+1);
-                // player->setCellSymbol(SYM_TILE);
+                    }
+                start("", false);
+                player->setCellSymbol(SYM_TILE);
                 player->setAtk(player->getDefaultAtk());
                 player->setDef(player->getDefaultDef());
+               }
+                
             }else{
-                floor->displayFloor(actionMsg);
+                floor->displayFloor(actionMsg, level);
             }
         }
     }
@@ -145,10 +214,10 @@ string ChamberCrawler::playerTakeTurn(){
             } else if ( cmd == CMD_EXIT){
                 exit(0);
             }else if ( cmd == CMD_RESTART) {
-                string x; 
-                Player::setInstance();
-                this->start("", 1);
-            }else {
+                restartGame();
+            } else if ( cmd == CMD_FREEZE) {
+                canEnemyTakeTurn = !canEnemyTakeTurn;
+            } else {
                 msg = floor->movePlayer(cmd);
                 if(msg.size() > 0){
                     break;
@@ -174,7 +243,6 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
         Player* player = Player::getInstance();
         int HP = enemy->getHP();
         int damage = player->calculateDmgToEnemy(enemy->getDef());
-        // enemy->takeDamage(damage);
         player->attackEnemy(enemy);
         if(Player::getRace() == TROLL && player->getHP() < player->getDefaultHP()){
             actionMsg += "Player gain HP | ";
@@ -198,15 +266,15 @@ string ChamberCrawler::processPlayerAttackCmd(string direction){
 string ChamberCrawler::processPlayerUsePotionCmd(string dir){
     string actionMsg = "";
     ItemDecorator* potion = floor->canPlayerTakePotion(dir);
-    if(potion){
+    if(potion){  
         potion->update();
-        actionMsg = "Player take potion: " + potion->getName() + "\n";
+        actionMsg = "PC uses: " + potion->getName() + ".\n";
     }
     return actionMsg;
 }
 
 bool ChamberCrawler::isValidCmd(string cmd){
-    if ( cmd == CMD_ATTACK || cmd == CMD_POTION || cmd == CMD_EXIT || cmd == CMD_RESTART){
+    if ( cmd == CMD_ATTACK || cmd == CMD_POTION || cmd == CMD_EXIT || cmd == CMD_RESTART || cmd == CMD_FREEZE){
         return true;
     }
     auto it = find(std::begin(DIRECTIONS), end(DIRECTIONS), cmd);
@@ -215,11 +283,9 @@ bool ChamberCrawler::isValidCmd(string cmd){
 
 string ChamberCrawler::enemiesTakeTurn(){
     vector<string> msg = floor->enemyTurn();
-    string result = "Action: Enemy ";
-    if(msg.size() == 0){
-        result += "take move randomly...";
-
-    }else {
+    string result = "";
+    if(msg.size() != 0){
+        result = "Action: Enemy ";
         for(string s : msg){
             result += s;
             result += " | ";

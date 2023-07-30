@@ -19,7 +19,8 @@ Player::Player(int hp, int atk, int def, string race, int maxHP, int gold) : Cha
 
 
 Player::~Player() {
-    // todo:
+    delete instance;
+    setInstance();
 }
 
 void Player::setRace(string s){
@@ -53,6 +54,14 @@ void Player::setMaxHp(int mh) {
     maxHp = mh;
 }
 
+int Player::getScore(){
+    int score = gold;
+    if (Player::race == SHADE ){
+        score *= 1.5;
+    }
+    return score;
+
+}
 void Player::takeDamage(int dmg) {
     setHP(std::max(getHP() - dmg, 0));
 }

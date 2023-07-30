@@ -37,7 +37,6 @@ class Chamber {
         void renderEnemy();
         void renderStairs();
         void addCell(Cell* c);
-        vector<Cell*> getCells();
         Cell* getRandomCell();
         int getChamberID();
 };

@@ -28,6 +28,7 @@ class Enemy : public Character{
         void setMoved(bool moved);
         int giveRewardToPlayer();
         void move(Cell* cell);
+        static bool isEnemy(char c);
         virtual bool isMovable() = 0;
         
 };

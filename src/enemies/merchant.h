@@ -15,5 +15,4 @@ class Merchant : public Enemy {
         
 };
 
-
 #endif

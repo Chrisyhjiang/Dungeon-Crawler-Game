@@ -1,11 +1,14 @@
 #include "floor.h"
+#include <map>
 
 using namespace std;
 
 class Chamber;
 class Cell;
 
-Floor::Floor(int level) : level(level) {
+std::map<std::string, std::string> directionMap = {{NORTH, "North"}, {SOUTH, "South"}, {WEST, "West"}, {EAST, "East"},
+{NORTH_WEST, "North West"}, {NORTH_EAST, "North East"}, {SOUTH_WEST, "South West"}, {SOUTH_EAST, "South East"}};
+Floor::Floor() {
 
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
@@ -22,32 +25,66 @@ Floor::~Floor() {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
             delete cells[i][j];
+            cells[i][j] = nullptr;
         }
     }
 
     for (int i = 0; i < MAX_CHAMBERS; i++) {
        delete chambers[i];
+       chambers[i] = nullptr;
     }
 }
 
-int Floor::getLevel(){
-    return level;
-}
-
-void Floor::setLevel(int n){
-    level = n;
+bool Floor::isValidSymbol(char symbol){
+    return symbol == SYM_TILE || symbol == SYM_PLAYER || Enemy::isEnemy(symbol) || symbol == SYM_STAIRS ||
+                 Potion::isPotion(symbol) || Treasure::isTreasure(symbol);
 }
 void Floor::loadFromFile(ifstream *floorStream) {
     string line;
     for (int i = 0; i < MAX_ROW; i++) {
         getline(*floorStream, line);
         for (int j = 0; j < MAX_COLUMN; j++) {
-            cells[i][j] = new Cell(i, j, line[j]);
-            if ( cells[i][j]->getSymbol() == SYM_TILE) {
+            cells[i][j]->setSymbol(line[j]);
+            char symbol = line[j];
+            if (isValidSymbol(symbol)) {
                 int chamberID = locateChamber(i, j);
                 cells[i][j]->setChamberID(chamberID);
                 chambers[chamberID]->addCell(cells[i][j]);
-            } else {
+                if( symbol == SYM_TILE){
+                    cells[i][j]->setEntity(nullptr);
+                } else if( symbol == SYM_PLAYER ){
+                    Player* player = Player::getInstance();
+                    player->setX(i);
+                    player->setY(j);
+                    player->setCellSymbol(SYM_TILE);
+                    cells[i][j]->setEntity(player);
+                } else if ( Enemy::isEnemy(symbol)){
+                    Enemy* enemy = EnemyFactory::createEnemy(symbol, Player::getRace());
+                    cells[i][j]->setEntity(enemy);
+                    enemy->setX(i);
+                    enemy->setY(j);
+                } else if ( Potion::isPotion(symbol)){
+                    double mag = 1;
+                    if(Player::getRace() == DROW){
+                        mag = POTION_MAGNIFY;
+                    }
+                    
+                        Potion* p = Potion::createPotion(Player::getInstance(), symbol, mag);
+                        cells[i][j]->setEntity(p);
+                        cells[i][j]->setSymbol(SYM_POTION);
+                        p->setX(i);
+                        p->setY(j);
+               
+                } else if ( Treasure::isTreasure(symbol)){
+                    Treasure* treasure = Treasure::createTreasure(Player::getInstance(), symbol);
+                    cells[i][j]->setEntity(treasure);
+                    treasure->setX(cells[i][j]->getRow());
+                    treasure->setY(cells[i][j]->getCol());
+                    treasure->setSymbol(SYM_GOLD);
+                    cells[i][j]->setSymbol(SYM_GOLD);
+                }
+            }
+            else {
                  cells[i][j]->setChamberID(-1);
             }
         }
@@ -69,7 +106,7 @@ int Floor::locateChamber(int i, int j) {
     }
 }
 
-void Floor::displayFloor(string actionMsg) {
+void Floor::displayFloor(string actionMsg, int level) {
     for (int i = 0; i < MAX_ROW; i++) {
         for (int j = 0; j < MAX_COLUMN; j++) {
             if (cells[i][j]) {
@@ -87,7 +124,7 @@ void Floor::displayFloor(string actionMsg) {
         cout << endl;
     }
     Player* player = Player::getInstance();
-    cout << "Race: " << Player::getRace() << " Gold: " << player->getGold() << "\t\t\t\t\t\t\tFloor " << getLevel() << endl; 
+    cout << "Race: " << Player::getRace() << " Gold: " << player->getGold() << "\t\t\t\t\t\t\tFloor " << level << endl; 
     cout << "HP: " << player->getHP() << endl;
     cout << "Atk: " << player->getAtk() << endl;
     cout << "Def: " << player->getDef() << endl;
@@ -141,7 +178,7 @@ void Floor::spawnTreasures() {
 }
 
 void Floor::spawnStairs() {
-    Chamber* chamber = getRandomChamber();
+    Chamber* chamber =  getRandomChamber();
     chamber->renderStairs();   
 }
 
@@ -298,24 +335,41 @@ string Floor::movePlayer(string dir){
     string msg = "";
     Player* player = Player::getInstance();
     Cell* nextCell = getNeighbourCell(dir, player);
+
     if(canMovePlayer(nextCell)){
         if(nextCell->getSymbol() == SYM_GOLD){
             bool pickUpGold = canPlayerPickUpGold(nextCell);
             if(pickUpGold){
                 resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
                 player->move(nextCell, canPlayerPickUpGold(nextCell));
-                msg = "Player move to : " + dir + " | player pick up gold\n";
+                msg = "PC move to : " + directionMap[dir] + " | player pick up gold\n";
             }
         }else{
             resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
             player->move(nextCell, false);
-            msg = "Player move to: " + dir + "\n";
-            
+            msg = "PC move to: " + directionMap[dir];
+            if(hasUnknownPotion(nextCell)) {
+                msg += " and see an unknown potion";
+            }
+            msg += "\n";
         }
     }
     return msg;
 }
 
+bool Floor::hasUnknownPotion(Cell* cell){
+    for( string s : DIRECTIONS){
+        Cell* next = getNextCellWithDirection(s, cell->getRow(), cell->getCol());
+        if(next){
+            Entity* e = next->getEntity();
+            Potion* potion = dynamic_cast<Potion*>(e);
+            if(potion){
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 bool Floor::canPlayerPickUpGold(Cell* cell) {
     bool result = false;
@@ -330,6 +384,32 @@ bool Floor::canPlayerPickUpGold(Cell* cell) {
 Cell* Floor::getNeighbourCell(string dir, Entity* entity){
     int nextRow = entity->getX();
     int nextCol = entity->getY();
+    return getNextCellWithDirection(dir, nextRow, nextCol);
+    // if ( dir == NORTH){
+    //     nextRow--;
+    // } else if ( dir == SOUTH){
+    //     nextRow++;
+    // } else if ( dir == EAST) {
+    //     nextCol++;
+    // } else if ( dir == WEST) {
+    //     nextCol--;
+    // } else if ( dir == NORTH_EAST) {
+    //     nextRow--;
+    //     nextCol++;
+    // } else if ( dir == NORTH_WEST ) {
+    //     nextRow--;
+    //     nextCol--;
+    // } else if ( dir == SOUTH_EAST ) {
+    //     nextRow++;
+    //     nextCol++;
+    // } else if ( dir == SOUTH_WEST ) {
+    //     nextRow++;
+    //     nextCol--;
+    // }
+    // return cells[nextRow][nextCol];
+}
+
+Cell* Floor::getNextCellWithDirection(string dir, int nextRow, int nextCol){
     if ( dir == NORTH){
         nextRow--;
     } else if ( dir == SOUTH){
@@ -353,4 +433,6 @@ Cell* Floor::getNeighbourCell(string dir, Entity* entity){
     }
     return cells[nextRow][nextCol];
 }
+
+
 

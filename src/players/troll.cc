@@ -1,13 +1,4 @@
 #include "troll.h"
 
-Troll::Troll() : Player(120, 25, 15, TROLL, 120, 0) {
-   // this->setCellSymbol(SYM_TILE);
-}
+Troll::Troll() : Player(120, 25, 15, TROLL, 120, 0) {}
 
-// int Troll::calculateDmgToEnemy(){
-//     return this->getAtk();
-// }
-
-void Troll::addReward(Enemy* enemy){
-    // no reward to add
-}
