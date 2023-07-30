@@ -21,7 +21,7 @@ x HP cap at starting HP for all except vampire
     x goblin
 
 Enemies:
-- check that all enemies except for dragons move one square randomly within the confines of the chamber they were spawned in
+x check that all enemies except for dragons move one square randomly within the confines of the chamber they were spawned in
 - other than human, dragon and merchants, enemies drop either small or normal pile of gold which is immediately added to player
 - (H) human    (140 HP 20 ATK 20 DEF) drops 2 normal piles of gold
 - (W) dwarf    (100 HP 20 ATK 30 DEF) vampires lose 5 HP instead of gain 5 HP
