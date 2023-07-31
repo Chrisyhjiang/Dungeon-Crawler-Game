@@ -16,5 +16,6 @@ int Elf::attackPlayer(string playerRace, int playerDef) {
 }
 
 int Elf::dropGoldOnDeath(Cell* cell){
-    return 2 + Enemy::dropGoldOnDeath(cell);
+    int n = rand() % 2 + 1;
+    return n + Enemy::dropGoldOnDeath(cell);
 }

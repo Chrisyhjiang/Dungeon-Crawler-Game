@@ -9,5 +9,6 @@ bool Dwarf::isMovable(){
 }
 
 int Dwarf::dropGoldOnDeath(Cell* cell){
-    return 2 + Enemy::dropGoldOnDeath(cell);
+    int n = rand() % 2 + 1;
+    return n + Enemy::dropGoldOnDeath(cell);
 }
