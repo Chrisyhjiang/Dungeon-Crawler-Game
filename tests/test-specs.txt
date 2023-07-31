@@ -28,3 +28,5 @@ test10.txt - Combat and Potions: Def = 100 (Shade vs. all enemies, PC takes half
             // floor 4: combat with Orcs and Halfling
             // floor 5: combat with Merchant and Dragon
 test11.txt - 
+Drow:
+
