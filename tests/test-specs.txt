@@ -7,4 +7,5 @@ test4.txt - the Shade reaches the 5th floor and the lifetime score is increased 
 test5.txt - demonstrates the use of each potion (BA, BD, WA, WD are limited to one floor)
             (the PC's attack/defense never drops below 0), the 4 types of gold that can be picked up,
             and combat with 2 enemies with boosted attack stats
-test6.txt - 
+test6.txt - Merchants, if attacked/slayed will become hostile to PC
+test7.txt - Dragon guarding Treaure Hoard, and combat with Dragon enemy
