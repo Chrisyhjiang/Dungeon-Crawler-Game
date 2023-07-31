@@ -11,7 +11,7 @@ class Merchant : public Enemy {
         Merchant(int hp, int atk, int def, string race, char symbol);
         ~Merchant();
         static bool isHostile();
-        static void setHostile();
+        static void setHostile(bool b);
         bool isMovable() override;
         int dropGoldOnDeath(Cell* cell) override;  
         

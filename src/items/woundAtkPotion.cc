@@ -6,6 +6,7 @@ WoundAtkPotion::~WoundAtkPotion(){}
 
 void WoundAtkPotion::update() {
     Player* target = this->getTarget();
-    target->setAtk(target->getAtk() - 5 * this->getMagnify());
+    int atk = std::max(0, (int)(target->getAtk() - 5 * this->getMagnify()));
+    target->setAtk(atk);
 }
 
