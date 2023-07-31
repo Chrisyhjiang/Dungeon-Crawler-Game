@@ -174,12 +174,22 @@ void Floor::spawnTreasures() {
                 Cell* cell = getNeighbourCell(dir, dt);
                 if(!cell->isOccupied()){
                     // spawn a dragon to guard the DragonTreasure
+                    // found = true;
+                    // Enemy* enemy = EnemyFactory::createEnemy(ENEMY_DRAGON, Player::getRace());
+                    // cell->setSymbol(ENEMY_DRAGON);
+                    // cell->setEntity(enemy);
+                    // enemy->setX(cell->getRow());
+                    // enemy->setY(cell->getCol());
                     found = true;
                     Enemy* enemy = EnemyFactory::createEnemy(ENEMY_DRAGON, Player::getRace());
+                    Dragon* dragon = dynamic_cast<Dragon*>(enemy);
                     cell->setSymbol(ENEMY_DRAGON);
-                    cell->setEntity(enemy);
-                    enemy->setX(cell->getRow());
-                    enemy->setY(cell->getCol());
+                    if(dragon){
+                        cell->setEntity(dragon);
+                        dragon->setX(cell->getRow());
+                        dragon->setY(cell->getCol());
+                        dragon->setTreasureHoard(dt);
+                    }
                 }
             }
         }
