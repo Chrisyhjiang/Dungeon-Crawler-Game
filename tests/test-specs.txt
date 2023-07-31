@@ -16,6 +16,15 @@ test7.txt - Dragon guarding Treaure Hoard, and combat with Dragon enemy
             // seems as though the PC can't walk over the treasure associated with a still alive Dragon
 test8.txt - Purchasing Potions from Merchant
 test9.txt - Combat and Potions: Def = 0 (Shade vs. all enemies)
-            // floor 1: combat with Human enemy
-            // floor 2: combat with Dwarf enemy
-test10.txt - 
+            // floor 1: combat with Human
+            // floor 2: combat with Dwarf
+            // floor 3: combat with Elf
+            // floor 4: combat with Orcs and Halfling
+            // floor 5: combat with Merchant and Dragon
+test10.txt - Combat and Potions: Def = 100 (Shade vs. all enemies, PC takes half the damage)
+            // floor 1: combat with Human
+            // floor 2: combat with Dwarf
+            // floor 3: combat with Elf
+            // floor 4: combat with Orcs and Halfling
+            // floor 5: combat with Merchant and Dragon
+test11.txt - 
