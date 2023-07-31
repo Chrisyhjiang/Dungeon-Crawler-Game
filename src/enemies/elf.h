@@ -12,6 +12,7 @@ class Elf : public Enemy {
         Elf(int hp, int atk, int def, string race, char symbol, int extraAtk);
         bool isMovable() override;
         virtual int attackPlayer(string playerRace, int playerDef);
+        int dropGoldOnDeath(Cell* cell) override; 
 };
 
 #endif

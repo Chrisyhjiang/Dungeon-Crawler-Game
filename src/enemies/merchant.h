@@ -2,6 +2,7 @@
 #define ___MERCHANT_H___
 
 #include "enemy.h"
+#include "../items/merchantHoard.h"
 
 class Merchant : public Enemy {
     public:
@@ -12,6 +13,7 @@ class Merchant : public Enemy {
         static bool isHostile();
         static void setHostile();
         bool isMovable() override;
+        int dropGoldOnDeath(Cell* cell) override;  
         
 };
 

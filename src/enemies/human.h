@@ -2,6 +2,7 @@
 #define ___HUMAN_H___
 
 #include "enemy.h"
+#include "../items/merchantHoard.h"
 
 class Human: public Enemy{
     private:
@@ -12,6 +13,8 @@ class Human: public Enemy{
         Human(int hp, int atk, int def, string race, char symbol, int goldToDrop);
         ~Human();
         bool isMovable() override;
+        int dropGoldOnDeath(Cell* cell) override;  
+
 };
 
 #endif

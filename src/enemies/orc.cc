@@ -17,3 +17,7 @@ int Orc::calculateDamageToPlayer(string playerRace, int playerDef){
 bool Orc::isMovable(){
     return true;
 }
+
+int Orc::dropGoldOnDeath(Cell* cell){
+    return 2 + Enemy::dropGoldOnDeath(cell);
+}

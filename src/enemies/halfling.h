@@ -3,6 +3,8 @@
 
 #include "enemy.h"
 
+
+
 class Halfling : public Enemy {
     private: 
         double chance;
@@ -15,6 +17,7 @@ class Halfling : public Enemy {
         void setChance(double chance);
         bool chanceToMiss();
         bool isMovable() override;
+        int dropGoldOnDeath(Cell* cell) override; 
 };
 
 #endif

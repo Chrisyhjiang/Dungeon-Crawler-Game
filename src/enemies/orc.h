@@ -10,6 +10,7 @@ class Orc : public Enemy {
         ~Orc();
         int calculateDamageToPlayer(string playerRace, int playerDef) override;
         bool isMovable() override;
+        int dropGoldOnDeath(Cell* cell) override;  
 
 };
 

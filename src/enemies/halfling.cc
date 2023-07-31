@@ -21,7 +21,10 @@ bool Halfling::chanceToMiss(){
     return (rv < chance);
 }
 
-
 bool Halfling::isMovable(){
     return true;
+}
+
+int Halfling::dropGoldOnDeath(Cell* cell){
+    return 2 + Enemy::dropGoldOnDeath(cell);
 }
