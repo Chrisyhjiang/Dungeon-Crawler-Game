@@ -9,3 +9,5 @@ test5.txt - demonstrates the use of each potion (BA, BD, WA, WD are limited to o
             and combat with 2 enemies with boosted attack stats
 test6.txt - Merchants, if attacked/slayed will become hostile to PC
 test7.txt - Dragon guarding Treaure Hoard, and combat with Dragon enemy
+            (the Dragon attacks PC if within 1 block radius of its treasure or itself)
+            // seems as though the PC can't walk over the treasure associated with a still alive Dragon
