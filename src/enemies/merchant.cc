@@ -12,8 +12,8 @@ Merchant::~Merchant(){}
     return hostile;
  }
 
-void  Merchant::setHostile(){
-    hostile = true;
+void  Merchant::setHostile(bool b){
+    hostile = b;
 }
 
 bool Merchant::isMovable(){

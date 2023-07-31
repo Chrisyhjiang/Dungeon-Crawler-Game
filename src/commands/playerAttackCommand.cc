@@ -10,7 +10,7 @@ string PlayerATKCommand::execute(){
         if(enemy){
             Merchant* m = dynamic_cast<Merchant*>(enemy);
             if (m) {
-                Merchant::setHostile();
+                Merchant::setHostile(true);
             }
             Player* player = Player::getInstance();
             int HP = enemy->getHP();

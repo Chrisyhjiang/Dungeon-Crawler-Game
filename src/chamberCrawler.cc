@@ -125,6 +125,7 @@ void ChamberCrawler::restartGame() {
     restart = false;
 	level = 1;
     Player::setInstance();
+    Merchant::setHostile(false);
 	start(floorLayoutFile, true);
 	Player::getInstance()->setCellSymbol(SYM_TILE);
 }

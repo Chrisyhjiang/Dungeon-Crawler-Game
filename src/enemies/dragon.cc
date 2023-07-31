@@ -21,6 +21,11 @@ void Dragon::setTreasureHoard(DragonTreasure* hoard){
  }
 
 bool Dragon::isPlayerInRange(int px, int py) { 
-    // return Enemy::isPlayerInRange(px, py);
-    return Enemy::isPlayerInRange(px, py) || (std::abs(px - hoard->getX()) <= 1 && std::abs(py - hoard->getY()) <= 1);
+    bool res =  Enemy::isPlayerInRange(px, py);
+    if (!res) {
+        if (hoard) {
+            res = (std::abs(px - hoard->getX()) <= 1 && std::abs(py - hoard->getY()) <= 1);
+        }
+    }
+    return res;
 }

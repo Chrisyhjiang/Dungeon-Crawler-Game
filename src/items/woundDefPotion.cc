@@ -6,5 +6,6 @@ WoundDefPotion::~WoundDefPotion(){}
 
 void WoundDefPotion::update() {
     Player* target = this->getTarget();
-    target->setDef(target->getDef() - 5 * this->getMagnify());
+    int def = std::max(0, (int)(target->getDef() - 5 * this->getMagnify()));
+    target->setDef(def);
 }
