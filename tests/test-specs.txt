@@ -2,6 +2,7 @@ File arguments and the specifications that each focuses on:
 test1.txt - the player character is able to beat the game through the different floors via stairs
 test2.txt - tests the restore health potion (RH), combat between 2 enemies (HP does not exceed starting race HP)
 test3.txt - demonstrates the player character's death, program prompts for user to play again
+            // the merchants should be reset after restarting
 Shade:
 test4.txt - the Shade reaches the 5th floor and the lifetime score is increased by 50%
 test5.txt - demonstrates the use of each potion (BA, BD, WA, WD are limited to one floor)
