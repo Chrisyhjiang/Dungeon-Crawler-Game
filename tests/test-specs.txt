@@ -15,4 +15,7 @@ test7.txt - Dragon guarding Treaure Hoard, and combat with Dragon enemy
             (the Dragon attacks PC if within 1 block radius of its treasure or itself)
             // seems as though the PC can't walk over the treasure associated with a still alive Dragon
 test8.txt - Purchasing Potions from Merchant
-test9.txt - Combat and Potions (focuses on Atk and Def numbers), 
+test9.txt - Combat and Potions: Def = 0 (Shade vs. all enemies)
+            // floor 1: combat with Human enemy
+            // floor 2: combat with Dwarf enemy
+test10.txt - 
