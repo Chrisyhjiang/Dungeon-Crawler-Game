@@ -1,3 +1,4 @@
+./main [.TXT FILE] < [.IN FILE]
 File arguments and the specifications that each focuses on:
 test1.txt - the player character is able to beat the game through the different floors via stairs
 test2.txt - tests the restore health potion (RH), combat between 2 enemies (HP does not exceed starting race HP)
@@ -12,3 +13,4 @@ test6.txt - Merchants, if attacked/slayed will become hostile to PC
 test7.txt - Dragon guarding Treaure Hoard, and combat with Dragon enemy
             (the Dragon attacks PC if within 1 block radius of its treasure or itself)
             // seems as though the PC can't walk over the treasure associated with a still alive Dragon
+test8.txt - 
