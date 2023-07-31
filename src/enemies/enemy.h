@@ -30,7 +30,7 @@ class Enemy : public Character{
         void move(Cell* cell);
         static bool isEnemy(char c);
         virtual bool isMovable() = 0;
-        
+        virtual int dropGoldOnDeath(Cell* cell);    
 };
 
 #endif

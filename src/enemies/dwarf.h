@@ -2,6 +2,7 @@
 #define ___DWARF_H___
 
 #include "enemy.h"
+#include "../players/player.h"
 
 class Dwarf : public Enemy {
     public:
@@ -9,7 +10,7 @@ class Dwarf : public Enemy {
         Dwarf(int hp, int atk, int def, string race, char symbol);
         ~Dwarf();
         bool isMovable() override;
-
+        int dropGoldOnDeath(Cell* cell) override; 
 };
 
 #endif

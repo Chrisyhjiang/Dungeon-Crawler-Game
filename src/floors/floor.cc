@@ -260,19 +260,22 @@ vector<string> Floor::enemyTurn(){
                         p->stealGoldOnEnemySlain();
                         string s = string(1, enemy->getSymbol()) + " was slain!";
                         msg.push_back(s);
-                        Human* h = dynamic_cast<Human*>(enemy);
-                        Merchant* m = dynamic_cast<Merchant*>(enemy);
-                        if (h || m) {
-                            Treasure* gold = new MerchantTreasure(p);
-                            current->setSymbol(SYM_GOLD);
-                            current->setEntity(gold);
-                            gold->setX(current->getRow());
-                            gold->setY(current->getCol());
-                            gold->setSymbol(SYM_GOLD);
-                        } else {
-                            current->setSymbol(SYM_TILE);
-                            current->setEntity(nullptr);
-                        }
+                        int k = enemy->dropGoldOnDeath(current);
+                        p->setGold(p->getGold() + k);
+
+                        // Human* h = dynamic_cast<Human*>(enemy);
+                        // Merchant* m = dynamic_cast<Merchant*>(enemy);
+                        // if (h || m) {
+                        //     Treasure* gold = new MerchantTreasure(p);
+                        //     current->setSymbol(SYM_GOLD);
+                        //     current->setEntity(gold);
+                        //     gold->setX(current->getRow());
+                        //     gold->setY(current->getCol());
+                        //     gold->setSymbol(SYM_GOLD);
+                        // } else {
+                        //     current->setSymbol(SYM_TILE);
+                        //     current->setEntity(nullptr);
+                        // }
                         delete enemy;
                         continue;
                     }
