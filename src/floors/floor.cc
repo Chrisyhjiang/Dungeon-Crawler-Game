@@ -39,8 +39,11 @@ bool Floor::isValidSymbol(char symbol){
     return symbol == SYM_TILE || symbol == SYM_PLAYER || Enemy::isEnemy(symbol) || symbol == SYM_STAIRS ||
                  Potion::isPotion(symbol) || Treasure::isTreasure(symbol);
 }
+
+
 void Floor::loadFromFile(ifstream *floorStream) {
     string line;
+    Player* player = Player::getInstance();
     for (int i = 0; i < MAX_ROW; i++) {
         getline(*floorStream, line);
         for (int j = 0; j < MAX_COLUMN; j++) {
@@ -53,7 +56,7 @@ void Floor::loadFromFile(ifstream *floorStream) {
                 if( symbol == SYM_TILE){
                     cells[i][j]->setEntity(nullptr);
                 } else if( symbol == SYM_PLAYER ){
-                    Player* player = Player::getInstance();
+                    // Player* player = Player::getInstance();
                     player->setX(i);
                     player->setY(j);
                     player->setCellSymbol(SYM_TILE);
@@ -63,25 +66,31 @@ void Floor::loadFromFile(ifstream *floorStream) {
                     cells[i][j]->setEntity(enemy);
                     enemy->setX(i);
                     enemy->setY(j);
+                    Dragon* dragon = dynamic_cast<Dragon*>(enemy);
+                    if(dragon){
+                        findDragonHoard(dragon);
+                    }
                 } else if ( Potion::isPotion(symbol)){
                     double mag = 1;
                     if(Player::getRace() == DROW){
                         mag = POTION_MAGNIFY;
                     }
-                    
-                        Potion* p = Potion::createPotion(Player::getInstance(), symbol, mag);
-                        cells[i][j]->setEntity(p);
-                        cells[i][j]->setSymbol(SYM_POTION);
-                        p->setX(i);
-                        p->setY(j);
-               
+                    Potion* p = Potion::createPotion(player, symbol, mag);
+                    cells[i][j]->setEntity(p);
+                    cells[i][j]->setSymbol(SYM_POTION);
+                    p->setX(i);
+                    p->setY(j);
                 } else if ( Treasure::isTreasure(symbol)){
-                    Treasure* treasure = Treasure::createTreasure(Player::getInstance(), symbol);
+                    Treasure* treasure = Treasure::createTreasure(player, symbol);
                     cells[i][j]->setEntity(treasure);
                     treasure->setX(cells[i][j]->getRow());
                     treasure->setY(cells[i][j]->getCol());
                     treasure->setSymbol(SYM_GOLD);
                     cells[i][j]->setSymbol(SYM_GOLD);
+                    DragonTreasure* dt = dynamic_cast<DragonTreasure*>(treasure);
+                    if(dt){
+                        hasDragonGuardTreasure(dt);
+                    }
                 }
             }
             else {
@@ -165,12 +174,22 @@ void Floor::spawnTreasures() {
                 Cell* cell = getNeighbourCell(dir, dt);
                 if(!cell->isOccupied()){
                     // spawn a dragon to guard the DragonTreasure
+                    // found = true;
+                    // Enemy* enemy = EnemyFactory::createEnemy(ENEMY_DRAGON, Player::getRace());
+                    // cell->setSymbol(ENEMY_DRAGON);
+                    // cell->setEntity(enemy);
+                    // enemy->setX(cell->getRow());
+                    // enemy->setY(cell->getCol());
                     found = true;
                     Enemy* enemy = EnemyFactory::createEnemy(ENEMY_DRAGON, Player::getRace());
+                    Dragon* dragon = dynamic_cast<Dragon*>(enemy);
                     cell->setSymbol(ENEMY_DRAGON);
-                    cell->setEntity(enemy);
-                    enemy->setX(cell->getRow());
-                    enemy->setY(cell->getCol());
+                    if(dragon){
+                        cell->setEntity(dragon);
+                        dragon->setX(cell->getRow());
+                        dragon->setY(cell->getCol());
+                        dragon->setTreasureHoard(dt);
+                    }
                 }
             }
         }
@@ -235,11 +254,27 @@ bool Floor::hasDragonGuardTreasure(DragonTreasure* gold){
             Entity* item = cells[x+i][y+j]->getEntity();
             Dragon* dragon = dynamic_cast<Dragon*>(item);
             if(dragon){
+                dragon->setTreasureHoard(gold);
                 return true;
             } 
         }
     }
     return result;
+}
+
+void Floor::findDragonHoard(Dragon* dragon){
+    int x = dragon->getX();
+    int y = dragon->getY();
+    for(int i =-1; i <= 1; i++){
+        for(int j = -1; j <= 1; j++){
+            Entity* item = cells[x+i][y+j]->getEntity();
+            DragonTreasure* gold = dynamic_cast<DragonTreasure*>(item);
+            if(gold){
+                dragon->setTreasureHoard(gold);
+                return;
+            }
+        }
+    }
 }
 
 void Floor::resetCurCell(Cell* cell, char symbol) {
@@ -257,37 +292,38 @@ vector<string> Floor::enemyTurn(){
                   Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
                   if(enemy && !enemy->hasMoved()){
                     if (enemy->isDead()) {
-                        Goblin* g = dynamic_cast<Goblin*>(p);
-                        if (g) {
-                            p->setGold(p->getGold() + 5);
-                        }
+                        // enemy dead
+                        p->stealGoldOnEnemySlain();
                         string s = string(1, enemy->getSymbol()) + " was slain!";
                         msg.push_back(s);
-                        Human* h = dynamic_cast<Human*>(enemy);
-                        Merchant* m = dynamic_cast<Merchant*>(enemy);
-                        if (h || m) {
-                            Treasure* gold = new MerchantTreasure(p);
-                            current->setSymbol(SYM_GOLD);
-                            current->setEntity(gold);
-                            gold->setX(current->getRow());
-                            gold->setY(current->getCol());
-                            gold->setSymbol(SYM_GOLD);
-                        } else {
-                            current->setSymbol(SYM_TILE);
-                            current->setEntity(nullptr);
-                            continue;
-                        }
+                        int k = enemy->dropGoldOnDeath(current);
+                        p->setGold(p->getGold() + k);
+
+                        // Human* h = dynamic_cast<Human*>(enemy);
+                        // Merchant* m = dynamic_cast<Merchant*>(enemy);
+                        // if (h || m) {
+                        //     Treasure* gold = new MerchantTreasure(p);
+                        //     current->setSymbol(SYM_GOLD);
+                        //     current->setEntity(gold);
+                        //     gold->setX(current->getRow());
+                        //     gold->setY(current->getCol());
+                        //     gold->setSymbol(SYM_GOLD);
+                        // } else {
+                        //     current->setSymbol(SYM_TILE);
+                        //     current->setEntity(nullptr);
+                        // }
+                        //current->setEntity(nullptr);
+                        // delete enemy
+                        continue;
                     }
                     if (enemy->isPlayerInRange(p->getX(), p->getY())) {
+                        // enemy attack
                         Merchant* m = dynamic_cast<Merchant*>(current->getEntity());
                         if (!m || Merchant::isHostile()) {
                             int x = enemy->attackPlayer(p->getRace(), p->getDef());
                             string s = string(1, enemy->getSymbol());
                             if (x > 0) {
                                 p->takeDamage(x);
-                                // msg += " dealt " + std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
-                                //                     + " damage to player\n";
-
                                 s += " dealt " + std::to_string(x) + " damage to player";
                             } else {
                                 s += " missed";
@@ -295,6 +331,7 @@ vector<string> Floor::enemyTurn(){
                             msg.push_back(s);
                         }
                     } else {
+                        // enemy move
                         Dragon* dragon = dynamic_cast<Dragon*>(enemy);
                         if(!dragon){
                             bool done = false;
@@ -343,6 +380,8 @@ string Floor::movePlayer(string dir){
                 resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
                 player->move(nextCell, canPlayerPickUpGold(nextCell));
                 msg = "PC move to : " + directionMap[dir] + " | player pick up gold\n";
+            }else{
+                msg = "PC attack by Dragon | ";
             }
         }else{
             resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
@@ -385,28 +424,6 @@ Cell* Floor::getNeighbourCell(string dir, Entity* entity){
     int nextRow = entity->getX();
     int nextCol = entity->getY();
     return getNextCellWithDirection(dir, nextRow, nextCol);
-    // if ( dir == NORTH){
-    //     nextRow--;
-    // } else if ( dir == SOUTH){
-    //     nextRow++;
-    // } else if ( dir == EAST) {
-    //     nextCol++;
-    // } else if ( dir == WEST) {
-    //     nextCol--;
-    // } else if ( dir == NORTH_EAST) {
-    //     nextRow--;
-    //     nextCol++;
-    // } else if ( dir == NORTH_WEST ) {
-    //     nextRow--;
-    //     nextCol--;
-    // } else if ( dir == SOUTH_EAST ) {
-    //     nextRow++;
-    //     nextCol++;
-    // } else if ( dir == SOUTH_WEST ) {
-    //     nextRow++;
-    //     nextCol--;
-    // }
-    // return cells[nextRow][nextCol];
 }
 
 Cell* Floor::getNextCellWithDirection(string dir, int nextRow, int nextCol){

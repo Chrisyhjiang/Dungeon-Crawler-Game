@@ -38,6 +38,8 @@ const char DROW_SYM = 'd';
 const char VAMP_SYM = 'v';
 const char TROLL_SYM = 't';
 const char GOBLIN_SYM = 'g';
+const char EXIT_SYM = 'q';
+const char RESTART_SYM = 'r';
 
 const char PLAYER_SYM[] = {SHADE_SYM, DROW_SYM, VAMP_SYM, TROLL_SYM, GOBLIN_SYM};
 
@@ -101,9 +103,14 @@ const string CMD_POTION = "u";
 const string CMD_EXIT = "q";
 const string CMD_RESTART = "r";
 const string CMD_FREEZE = "f";
-
+const string CMD_SHADE = "s";
+const string CMD_DROW = "d";
+const string CMD_VAMP = "v";
+const string CMD_TROLL = "t";
+const string CMD_GOBLIN = "g";
 
 const string DIRECTIONS[] = { NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST};
+const string COMMANDS[] = { CMD_ATTACK, CMD_POTION, CMD_EXIT, CMD_RESTART, CMD_FREEZE, CMD_SHADE, CMD_DROW, CMD_VAMP, CMD_TROLL, CMD_GOBLIN};
 
 // ANSI escape codes for text colors
 const string ANSI_RESET = "\033[0m";

@@ -7,3 +7,7 @@ Dwarf::~Dwarf(){}
 bool Dwarf::isMovable(){
     return true;
 }
+
+int Dwarf::dropGoldOnDeath(Cell* cell){
+    return 2 + Enemy::dropGoldOnDeath(cell);
+}

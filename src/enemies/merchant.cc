@@ -12,10 +12,22 @@ Merchant::~Merchant(){}
     return hostile;
  }
 
-void  Merchant::setHostile(){
-    hostile = true;
+void  Merchant::setHostile(bool b){
+    hostile = b;
 }
 
 bool Merchant::isMovable(){
     return true;
+}
+
+int Merchant::dropGoldOnDeath(Cell* cell){
+    if(cell){
+        Treasure* gold = new MerchantTreasure(Player::getInstance());
+        cell->setSymbol(SYM_GOLD);
+        cell->setEntity(gold);
+        gold->setX(cell->getRow());
+        gold->setY(cell->getCol());
+        gold->setSymbol(SYM_GOLD);
+    }
+    return 0;
 }

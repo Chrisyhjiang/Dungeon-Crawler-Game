@@ -1,7 +1,7 @@
 #include "dragon.h"
 
 
-Dragon::Dragon(string race) : Enemy(100, 20, 20, race, ENEMY_DRAGON){};
+Dragon::Dragon(string race) : Enemy(150, 20, 20, race, ENEMY_DRAGON){};
 Dragon::Dragon(int hp, int atk, int def, string race, char symbol): Enemy(hp, atk, def, race, symbol){};
 
 Dragon::~Dragon(){
@@ -21,5 +21,11 @@ void Dragon::setTreasureHoard(DragonTreasure* hoard){
  }
 
 bool Dragon::isPlayerInRange(int px, int py) { 
-    return Enemy::isPlayerInRange(px, py);
+    bool res =  Enemy::isPlayerInRange(px, py);
+    if (!res) {
+        if (hoard) {
+            res = (std::abs(px - hoard->getX()) <= 1 && std::abs(py - hoard->getY()) <= 1);
+        }
+    }
+    return res;
 }

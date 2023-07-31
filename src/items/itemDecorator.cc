@@ -4,7 +4,7 @@
 ItemDecorator::ItemDecorator(Player* target, string name) : target(target), name(name){}
 
 ItemDecorator::~ItemDecorator() {
-    delete target;
+    // delete target;
 }
 
  Player* ItemDecorator::getTarget(){

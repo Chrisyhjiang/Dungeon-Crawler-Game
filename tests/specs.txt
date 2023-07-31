@@ -29,7 +29,7 @@ x check that all enemies except for dragons move one square randomly within the 
 - (O) orcs     (180 HP 30 ATK 25 DEF) deals 50 % more damage to goblins
 - (M) merchant ( 30 HP 70 ATK  5 DEF) neutral to all parties, being attacked or slain makes all merchants hostile
 - (D) dragon   (150 HP 20 ATK 20 DEF) stationary, always guards treasure hoard, spawned in one block radius of its dragon hoard
-- (L) halfling (100 HP 15 ATK 20 DEF) 50 % chance to cause player to miss
+x (L) halfling (100 HP 15 ATK 20 DEF) 50 % chance to cause player to miss
 
 Potions (P):
 - potion cannot be used unless player standing within 1 block radius

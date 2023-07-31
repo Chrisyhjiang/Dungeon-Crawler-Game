@@ -58,6 +58,7 @@ class Floor {
 		bool isValidSymbol(char s);
 		bool hasUnknownPotion(Cell* cell);
 		Cell* getNextCellWithDirection(string dir, int nextRow, int nextCol);
+		void findDragonHoard(Dragon* dragon);
 
 };
 #endif

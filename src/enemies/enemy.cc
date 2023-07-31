@@ -63,5 +63,11 @@ void Enemy::move(Cell* cell){
     isMoved = true;
 }
 
-
+int Enemy::dropGoldOnDeath(Cell* cell){
+    if(cell){
+        cell->setSymbol(SYM_TILE);
+        cell->setEntity(nullptr);
+    }
+    return 0;
+}
 

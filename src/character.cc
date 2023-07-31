@@ -32,11 +32,11 @@ void Character::setAtk(int atk){
 }
 
 int Character::getDefaultAtk(){
-    return def;
+    return default_atk;
 }
 
 void Character::setDefaultAtk(int atk){
-    this->default_atk = atk;
+    default_atk = atk;
 }
 
 
