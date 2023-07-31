@@ -39,6 +39,8 @@ bool Floor::isValidSymbol(char symbol){
     return symbol == SYM_TILE || symbol == SYM_PLAYER || Enemy::isEnemy(symbol) || symbol == SYM_STAIRS ||
                  Potion::isPotion(symbol) || Treasure::isTreasure(symbol);
 }
+
+
 void Floor::loadFromFile(ifstream *floorStream) {
     string line;
     Player* player = Player::getInstance();
@@ -64,6 +66,10 @@ void Floor::loadFromFile(ifstream *floorStream) {
                     cells[i][j]->setEntity(enemy);
                     enemy->setX(i);
                     enemy->setY(j);
+                    Dragon* dragon = dynamic_cast<Dragon*>(enemy);
+                    if(dragon){
+                        findDragonHoard(dragon);
+                    }
                 } else if ( Potion::isPotion(symbol)){
                     double mag = 1;
                     if(Player::getRace() == DROW){
@@ -81,6 +87,10 @@ void Floor::loadFromFile(ifstream *floorStream) {
                     treasure->setY(cells[i][j]->getCol());
                     treasure->setSymbol(SYM_GOLD);
                     cells[i][j]->setSymbol(SYM_GOLD);
+                    DragonTreasure* dt = dynamic_cast<DragonTreasure*>(treasure);
+                    if(dt){
+                        hasDragonGuardTreasure(dt);
+                    }
                 }
             }
             else {
@@ -234,11 +244,27 @@ bool Floor::hasDragonGuardTreasure(DragonTreasure* gold){
             Entity* item = cells[x+i][y+j]->getEntity();
             Dragon* dragon = dynamic_cast<Dragon*>(item);
             if(dragon){
+                dragon->setTreasureHoard(gold);
                 return true;
             } 
         }
     }
     return result;
+}
+
+void Floor::findDragonHoard(Dragon* dragon){
+    int x = dragon->getX();
+    int y = dragon->getY();
+    for(int i =-1; i <= 1; i++){
+        for(int j = -1; j <= 1; j++){
+            Entity* item = cells[x+i][y+j]->getEntity();
+            DragonTreasure* gold = dynamic_cast<DragonTreasure*>(item);
+            if(gold){
+                dragon->setTreasureHoard(gold);
+                return;
+            }
+        }
+    }
 }
 
 void Floor::resetCurCell(Cell* cell, char symbol) {
@@ -276,7 +302,8 @@ vector<string> Floor::enemyTurn(){
                         //     current->setSymbol(SYM_TILE);
                         //     current->setEntity(nullptr);
                         // }
-                        delete enemy;
+                        //current->setEntity(nullptr);
+                        // delete enemy
                         continue;
                     }
                     if (enemy->isPlayerInRange(p->getX(), p->getY())) {
@@ -343,6 +370,8 @@ string Floor::movePlayer(string dir){
                 resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
                 player->move(nextCell, canPlayerPickUpGold(nextCell));
                 msg = "PC move to : " + directionMap[dir] + " | player pick up gold\n";
+            }else{
+                msg = "PC attack by Dragon | ";
             }
         }else{
             resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
