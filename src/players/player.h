@@ -36,6 +36,7 @@ class Player : public Character{
         virtual int calculateDmgToEnemy(int def);
         bool isDead();
         virtual void addReward(Enemy *en);
+        virtual void stealGoldOnEnemySlain();
         static Player* getInstance();
         static void setInstance();
         char getCellSymbol();

@@ -41,6 +41,7 @@ bool Floor::isValidSymbol(char symbol){
 }
 void Floor::loadFromFile(ifstream *floorStream) {
     string line;
+    Player* player = Player::getInstance();
     for (int i = 0; i < MAX_ROW; i++) {
         getline(*floorStream, line);
         for (int j = 0; j < MAX_COLUMN; j++) {
@@ -53,7 +54,7 @@ void Floor::loadFromFile(ifstream *floorStream) {
                 if( symbol == SYM_TILE){
                     cells[i][j]->setEntity(nullptr);
                 } else if( symbol == SYM_PLAYER ){
-                    Player* player = Player::getInstance();
+                    // Player* player = Player::getInstance();
                     player->setX(i);
                     player->setY(j);
                     player->setCellSymbol(SYM_TILE);
@@ -68,15 +69,13 @@ void Floor::loadFromFile(ifstream *floorStream) {
                     if(Player::getRace() == DROW){
                         mag = POTION_MAGNIFY;
                     }
-                    
-                        Potion* p = Potion::createPotion(Player::getInstance(), symbol, mag);
-                        cells[i][j]->setEntity(p);
-                        cells[i][j]->setSymbol(SYM_POTION);
-                        p->setX(i);
-                        p->setY(j);
-               
+                    Potion* p = Potion::createPotion(player, symbol, mag);
+                    cells[i][j]->setEntity(p);
+                    cells[i][j]->setSymbol(SYM_POTION);
+                    p->setX(i);
+                    p->setY(j);
                 } else if ( Treasure::isTreasure(symbol)){
-                    Treasure* treasure = Treasure::createTreasure(Player::getInstance(), symbol);
+                    Treasure* treasure = Treasure::createTreasure(player, symbol);
                     cells[i][j]->setEntity(treasure);
                     treasure->setX(cells[i][j]->getRow());
                     treasure->setY(cells[i][j]->getCol());
@@ -257,10 +256,8 @@ vector<string> Floor::enemyTurn(){
                   Enemy* enemy = dynamic_cast<Enemy*>(current->getEntity());
                   if(enemy && !enemy->hasMoved()){
                     if (enemy->isDead()) {
-                        Goblin* g = dynamic_cast<Goblin*>(p);
-                        if (g) {
-                            p->setGold(p->getGold() + 5);
-                        }
+                        // enemy dead
+                        p->stealGoldOnEnemySlain();
                         string s = string(1, enemy->getSymbol()) + " was slain!";
                         msg.push_back(s);
                         Human* h = dynamic_cast<Human*>(enemy);
@@ -275,19 +272,18 @@ vector<string> Floor::enemyTurn(){
                         } else {
                             current->setSymbol(SYM_TILE);
                             current->setEntity(nullptr);
-                            continue;
                         }
+                        delete enemy;
+                        continue;
                     }
                     if (enemy->isPlayerInRange(p->getX(), p->getY())) {
+                        // enemy attack
                         Merchant* m = dynamic_cast<Merchant*>(current->getEntity());
                         if (!m || Merchant::isHostile()) {
                             int x = enemy->attackPlayer(p->getRace(), p->getDef());
                             string s = string(1, enemy->getSymbol());
                             if (x > 0) {
                                 p->takeDamage(x);
-                                // msg += " dealt " + std::to_string(enemy->calculateDamageToPlayer(p->getRace(), p->getDef())) 
-                                //                     + " damage to player\n";
-
                                 s += " dealt " + std::to_string(x) + " damage to player";
                             } else {
                                 s += " missed";
@@ -295,6 +291,7 @@ vector<string> Floor::enemyTurn(){
                             msg.push_back(s);
                         }
                     } else {
+                        // enemy move
                         Dragon* dragon = dynamic_cast<Dragon*>(enemy);
                         if(!dragon){
                             bool done = false;
@@ -385,28 +382,6 @@ Cell* Floor::getNeighbourCell(string dir, Entity* entity){
     int nextRow = entity->getX();
     int nextCol = entity->getY();
     return getNextCellWithDirection(dir, nextRow, nextCol);
-    // if ( dir == NORTH){
-    //     nextRow--;
-    // } else if ( dir == SOUTH){
-    //     nextRow++;
-    // } else if ( dir == EAST) {
-    //     nextCol++;
-    // } else if ( dir == WEST) {
-    //     nextCol--;
-    // } else if ( dir == NORTH_EAST) {
-    //     nextRow--;
-    //     nextCol++;
-    // } else if ( dir == NORTH_WEST ) {
-    //     nextRow--;
-    //     nextCol--;
-    // } else if ( dir == SOUTH_EAST ) {
-    //     nextRow++;
-    //     nextCol++;
-    // } else if ( dir == SOUTH_WEST ) {
-    //     nextRow++;
-    //     nextCol--;
-    // }
-    // return cells[nextRow][nextCol];
 }
 
 Cell* Floor::getNextCellWithDirection(string dir, int nextRow, int nextCol){

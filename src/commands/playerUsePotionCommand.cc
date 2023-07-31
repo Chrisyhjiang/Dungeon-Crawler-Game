@@ -1,4 +1,4 @@
-#include "playerUsePotion.h"
+#include "playerUsePotionCommand.h"
 
 PlayerUsePotionCommand::PlayerUsePotionCommand(ChamberCrawler* game, string direction) : game(game), direction(direction) {};
 
@@ -10,6 +10,7 @@ string PlayerUsePotionCommand::execute(){
         if(potion){  
             potion->update();
             actionMsg = "PC uses: " + potion->getName() + ".\n";
+            delete potion;
         }
     }
     return actionMsg;

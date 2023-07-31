@@ -2,7 +2,7 @@
 #include "commandInterpreter.h"
 #include "playerMoveCommand.h"
 #include "playerAttackCommand.h"
-#include "playerUsePotion.h"
+#include "playerUsePotionCommand.h"
 #include "restartCommand.h"
 #include "exitCommand.h"
 #include "freezeCommand.h"
@@ -13,9 +13,10 @@ CommandInput* CommandInterpreter::parseCommand(string line){
     vector<string> tokens;
     istringstream iss(line);
     string token;
-    while (getline(iss, token, ' ')) {
+    while (iss >> token) {
         tokens.push_back(token);
     }
+
     CommandInput* cmd = new  CommandInput("", "", false); 
     if(tokens.size() == 1){
         string first = tokens.at(0);
@@ -64,8 +65,11 @@ string CommandInterpreter::executeCommand(string line){
 
         if(cmd){
             result = cmd->execute();
+            delete cmd;
+            
         }
     }
+    delete cmdInput;
     return result;
     
 }
@@ -79,9 +83,4 @@ bool CommandInterpreter::isValidDirection(string direction){
     auto itr = find(std::begin(DIRECTIONS), end(DIRECTIONS), direction);
     return itr != end(DIRECTIONS);
 }
-
-// bool CommandInterpreter::isValidRaceCmd(string cmd){
-//     return (cmd == CMD_SHADE) || (cmd == CMD_DROW) || (cmd == CMD_VAMP) || (cmd == CMD_TROLL) || 
-//            (cmd == CMD_GOBLIN) || (cmd == CMD_EXIT || (cmd == CMD_RESTART));
-// }
 
