@@ -14,17 +14,17 @@ test6.txt - Merchants, if attacked/slayed will become hostile to PC
 test7.txt - Dragon guarding Treaure Hoard, and combat with Dragon enemy
             (the Dragon attacks PC if within 1 block radius of its treasure or itself)
             // seems as though the PC can't walk over the treasure associated with a still alive Dragon *update this test case
-test8.txt - Combat and Potions: Def = 0 (Shade vs. all enemies, PC takes full damage from enemies)
+test8.txt - Combat and Potions: Def = 0 (Shade vs. all enemies, PC takes full damage from enemies), through 5 floors
             // floor 1: combat with Human
             // floor 2: combat with Dwarf
             // floor 3: combat with Elf (will have two attacks against Shade)
             // floor 4: combat with Orcs
             // floor 5: combat with Halfling (causes PC to miss their attack 50% of the time)
-Combat and Potions: Def = 100 (Shade vs. all enemies, PC takes half the damage)
+Combat and Potions: Def = 100 (Shade vs. all enemies, PC takes half the damage), each test is a separate game
 test9.txt - combat with Human
 test10.txt - combat with Dwarf
-test11.txt - combat with Elf
-test12.txt - combat with Orcs and Halfling
-test13.txt - combat with Merchant and Dragon
+test11.txt - combat with Elf (will have two attacks against Shade)
+test12.txt - combat with Orcs
+test13.txt - combat with Halfling (PC misses their attack 50% of the time)
 Drow:
 
