@@ -43,4 +43,4 @@ Goblin:
 test22.txt - every time it slays an enemy, it gains 5 extra gold
 test23.txt - in combat against Orcs it takes 50% more damage (Def = 0)
 
-test24.txt - combat against Orc (Def = 0)
+test24.txt - non-Goblin combat against Orc (Def = 0), no 50% more damage
