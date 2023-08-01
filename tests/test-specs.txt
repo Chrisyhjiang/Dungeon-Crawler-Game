@@ -27,6 +27,7 @@ test11.txt - combat with Elf (will have two attacks against Shade)
 test12.txt - combat with Orcs
 test13.txt - combat with Halfling (PC misses their attack 50% of the time)
 test14.txt - combat with Merchant
+test15.txt - combat with Atk = 0
 
 Drow:
-
+test16.txt - 
