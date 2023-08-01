@@ -37,4 +37,10 @@ test18.txt - combat with Halfling (like every other race, will miss 50% of their
 Vampire:
 test19.txt - HP can exceed starting HP and gains 5 HP after every successful attack (includes combat with Halfling)
 test20.txt - combat against Dwarf results in 5 additional HP lost instead of gained
+Troll:
+test21.txt - every turn (not neccessarily all combat) gains 5 HP
+Goblin:
+test22.txt - every time it slays an enemy, it gains 5 extra gold
+test23.txt - in combat against Orcs it takes 50% more damage (Def = 0)
 
+test24.txt - combat against Orc (Def = 0)
