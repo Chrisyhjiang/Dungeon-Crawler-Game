@@ -1,5 +1,6 @@
 ./main [.TXT FILE] < [.IN FILE]
 File arguments and the specifications that each focuses on:
+// Also tested gold drop from different enemies (except for dragon, human, merchant, gold is immediately added to PC's score)
 test1.txt - the player character is able to beat the game through the different floors via stairs
 test2.txt - tests the restore health potion (RH), combat between 2 enemies (HP does not exceed starting race HP)
 test3.txt - demonstrates the player character's death, program prompts for user to play again
@@ -33,3 +34,5 @@ Drow:
 test16.txt - the effects of all potions are magnified by 1.5 (also finishes the game, score isn't increased by 50%, isn't Shade)
 test17.txt - Elf only attacks Drow once per combat engagement, not twice
 test18.txt - combat with Halfling (like every other race, will miss 50% of their attack)
+Vampire:
+test19.txt - 
