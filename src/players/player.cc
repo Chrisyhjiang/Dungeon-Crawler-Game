@@ -75,13 +75,13 @@ void Player::stealGoldOnEnemySlain(){}
 bool Player::attackEnemy(Enemy* enemy){
     Halfling* h = dynamic_cast<Halfling*>(enemy);
     if (h) {
-        bool b = h->chanceToMiss();
-        if (!b) {
+        bool fail = h->chanceToMiss();
+        if (!fail) {
             int dmg = this->calculateDmgToEnemy(enemy->getDef());
             enemy->takeDamage(dmg);
             this->addReward(enemy);
-            return !b;
         }
+        return !fail;
     }else {
         int dmg = this->calculateDmgToEnemy(enemy->getDef());
         enemy->takeDamage(dmg);
