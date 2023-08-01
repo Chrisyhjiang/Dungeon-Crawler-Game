@@ -18,6 +18,4 @@ class ItemDecorator : public Entity {
         void setName(string s);
 };
 
-
-
 #endif

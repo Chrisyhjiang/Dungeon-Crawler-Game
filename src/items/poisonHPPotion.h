@@ -10,6 +10,4 @@ class PoisonHealthPotion : public Potion {
         void update();
 };
 
-
-
 #endif
