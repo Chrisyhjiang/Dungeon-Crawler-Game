@@ -30,4 +30,5 @@ test14.txt - combat with Merchant
 test15.txt - combat with Atk = 0
 
 Drow:
-test16.txt - 
+test16.txt - the effects of all potions are magnified by 1.5 (also finishes the game, score isn't increased by 50%, isn't Shade)
+test17.txt - 
