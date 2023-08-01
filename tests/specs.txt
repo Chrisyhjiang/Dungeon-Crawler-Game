@@ -23,36 +23,38 @@ x HP cap at starting HP for all except vampire
 Enemies:
 x check that all enemies except for dragons move one square randomly within the confines of the chamber they were spawned in
 - other than human, dragon and merchants, enemies drop either small or normal pile of gold which is immediately added to player
-- (H) human    (140 HP 20 ATK 20 DEF) drops 2 normal piles of gold
-- (W) dwarf    (100 HP 20 ATK 30 DEF) vampires lose 5 HP instead of gain 5 HP
-- (E) elf      (140 HP 30 ATK 10 DEF) gets 2 attacks against all race except drow
-- (O) orcs     (180 HP 30 ATK 25 DEF) deals 50 % more damage to goblins
-- (M) merchant ( 30 HP 70 ATK  5 DEF) neutral to all parties, being attacked or slain makes all merchants hostile
-- (D) dragon   (150 HP 20 ATK 20 DEF) stationary, always guards treasure hoard, spawned in one block radius of its dragon hoard
+x (H) human    (140 HP 20 ATK 20 DEF) drops 2 normal piles of gold
+x (W) dwarf    (100 HP 20 ATK 30 DEF) vampires lose 5 HP instead of gain 5 HP
+x (E) elf      (140 HP 30 ATK 10 DEF) gets 2 attacks against all race except drow
+x (O) orcs     (180 HP 30 ATK 25 DEF) deals 50 % more damage to goblins
+x (M) merchant ( 30 HP 70 ATK  5 DEF) neutral to all parties, being attacked or slain makes all merchants hostile
+x (D) dragon   (150 HP 20 ATK 20 DEF) stationary, always guards treasure hoard, spawned in one block radius of its dragon hoard
 x (L) halfling (100 HP 15 ATK 20 DEF) 50 % chance to cause player to miss
 
 Potions (P):
-- potion cannot be used unless player standing within 1 block radius
+x potion cannot be used unless player standing within 1 block radius
 - effects of potion is not known until used for the first time, only learns about effect of that one potion
-- Restore HP: restores up to 10 HP      (permanent effect)
-    - test when player is missing > 10 HP
-    - test when player is missing 10 HP
-    - test when player is missinig < 10 HP
-    - test when player is vampire and has > 50 HP
-- Boost ATK:      increase ATK by 5         (effect limited to floor)
-- Boost DEF:      increase DEF by 5         (effect limited to floor)
-- Poison HP:  lose up to 10 HP          (permanent effect)
-    - test when player has < 10 HP
-    - test when player has 10 HP
-    - test when player has > 10 HP
-- Wound ATK:      decrease ATK by 5         (effect limited to floor)
-    - test when player has > 5 ATK
-    - test when player has < 5 ATK
-    - test when player has 5 ATK
-- Wound DEF:      decrease DEF by 5         (effect limited to floor)
-    - test when player has > 5 DEF
-    - test when player has < 5 DEF
-    - test when player has 5 DEF
+x Restore HP:   restores up to 10 HP      (permanent effect)
+    x test when player is missing > 10 HP
+    x test when player is missing 10 HP
+    x test when player is missing < 10 HP
+    x test when player is vampire and has > 50 HP
+x Boost ATK:    increase ATK by 5         (effect limited to floor)
+x Boost DEF:    increase DEF by 5         (effect limited to floor)
+x Poison HP:    lose up to 10 HP          (permanent effect)
+    x test when player has < 10 HP
+    x test when player has 10 HP
+    x test when player has > 10 HP
+x Wound ATK:    decrease ATK by 5         (effect limited to floor)
+    x test when player has > 5 ATK
+    x test when player has < 5 ATK
+    x test when player has 0 ATK
+    x test when player has 5 ATK
+x Wound DEF:    decrease DEF by 5         (effect limited to floor)
+    x test when player has > 5 DEF
+    x test when player has < 5 DEF
+    x test when player has 0 DEF
+    x test when player has 5 DEF
 
 Gold (G):
 - small          (1)
@@ -121,7 +123,7 @@ Command Line options:
 - 2 - Boost DEF
 - 3 - Poison HP
 - 4 - Wound ATK
-- 5 - Would DEF
+- 5 - Wound DEF
 - 6 - normal gold pile
 - 7 - small hoard (small gold pile?)
 - 8 - merchant hoard
