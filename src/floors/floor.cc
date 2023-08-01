@@ -13,7 +13,6 @@ std::map<std::string, bool> Floor::usedPotions = {{POTION_RH, false}, {POTION_BA
                                            		  {POTION_PH, false}, {POTION_WA, false}, {POTION_WD, false}};
 
 void Floor::resetUsedPotions() {
-    cout << ">>" << endl;
     usedPotions = {
         {POTION_RH, false},
         {POTION_BA, false},
@@ -213,8 +212,16 @@ void Floor::spawnTreasures() {
 }
 
 void Floor::spawnStairs() {
-    Chamber* chamber =  getRandomChamber();
-    chamber->renderStairs();   
+    Player* player = Player::getInstance();
+    while(true){
+        int i = locateChamber(player->getX(), player->getY());
+        Chamber* chamber =  getRandomChamber();
+        int j = chamber->getChamberID();
+        if( i != j){
+            chamber->renderStairs(); 
+            break;  
+        }
+    }
 }
 
 Cell* Floor::getCell(int i, int j) {
@@ -382,7 +389,7 @@ string Floor::movePlayer(string dir){
                 player->move(nextCell, canPlayerPickUpGold(nextCell));
                 msg = "PC move to : " + directionMap[dir] + " | player pick up gold";
             }else{
-                msg = "PC attack by Dragon | ";
+                // msg = "PC attack by Dragon | ";
             }
         }else{
             resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());

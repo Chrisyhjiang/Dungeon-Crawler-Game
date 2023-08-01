@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -g -Wall -Werror=vla -MMD
-EXEC = main
+EXEC = cc3k
 
 SRC_DIRS := ./ ./enemies/ ./floors/  ./items/ ./players/ ./commands/  # Add your source folders here
 OBJ_DIR := ./build

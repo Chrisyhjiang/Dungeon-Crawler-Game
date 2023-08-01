@@ -128,6 +128,7 @@ void ChamberCrawler::restartGame() {
     Merchant::setHostile(false);
     Player::getInstance()->setCellSymbol(SYM_TILE);
     Floor::resetUsedPotions();
+    setFreezeEnemy(false);
 	start(floorLayoutFile, true);
 	
 }
@@ -190,6 +191,8 @@ string ChamberCrawler::playerTakeTurn(){
         if(msg != ""){
             if(msg == CMD_EXIT){
                 exit(0);
+            } else if (msg == CMD_FREEZE) {
+                continue;
             }else{
                 break;
             }
