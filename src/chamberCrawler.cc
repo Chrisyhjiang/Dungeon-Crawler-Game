@@ -152,7 +152,7 @@ void ChamberCrawler::play(){
                     goToNextFloor();
                }else {
                     level++;
-                    if (level == 6) {
+                    if (level > MAX_LEVEL ) {
                     cout << "you beat the game!!!" << endl;
                     int g = player->getGold();
                     if (player->getRace() == "shade") {
