@@ -12,3 +12,4 @@ int Dwarf::dropGoldOnDeath(Cell* cell){
     int n = rand() % 2 + 1;
     return n + Enemy::dropGoldOnDeath(cell);
 }
+

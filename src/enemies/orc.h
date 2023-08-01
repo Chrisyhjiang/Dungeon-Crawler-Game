@@ -15,3 +15,4 @@ class Orc : public Enemy {
 };
 
 #endif
+

@@ -29,3 +29,4 @@ bool Dragon::isPlayerInRange(int px, int py) {
     }
     return res;
 }
+

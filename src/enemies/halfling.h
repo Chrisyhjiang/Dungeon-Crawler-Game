@@ -21,3 +21,4 @@ class Halfling : public Enemy {
 };
 
 #endif
+

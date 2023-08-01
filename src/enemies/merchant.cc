@@ -31,3 +31,4 @@ int Merchant::dropGoldOnDeath(Cell* cell){
     }
     return 0;
 }
+

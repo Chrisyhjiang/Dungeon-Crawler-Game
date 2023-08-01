@@ -29,3 +29,4 @@ Enemy* EnemyFactory::createEnemy(char en, string race){
     }
     return enemy;
 }
+

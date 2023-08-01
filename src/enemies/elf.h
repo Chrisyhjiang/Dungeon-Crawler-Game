@@ -16,3 +16,4 @@ class Elf : public Enemy {
 };
 
 #endif
+

@@ -22,3 +22,4 @@ int Human::dropGoldOnDeath(Cell* cell){
     }
     return 0;
 }
+
