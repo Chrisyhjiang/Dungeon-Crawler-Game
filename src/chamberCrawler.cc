@@ -209,10 +209,11 @@ string ChamberCrawler::enemiesTakeTurn(){
         vector<string> msg = floor->enemyTurn();
         if(msg.size() != 0){
             result = "Action: Enemy ";
-            for(string s : msg){
-                result += s;
+            for (size_t i = 0; i < msg.size() - 1; i++) {
+                result += msg[i];
                 result += " | ";
             }
+            result += msg.back();
         }
     }
     return result;
