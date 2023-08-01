@@ -212,8 +212,16 @@ void Floor::spawnTreasures() {
 }
 
 void Floor::spawnStairs() {
-    Chamber* chamber =  getRandomChamber();
-    chamber->renderStairs();   
+    Player* player = Player::getInstance();
+    while(true){
+        int i = locateChamber(player->getX(), player->getY());
+        Chamber* chamber =  getRandomChamber();
+        int j = chamber->getChamberID();
+        if( i != j){
+            chamber->renderStairs(); 
+            break;  
+        }
+    }
 }
 
 Cell* Floor::getCell(int i, int j) {
