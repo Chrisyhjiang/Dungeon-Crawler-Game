@@ -8,6 +8,22 @@ class Cell;
 
 std::map<std::string, std::string> directionMap = {{NORTH, "North"}, {SOUTH, "South"}, {WEST, "West"}, {EAST, "East"},
 {NORTH_WEST, "North West"}, {NORTH_EAST, "North East"}, {SOUTH_WEST, "South West"}, {SOUTH_EAST, "South East"}};
+
+std::map<std::string, bool> Floor::usedPotions = {{POTION_RH, false}, {POTION_BA, false}, {POTION_BD, false},
+                                           		  {POTION_PH, false}, {POTION_WA, false}, {POTION_WD, false}};
+
+void Floor::resetUsedPotions() {
+    cout << ">>" << endl;
+    usedPotions = {
+        {POTION_RH, false},
+        {POTION_BA, false},
+        {POTION_BD, false},
+        {POTION_PH, false},
+        {POTION_WA, false},
+        {POTION_WD, false}
+    };
+}
+
 Floor::Floor() {
 
     for (int i = 0; i < MAX_ROW; i++) {
@@ -298,21 +314,6 @@ vector<string> Floor::enemyTurn(){
                         msg.push_back(s);
                         int k = enemy->dropGoldOnDeath(current);
                         p->setGold(p->getGold() + k);
-
-                        // Human* h = dynamic_cast<Human*>(enemy);
-                        // Merchant* m = dynamic_cast<Merchant*>(enemy);
-                        // if (h || m) {
-                        //     Treasure* gold = new MerchantTreasure(p);
-                        //     current->setSymbol(SYM_GOLD);
-                        //     current->setEntity(gold);
-                        //     gold->setX(current->getRow());
-                        //     gold->setY(current->getCol());
-                        //     gold->setSymbol(SYM_GOLD);
-                        // } else {
-                        //     current->setSymbol(SYM_TILE);
-                        //     current->setEntity(nullptr);
-                        // }
-                        //current->setEntity(nullptr);
                         // delete enemy
                         continue;
                     }
@@ -397,17 +398,21 @@ string Floor::movePlayer(string dir){
 }
 
 bool Floor::hasUnknownPotion(Cell* cell){
+    bool result = false;
     for( string s : DIRECTIONS){
         Cell* next = getNextCellWithDirection(s, cell->getRow(), cell->getCol());
         if(next){
             Entity* e = next->getEntity();
             Potion* potion = dynamic_cast<Potion*>(e);
             if(potion){
-                return true;
+                 if(!usedPotions[potion->getName()]){
+                    result = true;
+                    break;
+                 };
             }
         }
     }
-    return false;
+    return result;
 }
 
 bool Floor::canPlayerPickUpGold(Cell* cell) {
