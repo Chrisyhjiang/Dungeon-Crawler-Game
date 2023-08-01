@@ -6,6 +6,7 @@ string PlayerMoveCommand::execute(){
     Floor* floor = game->getFloor();
     string s = "";
     if(floor){
+
         s = floor->movePlayer(direction);
     }
     return s;
