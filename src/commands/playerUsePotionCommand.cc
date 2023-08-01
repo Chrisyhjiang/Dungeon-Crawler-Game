@@ -10,7 +10,7 @@ string PlayerUsePotionCommand::execute(){
         if(potion){  
             potion->update();
             Floor::usedPotions[potion->getName()] = true;
-            actionMsg = "PC uses: " + potion->getName() + ".\n";
+            actionMsg = "PC uses: " + potion->getName();
             delete potion;
         }
     }

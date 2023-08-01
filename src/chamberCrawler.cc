@@ -136,7 +136,11 @@ void ChamberCrawler::play(){
    while(true){
         string actionMsg = "";
         actionMsg += playerTakeTurn();
-        actionMsg += enemiesTakeTurn();
+        string s = enemiesTakeTurn();
+        if (s.size() > 0) {
+            actionMsg += "\n";
+        }
+        actionMsg += s;
         Player* player = Player::getInstance();
         if (player->isDead()) {
             floor->displayFloor(actionMsg, level);

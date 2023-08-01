@@ -380,7 +380,7 @@ string Floor::movePlayer(string dir){
             if(pickUpGold){
                 resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());
                 player->move(nextCell, canPlayerPickUpGold(nextCell));
-                msg = "PC move to : " + directionMap[dir] + " | player pick up gold\n";
+                msg = "PC move to : " + directionMap[dir] + " | player pick up gold";
             }else{
                 msg = "PC attack by Dragon | ";
             }
@@ -391,7 +391,7 @@ string Floor::movePlayer(string dir){
             if(hasUnknownPotion(nextCell)) {
                 msg += " and see an unknown potion";
             }
-            msg += "\n";
+            // msg += "\n";
         }
     }
     return msg;

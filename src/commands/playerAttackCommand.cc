@@ -21,11 +21,11 @@ string PlayerATKCommand::execute(){
             }
             
             if(enemy->getSymbol() == ENEMY_HALFING && HP == enemy->getHP()){
-                actionMsg += " player missed attack (HALFING)...\n";
+                actionMsg += " player missed attack (HALFING)...";
 
             }else{
                 actionMsg += "PC deals " + std::to_string(damage) + " dmage to Enemy " + string(1, enemy->getSymbol()) 
-                        + " (" + to_string(enemy->getHP()) + " HP) \n";
+                        + " (" + to_string(enemy->getHP()) + " HP)";
             }
         }
     }
