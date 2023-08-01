@@ -389,7 +389,7 @@ string Floor::movePlayer(string dir){
                 player->move(nextCell, canPlayerPickUpGold(nextCell));
                 msg = "PC move to : " + directionMap[dir] + " | player pick up gold";
             }else{
-                msg = "PC attack by Dragon | ";
+                // msg = "PC attack by Dragon | ";
             }
         }else{
             resetCurCell(cells[player->getX()][player->getY()], player->getCellSymbol());

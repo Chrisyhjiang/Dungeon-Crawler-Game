@@ -190,6 +190,8 @@ string ChamberCrawler::playerTakeTurn(){
         if(msg != ""){
             if(msg == CMD_EXIT){
                 exit(0);
+            } else if (msg == CMD_FREEZE) {
+                continue;
             }else{
                 break;
             }
