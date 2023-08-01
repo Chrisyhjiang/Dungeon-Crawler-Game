@@ -9,7 +9,8 @@ string PlayerUsePotionCommand::execute(){
         ItemDecorator* potion = floor->canPlayerTakePotion(direction);
         if(potion){  
             potion->update();
-            actionMsg = "PC uses: " + potion->getName() + ".\n";
+            Floor::usedPotions[potion->getName()] = true;
+            actionMsg = "PC uses: " + potion->getName();
             delete potion;
         }
     }

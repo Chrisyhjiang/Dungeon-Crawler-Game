@@ -35,6 +35,9 @@ class Floor {
 		vector<string> enemyTurn();
 		Enemy* canPlayerAttack(string direction);
 		ItemDecorator* canPlayerTakePotion(string direction);
+		static std::map<std::string, bool> usedPotions;
+		static void resetUsedPotions();
+		
 		
 	private:
 		int locateChamber(int i, int j);
