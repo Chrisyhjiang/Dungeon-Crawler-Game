@@ -72,7 +72,7 @@ bool Player::isDead() {
 
 void Player::stealGoldOnEnemySlain(){}
 
-void Player::attackEnemy(Enemy* enemy){
+bool Player::attackEnemy(Enemy* enemy){
     Halfling* h = dynamic_cast<Halfling*>(enemy);
     if (h) {
         bool b = h->chanceToMiss();
@@ -80,11 +80,13 @@ void Player::attackEnemy(Enemy* enemy){
             int dmg = this->calculateDmgToEnemy(enemy->getDef());
             enemy->takeDamage(dmg);
             this->addReward(enemy);
+            return !b;
         }
     }else {
         int dmg = this->calculateDmgToEnemy(enemy->getDef());
         enemy->takeDamage(dmg);
         this->addReward(enemy);
+        return true;
     }
 }
 

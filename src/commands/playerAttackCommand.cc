@@ -15,14 +15,12 @@ string PlayerATKCommand::execute(){
             Player* player = Player::getInstance();
             int HP = enemy->getHP();
             int damage = player->calculateDmgToEnemy(enemy->getDef());
-            player->attackEnemy(enemy);
+            bool b = player->attackEnemy(enemy);
             if(Player::getRace() == TROLL && player->getHP() < player->getDefaultHP()){
                 actionMsg += "Player gain HP | ";
             }
-            
-            if(enemy->getSymbol() == ENEMY_HALFING && HP == enemy->getHP()){
+            if(!b){
                 actionMsg += " player missed attack (HALFING)...";
-
             }else{
                 actionMsg += "PC deals " + std::to_string(damage) + " dmage to Enemy " + string(1, enemy->getSymbol()) 
                         + " (" + to_string(enemy->getHP()) + " HP)";

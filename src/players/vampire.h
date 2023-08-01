@@ -7,7 +7,7 @@
 class Vampire : public Player {
     public:
         Vampire();
-        void attackEnemy(Enemy* enemy) override;
+        bool attackEnemy(Enemy* enemy) override;
         
 };
 

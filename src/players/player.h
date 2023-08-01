@@ -29,7 +29,7 @@ class Player : public Character{
         void move(Cell* nextCell, bool canPickupGold);
         int getGold();
         void setGold(int g);
-        virtual void attackEnemy(Enemy *en);
+        virtual bool attackEnemy(Enemy *en);
         int getMaxHp();
         void setMaxHp(int maxHp);
         void takeDamage(int dmg);
