@@ -126,11 +126,10 @@ void ChamberCrawler::restartGame() {
 	level = 1;
     Player::setInstance();
     Merchant::setHostile(false);
-    Player::getInstance()->setCellSymbol(SYM_TILE);
     Floor::resetUsedPotions();
     setFreezeEnemy(false);
 	start(floorLayoutFile, true);
-	
+    Player::getInstance()->setCellSymbol(SYM_TILE);
 }
 
 void ChamberCrawler::play(){
@@ -153,7 +152,7 @@ void ChamberCrawler::play(){
                     goToNextFloor();
                }else {
                     level++;
-                    if (level == 6) {
+                    if (level > MAX_LEVEL ) {
                     cout << "you beat the game!!!" << endl;
                     int g = player->getGold();
                     if (player->getRace() == "shade") {
