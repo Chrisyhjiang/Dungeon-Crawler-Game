@@ -6,6 +6,7 @@
 class Troll : public Player {
     public:
         Troll();
+        bool attackEnemy(Enemy* enemy) override;
 };
 
 #endif

@@ -13,7 +13,6 @@ string PlayerATKCommand::execute(){
                 Merchant::setHostile(true);
             }
             Player* player = Player::getInstance();
-            int HP = enemy->getHP();
             int damage = player->calculateDmgToEnemy(enemy->getDef());
             bool b = player->attackEnemy(enemy);
             if(Player::getRace() == TROLL && player->getHP() < player->getDefaultHP()){

@@ -10,6 +10,11 @@ string PlayerUsePotionCommand::execute(){
         if(potion){  
             potion->update();
             Floor::usedPotions[potion->getName()] = true;
+            if(Player::getRace() == TROLL){
+                Player* player = Player::getInstance();
+                int hp = player->getHP() + 5;
+                player->setHP(std::min(player->getMaxHp(), hp));
+            }
             actionMsg = "PC uses: " + potion->getName();
             delete potion;
         }
