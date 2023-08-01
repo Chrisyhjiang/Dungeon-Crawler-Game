@@ -35,4 +35,6 @@ test16.txt - the effects of all potions are magnified by 1.5 (also finishes the 
 test17.txt - Elf only attacks Drow once per combat engagement, not twice
 test18.txt - combat with Halfling (like every other race, will miss 50% of their attack)
 Vampire:
-test19.txt - 
+test19.txt - HP can exceed starting HP and gains 5 HP after every successful attack (includes combat with Halfling)
+test20.txt - combat against Dwarf results in 5 additional HP lost instead of gained
+
