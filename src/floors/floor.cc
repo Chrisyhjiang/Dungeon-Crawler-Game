@@ -13,7 +13,6 @@ std::map<std::string, bool> Floor::usedPotions = {{POTION_RH, false}, {POTION_BA
                                            		  {POTION_PH, false}, {POTION_WA, false}, {POTION_WD, false}};
 
 void Floor::resetUsedPotions() {
-    cout << ">>" << endl;
     usedPotions = {
         {POTION_RH, false},
         {POTION_BA, false},
