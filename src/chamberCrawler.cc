@@ -128,6 +128,7 @@ void ChamberCrawler::restartGame() {
     Merchant::setHostile(false);
     Player::getInstance()->setCellSymbol(SYM_TILE);
     Floor::resetUsedPotions();
+    setFreezeEnemy(false);
 	start(floorLayoutFile, true);
 	
 }
