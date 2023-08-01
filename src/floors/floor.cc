@@ -400,6 +400,14 @@ string Floor::movePlayer(string dir){
             }
             // msg += "\n";
         }
+
+    }
+    if(msg != ""){
+        if(Player::getRace() == TROLL){
+            Player* player = Player::getInstance();
+            int hp = player->getHP() + 5;
+            player->setHP(std::min(player->getMaxHp(), hp));
+        }
     }
     return msg;
 }
